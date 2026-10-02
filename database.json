@@ -452,6 +452,25 @@
       "totalAmountDisplay": "₹0",
       "status": "Pending",
       "createdAt": "2026-10-02T05:12:40.132Z"
+    },
+    {
+      "quoteRef": "GM-Q-686637",
+      "buyerName": "Adharsh Katari",
+      "hospitalName": "Adharsh Katari (Madanapalle)",
+      "phone": "+916309189339",
+      "location": "Madanapalle",
+      "items": [
+        {
+          "title": "CPAP & BiPAP Respiratory Care",
+          "price": 0,
+          "quantity": 1,
+          "notes": "oxygen concentrator"
+        }
+      ],
+      "totalAmount": 0,
+      "totalAmountDisplay": "₹0",
+      "status": "Pending",
+      "createdAt": "2026-10-02T05:41:26.641Z"
     }
   ],
   "reviews": [
