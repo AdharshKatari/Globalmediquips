@@ -15,6 +15,11 @@ let audioCtx = null;
 let chimePlayed = false;
 let introFinished = false;
 
+// When the preloader starts fading out (= site becomes visible).
+// The intro sound is required to be completely silent before this moment.
+const INTRO_REVEAL_AT_MS = 1800;
+const introPageStartMs = Date.now();
+
 // First-time-visitor gate: the intro sound plays once ever, then never again
 const INTRO_SOUND_FLAG = 'gm_intro_sound_played';
 
@@ -27,10 +32,15 @@ function markIntroSoundPlayed() {
 }
 
 // Cinematic intro audio logo: whoosh sweep + sub impact + glass-bell motif.
-// Designed to ride the preloader animation — whoosh during the zoom-out (0→1.1s),
-// impact as the logo lands (~0.95s), bell arpeggio during the hold (1.0→1.5s).
+// Rides the preloader animation and ALWAYS ends before the site is revealed —
+// late starts (autoplay blocked) compress the whole motif to fit the remaining time.
 function buildIntroSound(ctx) {
-  const t0 = ctx.currentTime + 0.03;
+  const msLeft = (introPageStartMs + INTRO_REVEAL_AT_MS) - Date.now();
+  if (msLeft < 180) return false; // intro is essentially over — play nothing
+
+  const soundDur = Math.min(1.7, (msLeft - 60) / 1000); // hard stop 60ms before reveal
+  const s = soundDur / 1.7; // timeline scale (1 = full design)
+  const t0 = ctx.currentTime + 0.02;
 
   // Master bus: soft compression for a polished, controlled logo sound
   const master = ctx.createGain();
@@ -43,6 +53,14 @@ function buildIntroSound(ctx) {
   comp.release.value = 0.25;
   master.connect(comp);
   comp.connect(ctx.destination);
+
+  // GUARANTEED hard stop: fade to silence before the site is revealed,
+  // then physically disconnect so nothing can ring over onto the main page
+  master.gain.setValueAtTime(0.9, t0 + Math.max(0.01, soundDur - 0.24 * s));
+  master.gain.exponentialRampToValueAtTime(0.0001, t0 + soundDur);
+  setTimeout(() => {
+    try { master.disconnect(); comp.disconnect(); } catch (e) {}
+  }, (soundDur + 0.3) * 1000);
 
   // Space bus: short feedback delay acting as a light reverb tail
   const spaceIn = ctx.createGain();
@@ -61,15 +79,15 @@ function buildIntroSound(ctx) {
   const send = (node, amount) => {
     node.connect(master);
     if (amount > 0) {
-      const s = ctx.createGain();
-      s.gain.value = amount;
-      node.connect(s);
-      s.connect(spaceIn);
+      const sendGain = ctx.createGain();
+      sendGain.gain.value = amount;
+      node.connect(sendGain);
+      sendGain.connect(spaceIn);
     }
   };
 
   // 1) WHOOSH — band-passed noise sweep riding the logo zoom-out
-  const noiseDur = 1.3;
+  const noiseDur = Math.max(0.3, 1.05 * s);
   const buffer = ctx.createBuffer(1, Math.floor(ctx.sampleRate * noiseDur), ctx.sampleRate);
   const data = buffer.getChannelData(0);
   for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
@@ -79,11 +97,11 @@ function buildIntroSound(ctx) {
   sweep.type = 'bandpass';
   sweep.Q.value = 0.7;
   sweep.frequency.setValueAtTime(160, t0);
-  sweep.frequency.exponentialRampToValueAtTime(3600, t0 + 0.85);
+  sweep.frequency.exponentialRampToValueAtTime(3600, t0 + 0.7 * s);
   const whooshGain = ctx.createGain();
   whooshGain.gain.setValueAtTime(0.0001, t0);
-  whooshGain.gain.exponentialRampToValueAtTime(0.14, t0 + 0.8);
-  whooshGain.gain.exponentialRampToValueAtTime(0.0001, t0 + 1.25);
+  whooshGain.gain.exponentialRampToValueAtTime(0.14, t0 + 0.55 * s);
+  whooshGain.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.9 * s);
   noise.connect(sweep);
   sweep.connect(whooshGain);
   send(whooshGain, 0.15);
@@ -91,19 +109,19 @@ function buildIntroSound(ctx) {
   noise.stop(t0 + noiseDur);
 
   // 2) SUB IMPACT — the "landing" as the logo settles
-  const impactAt = t0 + 0.92;
+  const impactAt = t0 + 0.85 * s;
   const sub = ctx.createOscillator();
   sub.type = 'sine';
   sub.frequency.setValueAtTime(115, impactAt);
-  sub.frequency.exponentialRampToValueAtTime(44, impactAt + 0.5);
+  sub.frequency.exponentialRampToValueAtTime(44, impactAt + 0.45 * s);
   const subGain = ctx.createGain();
   subGain.gain.setValueAtTime(0.0001, impactAt);
-  subGain.gain.exponentialRampToValueAtTime(0.55, impactAt + 0.05);
-  subGain.gain.exponentialRampToValueAtTime(0.0001, impactAt + 0.95);
+  subGain.gain.exponentialRampToValueAtTime(0.55, impactAt + 0.05 * s);
+  subGain.gain.exponentialRampToValueAtTime(0.0001, impactAt + 0.5 * s);
   sub.connect(subGain);
   send(subGain, 0.05);
   sub.start(impactAt);
-  sub.stop(impactAt + 1.0);
+  sub.stop(impactAt + 0.55 * s);
 
   // 3) GLASS-BELL LOGO MOTIF — ascending G-major arpeggio with layered partials
   const notes = [
@@ -114,11 +132,11 @@ function buildIntroSound(ctx) {
   ];
   const partials = [[1, 1], [2.0, 0.35], [3.01, 0.15], [4.18, 0.07]];
   notes.forEach(n => {
-    const start = t0 + n.at;
+    const start = t0 + n.at * s;
     const env = ctx.createGain();
     env.gain.setValueAtTime(0.0001, start);
     env.gain.exponentialRampToValueAtTime(n.v, start + 0.015);
-    env.gain.exponentialRampToValueAtTime(0.0001, start + 1.7);
+    env.gain.exponentialRampToValueAtTime(0.0001, start + 0.55 * s);
     partials.forEach(pair => {
       const osc = ctx.createOscillator();
       osc.type = 'sine';
@@ -128,10 +146,12 @@ function buildIntroSound(ctx) {
       osc.connect(pg);
       pg.connect(env);
       osc.start(start);
-      osc.stop(start + 1.75);
+      osc.stop(start + 0.6 * s);
     });
     send(env, 0.4);
   });
+
+  return true;
 }
 
 function playStartupChime() {
@@ -153,11 +173,10 @@ function playStartupChime() {
     const startIntro = () => {
       if (chimePlayed || introFinished || introSoundAlreadyPlayed()) return;
       try {
-        buildIntroSound(audioCtx);
+        // Returns false when the intro is already over — then nothing plays
+        if (buildIntroSound(audioCtx) === false) return;
         chimePlayed = true;
         markIntroSoundPlayed();
-        const hint = document.getElementById("intro-sound-hint");
-        if (hint) hint.classList.add("hidden");
       } catch (e) {}
     };
 
@@ -188,15 +207,9 @@ document.addEventListener("DOMContentLoaded", () => {
   updateQuoteBasketUI();
   setupFileInputHandler();
 
-  // Attempt direct chime playback (will succeed if browser media engagement permits)
+  // Attempt the intro sound automatically — it starts together with the
+  // animation and is required to finish before the site is revealed
   playStartupChime();
-
-  // If the browser blocked autoplay, invite the visitor to tap while the intro plays
-  // (first-time visitors only — returning visitors get no sound at all)
-  setTimeout(() => {
-    const hint = document.getElementById("intro-sound-hint");
-    if (hint && !chimePlayed && !introSoundAlreadyPlayed()) hint.classList.remove("hidden");
-  }, 700);
 
   // Cinematic Movie-Title Preloader Handler (Zoom-out 1.1s + 0.7s hold = 1.8s total)
   setTimeout(() => {
@@ -204,9 +217,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (preloader) {
       introFinished = true;
       preloader.style.opacity = "0";
-      setTimeout(() => preloader.style.display = "none", 400);
+      setTimeout(() => preloader.style.display = "none", 340);
     }
-  }, 1800);
+  }, INTRO_REVEAL_AT_MS);
 });
 
 // Mobile Gallery & File Input Handler
