@@ -277,6 +277,68 @@ function setLocalSetting(key, value) {
   } catch (e) {}
 }
 
+// Canonical display names — mirrors the server so labels stay consistent in local mode too
+const CATEGORY_DISPLAY_NAMES = {
+  'cpap-bipap': 'CPAP & BiPAP Care',
+  'oxygen-concentrators': 'Oxygen Concentrators',
+  'hospital-furniture': 'Hospital Furniture',
+  'ecg-machines': 'ECG & Diagnostics',
+  'icu-pumps': 'ICU Pumps'
+};
+
+// ============================================================
+// LOCAL ADMIN OVERLAY — static-host (Netlify) fallback
+// Static hosting has no backend, so admin writes cannot be saved
+// centrally. These overlays persist changes in this browser so the
+// admin portal stays fully usable; entries are cleared automatically
+// as soon as a real API write succeeds.
+// ============================================================
+const ADMIN_OVERLAY_KEY = 'gm_admin_local_overlay_v1';
+
+function loadAdminOverlay() {
+  try {
+    const raw = localStorage.getItem(ADMIN_OVERLAY_KEY);
+    const o = raw ? JSON.parse(raw) : {};
+    return {
+      editedProducts: o.editedProducts || {},
+      addedProducts: Array.isArray(o.addedProducts) ? o.addedProducts : [],
+      deletedProductIds: Array.isArray(o.deletedProductIds) ? o.deletedProductIds : [],
+      quoteStatus: o.quoteStatus || {},
+      localQuotes: Array.isArray(o.localQuotes) ? o.localQuotes : []
+    };
+  } catch (e) {
+    return { editedProducts: {}, addedProducts: [], deletedProductIds: [], quoteStatus: {}, localQuotes: [] };
+  }
+}
+
+function saveAdminOverlay(o) {
+  try {
+    localStorage.setItem(ADMIN_OVERLAY_KEY, JSON.stringify(o));
+  } catch (e) {
+    console.warn('Local admin overlay could not be persisted (storage full?):', e);
+  }
+}
+
+function applyProductsOverlay(list) {
+  const o = loadAdminOverlay();
+  const result = (list || [])
+    .filter(p => !o.deletedProductIds.includes(p.id))
+    .map(p => o.editedProducts[p.id] ? { ...p, ...o.editedProducts[p.id] } : p);
+  o.addedProducts.forEach(ap => {
+    if (!result.some(p => p.id === ap.id)) result.unshift(ap);
+  });
+  return result;
+}
+
+function applyQuotesOverlay(list) {
+  const o = loadAdminOverlay();
+  const result = (list || []).map(q => o.quoteStatus[q.quoteRef] ? { ...q, status: o.quoteStatus[q.quoteRef] } : q);
+  o.localQuotes.forEach(q => {
+    if (!result.some(x => x.quoteRef === q.quoteRef)) result.push(q);
+  });
+  return result;
+}
+
 function applyStorefrontSettings() {
   // Apply local preview overrides last so they always win when present
   const featuredOverride = getLocalSetting(FEATURED_OVERRIDE_KEY);
@@ -315,7 +377,7 @@ async function fetchProducts() {
     if (res.ok) {
       const data = await res.json();
       if (data.success && data.data && data.data.length > 0) {
-        PRODUCTS_DATA = data.data;
+        PRODUCTS_DATA = applyProductsOverlay(data.data);
         renderProducts();
         renderAdminProductsTable();
         applyStorefrontSettings();
@@ -333,7 +395,7 @@ async function fetchProducts() {
     if (fallbackRes.ok) {
       const fallbackData = await fallbackRes.json();
       if (fallbackData && fallbackData.products) {
-        PRODUCTS_DATA = fallbackData.products;
+        PRODUCTS_DATA = applyProductsOverlay(fallbackData.products);
         renderProducts();
         renderAdminProductsTable();
         applyStorefrontSettings();
@@ -408,6 +470,7 @@ async function handleGlobalContactSubmit(e) {
 
   let refId = "GM-Q-" + Math.floor(100000 + Math.random() * 900000);
 
+  let savedRemotely = false;
   try {
     const res = await fetch('/api/quotes', {
       method: 'POST',
@@ -424,9 +487,27 @@ async function handleGlobalContactSubmit(e) {
     const data = await res.json();
     if (data.data && data.data.quoteRef) {
       refId = data.data.quoteRef;
+      savedRemotely = true;
     }
   } catch (err) {
     console.warn("Offline or direct save:", err);
+  }
+
+  // Static host (e.g. Netlify) — keep the inquiry locally so it still appears in the admin inbox
+  if (!savedRemotely) {
+    const overlay = loadAdminOverlay();
+    overlay.localQuotes.push({
+      quoteRef: refId,
+      buyerName: name,
+      hospitalName: location ? `${name} (${location})` : name,
+      phone: phone,
+      location: location,
+      items: [{ title: category, price: 0, quantity: 1, notes: message }],
+      totalAmount: 0,
+      status: "Pending",
+      createdAt: new Date().toISOString()
+    });
+    saveAdminOverlay(overlay);
   }
 
   // Populate Success Card Details
@@ -787,41 +868,41 @@ function setAdminStat(id, value) {
 }
 
 async function fetchAdminDashboard() {
-  let loaded = false;
+  let quotes = null;
+  let productsCount = null;
 
   try {
     const res = await fetch('/api/admin/dashboard', { cache: 'no-store' });
     const data = await res.json();
     if (data.success) {
-      setAdminStat('admin-count-products', data.data.productsCount);
-      setAdminStat('admin-count-quotes', data.data.quotesCount);
-      setAdminStat('admin-pipeline-value', data.data.pipelineValue);
-      setAdminStat('admin-tab-badge-inquiries', data.data.quotesCount);
-      renderAdminQuotesTable(data.data.quotes);
-      loaded = true;
+      quotes = applyQuotesOverlay(data.data.quotes || []);
+      productsCount = applyProductsOverlay(data.data.products || []).length;
     }
   } catch (err) {
     // API unavailable — fall back to the static database below
   }
 
-  if (!loaded) {
+  if (quotes === null) {
     // Static-host fallback: keep inbox, inventory and Featured Product selector fully usable
     try {
       const fallbackRes = await fetch('./database.json', { cache: 'no-store' });
       const db = await fallbackRes.json();
-      const quotes = (db && db.quotes) || [];
-      const products = (db && db.products) || [];
-      const pipeline = quotes.reduce((sum, q) => sum + (q.totalAmount || 0), 0);
-      setAdminStat('admin-count-products', products.length);
-      setAdminStat('admin-count-quotes', quotes.length);
-      setAdminStat('admin-pipeline-value', `₹${pipeline.toLocaleString('en-IN')}`);
-      setAdminStat('admin-tab-badge-inquiries', quotes.length);
-      renderAdminQuotesTable(quotes);
+      quotes = applyQuotesOverlay((db && db.quotes) || []);
+      productsCount = applyProductsOverlay((db && db.products) || []).length;
     } catch (err) {
       console.error("Admin dashboard fetch error", err);
+      quotes = [];
+      productsCount = PRODUCTS_DATA.length;
     }
   }
 
+  const pipeline = quotes.reduce((sum, q) => sum + (q.totalAmount || 0), 0);
+  setAdminStat('admin-count-products', productsCount);
+  setAdminStat('admin-count-quotes', quotes.length);
+  setAdminStat('admin-pipeline-value', `₹${pipeline.toLocaleString('en-IN')}`);
+  setAdminStat('admin-tab-badge-inquiries', quotes.length);
+
+  renderAdminQuotesTable(quotes);
   // Always refresh the inventory table and the Featured Product selector,
   // even if the dashboard API failed — this is what previously left them empty
   renderAdminProductsTable();
@@ -951,16 +1032,62 @@ async function handleAddProductForm(e) {
       })
     });
     const data = await res.json();
-    if (data.success) {
-      showToast("New Product Published to Catalog!");
-      fetchProducts();
-      fetchAdminDashboard();
-      document.getElementById("add-product-form").reset();
-      switchAdminTab('inventory');
+    if (!data.success) {
+      alert("Error publishing product to catalog: " + (data.error || "Unknown error"));
+      return;
     }
+    showToast("New Product Published to Catalog!");
+    fetchProducts();
+    fetchAdminDashboard();
+    document.getElementById("add-product-form").reset();
+    switchAdminTab('inventory');
+    return;
   } catch (err) {
-    alert("Error publishing product to catalog");
+    // Static host (e.g. Netlify) has no backend — save the product locally below
   }
+
+  const newProduct = {
+    id: 'local-' + Date.now().toString(),
+    title,
+    category: category || 'cpap-bipap',
+    categoryName: CATEGORY_DISPLAY_NAMES[category] || 'Medical Equipment',
+    brand: brand || 'Global Mediquips',
+    price: price,
+    priceDisplay: `₹${price.toLocaleString('en-IN')}`,
+    hsnCode: hsnCode || '90181100',
+    image,
+    brochureUrl: brochureUrl || '',
+    videoUrl: videoUrl || '',
+    countryOfOrigin,
+    application,
+    pressureRange,
+    rampRate,
+    warranty,
+    inStock: true,
+    requiresPrescription: false,
+    description: description || 'Certified medical equipment supplied by Global Mediquips.',
+    specs: [
+      { key: "Brand", value: brand || "Global Mediquips" },
+      { key: "Warranty", value: warranty || "2 Years Manufacturer Warranty" },
+      { key: "Country of Origin", value: countryOfOrigin || "Made in India" },
+      { key: "Application / Usage", value: application || "Hospital / Home Care" },
+      { key: "Pressure Range", value: pressureRange || "Standard" },
+      { key: "Ramp Rate", value: rampRate || "Automatic" },
+      { key: "HSN & GST Compliance", value: `HSN ${hsnCode || '90181100'} - 12% GST` }
+    ]
+  };
+
+  const overlay = loadAdminOverlay();
+  overlay.addedProducts.unshift(newProduct);
+  saveAdminOverlay(overlay);
+  PRODUCTS_DATA.unshift(newProduct);
+
+  renderProducts();
+  renderAdminProductsTable();
+  populateAdminFeaturedSelect();
+  document.getElementById("add-product-form").reset();
+  switchAdminTab('inventory');
+  showToast("✅ Product added (saved locally — deploy on Vercel for central saving)");
 }
 
 async function deleteProductAdmin(id) {
@@ -968,14 +1095,32 @@ async function deleteProductAdmin(id) {
   try {
     const res = await fetch(`/api/admin/products/${id}`, { method: 'DELETE' });
     const data = await res.json();
-    if (data.success) {
-      showToast("Product Deleted");
-      fetchProducts();
-      fetchAdminDashboard();
+    if (!data.success) {
+      alert("Error deleting product: " + (data.error || "Unknown error"));
+      return;
     }
+    const overlay = loadAdminOverlay();
+    overlay.deletedProductIds = overlay.deletedProductIds.filter(x => x !== id);
+    saveAdminOverlay(overlay);
+    showToast("Product Deleted");
+    fetchProducts();
+    fetchAdminDashboard();
+    return;
   } catch (err) {
-    alert("Error deleting product");
+    // Static host (e.g. Netlify) has no backend — remove the product locally
   }
+
+  const overlay = loadAdminOverlay();
+  if (!overlay.deletedProductIds.includes(id)) overlay.deletedProductIds.push(id);
+  overlay.addedProducts = overlay.addedProducts.filter(p => p.id !== id);
+  delete overlay.editedProducts[id];
+  saveAdminOverlay(overlay);
+
+  PRODUCTS_DATA = PRODUCTS_DATA.filter(p => p.id !== id);
+  renderProducts();
+  renderAdminProductsTable();
+  populateAdminFeaturedSelect();
+  showToast("🗑️ Product removed (local mode — server unavailable on this hosting)");
 }
 
 async function updateQuoteStatusAdmin(quoteRef, status) {
@@ -986,13 +1131,25 @@ async function updateQuoteStatusAdmin(quoteRef, status) {
       body: JSON.stringify({ status })
     });
     const data = await res.json();
-    if (data.success) {
-      showToast("Quote Status Updated!");
-      fetchAdminDashboard();
+    if (!data.success) {
+      alert("Error updating status: " + (data.error || "Unknown error"));
+      return;
     }
+    const overlay = loadAdminOverlay();
+    delete overlay.quoteStatus[quoteRef];
+    saveAdminOverlay(overlay);
+    showToast("Quote Status Updated!");
+    fetchAdminDashboard();
+    return;
   } catch (err) {
-    alert("Error updating status");
+    // Static host (e.g. Netlify) has no backend — store the status locally
   }
+
+  const overlay = loadAdminOverlay();
+  overlay.quoteStatus[quoteRef] = status;
+  saveAdminOverlay(overlay);
+  fetchAdminDashboard();
+  showToast("Quote status updated (local mode — server unavailable on this hosting)");
 }
 
 // Enterprise IndiaMART-Standard Modal Controller
@@ -1391,7 +1548,8 @@ async function handleEditProductSubmit(event) {
 
   const categorySelect = document.getElementById("admin-edit-category");
   const category = categorySelect.value;
-  const categoryName = categorySelect.options[categorySelect.selectedIndex].text;
+  const categoryName = CATEGORY_DISPLAY_NAMES[category]
+    || (categorySelect.selectedIndex > -1 ? categorySelect.options[categorySelect.selectedIndex].text : 'Medical Equipment');
 
   const payload = {
     title: document.getElementById("admin-edit-title").value.trim(),
@@ -1420,22 +1578,51 @@ async function handleEditProductSubmit(event) {
       body: JSON.stringify(payload)
     });
     const data = await res.json();
-    if (data.success) {
-      // Update local array
-      const idx = PRODUCTS_DATA.findIndex(p => p.id === productId);
-      if (idx !== -1) {
-        PRODUCTS_DATA[idx] = { ...PRODUCTS_DATA[idx], ...data.data };
-      }
-      renderProducts();
-      renderAdminProductsTable();
-      populateAdminFeaturedSelect();
-      applyStorefrontSettings();
-      closeEditProductModal();
-      showToast("✅ Product details and photo updated in the live catalog!");
-    } else {
+    if (!data.success) {
       alert("Error updating product: " + (data.error || "Unknown error"));
+      return;
     }
+
+    // Update local array
+    const idx = PRODUCTS_DATA.findIndex(p => p.id === productId);
+    if (idx !== -1) {
+      PRODUCTS_DATA[idx] = { ...PRODUCTS_DATA[idx], ...data.data };
+    }
+
+    // Server is authoritative again — drop any local-only edit for this product
+    const overlay = loadAdminOverlay();
+    delete overlay.editedProducts[productId];
+    overlay.addedProducts = overlay.addedProducts.filter(p => p.id !== productId);
+    saveAdminOverlay(overlay);
+
+    renderProducts();
+    renderAdminProductsTable();
+    populateAdminFeaturedSelect();
+    applyStorefrontSettings();
+    closeEditProductModal();
+    showToast("✅ Product details and photo updated in the live catalog!");
+    return;
   } catch (err) {
-    alert("Connection error: " + err.message);
+    // Static host (e.g. Netlify) returned non-JSON — save the edit locally below
   }
+
+  // Local/static fallback: apply the edit in this browser so nothing is lost
+  const localIdx = PRODUCTS_DATA.findIndex(p => p.id === productId);
+  if (localIdx === -1) {
+    alert("Error updating product: product not found");
+    return;
+  }
+  PRODUCTS_DATA[localIdx] = { ...PRODUCTS_DATA[localIdx], ...payload };
+
+  const localOverlay = loadAdminOverlay();
+  localOverlay.editedProducts[productId] = { ...(localOverlay.editedProducts[productId] || {}), ...payload };
+  localOverlay.addedProducts = localOverlay.addedProducts.map(p => p.id === productId ? { ...p, ...payload } : p);
+  saveAdminOverlay(localOverlay);
+
+  renderProducts();
+  renderAdminProductsTable();
+  populateAdminFeaturedSelect();
+  applyStorefrontSettings();
+  closeEditProductModal();
+  showToast("✅ Product saved (local mode — server unavailable on this hosting)");
 }
