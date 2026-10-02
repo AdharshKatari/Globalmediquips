@@ -8,7 +8,9 @@
     "hsnDefault": "90181100",
     "banker": "ICICI BANK LIMITED",
     "location": "Amberpet, Hyderabad, Telangana, India",
-    "helpline": "+91 98765 43210"
+    "helpline": "+91 98765 43210",
+    "featuredProductId": "2857152264362",
+    "founderImage": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80"
   },
   "products": [
     {

@@ -111,11 +111,11 @@
             <span class="absolute top-3 right-3 bg-yellow-warm text-navy-dark text-[10px] font-black px-2 py-0.5 rounded">
               FEATURED
             </span>
-            <img src="https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png" alt="Philips BiPAP" class="h-44 mx-auto object-contain my-2">
-            <div class="font-bold text-slate-900 text-base">Philips BiPAP Auto Machine</div>
-            <div class="text-xs text-slate-500 mt-0.5">DreamStation • 4-25 cm H2O • 2 Yr Warranty</div>
-            <div class="mt-3 text-xl font-black text-navy-primary">₹81,000</div>
-            <button onclick="addToBasket('2857152264362')" class="mt-3 w-full bg-cyan-accent hover:bg-cyan-hover text-white py-2.5 rounded-xl text-xs font-bold transition">
+            <img id="hero-featured-image" src="https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png" alt="Featured Medical Device" class="h-44 mx-auto object-contain my-2">
+            <div id="hero-featured-title" class="font-bold text-slate-900 text-base">Philips BiPAP Auto Machine</div>
+            <div id="hero-featured-subtitle" class="text-xs text-slate-500 mt-0.5">DreamStation • 4-25 cm H2O • 2 Yr Warranty</div>
+            <div id="hero-featured-price" class="mt-3 text-xl font-black text-navy-primary">₹81,000</div>
+            <button id="hero-featured-btn" onclick="addToBasket('2857152264362')" class="mt-3 w-full bg-cyan-accent hover:bg-cyan-hover text-white py-2.5 rounded-xl text-xs font-bold transition">
               + Add to Quote Basket
             </button>
           </div>
@@ -846,12 +846,40 @@
   <!-- =================================================================== -->
   <main id="about-page" class="page-section py-10 px-4 max-w-7xl mx-auto w-full">
     <div class="master-card p-8 md:p-12 space-y-8">
-      <div>
-        <span class="px-3 py-1 bg-navy-primary/10 text-navy-primary text-xs font-bold rounded-lg">ESTABLISHED 2013</span>
-        <h1 class="text-3xl font-extrabold text-slate-900 mt-3">About Global Mediquips</h1>
-        <p class="text-slate-600 text-sm mt-2 leading-relaxed max-w-3xl">
-          Incorporated in the year 2013 under the leadership of **Shivashankar Katari (S. Katari)**, Global Mediquips has established itself as a trusted sole proprietorship entity in Amberpet, Hyderabad. We specialize in wholesaling, retailing, and direct manufacturing of high-precision medical equipment.
-        </p>
+      <!-- ABOUT HEADER WITH FOUNDER & TEAM PHOTO -->
+      <div class="grid md:grid-cols-12 gap-8 items-center pb-4 border-b border-slate-100">
+        <div class="md:col-span-7 space-y-4">
+          <div class="inline-flex items-center gap-2 bg-navy-primary/10 text-navy-primary text-xs font-extrabold px-3 py-1 rounded-lg">
+            <span>ESTABLISHED 2013 • HYDERABAD</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">About Global Mediquips</h1>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Incorporated in the year 2013 under the leadership of <strong class="text-navy-primary font-bold">Shivashankar Katari (S. Katari)</strong>, Global Mediquips has established itself as a trusted sole proprietorship medical equipment provider in Amberpet, Hyderabad.
+          </p>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            We specialize in wholesaling, institutional supply, and direct distribution of high-precision respiratory care (BiPAP, CPAP), oxygen concentrators, motorized ICU beds, and 12-channel diagnostic ECG systems with verified GST compliance.
+          </p>
+          <div class="pt-2 flex items-center gap-3">
+            <span class="w-10 h-10 rounded-full bg-navy-primary/10 text-navy-primary font-black flex items-center justify-center text-sm shadow-sm">SK</span>
+            <div>
+              <div class="font-extrabold text-slate-900 text-xs">Shivashankar Katari (S. Katari)</div>
+              <div class="text-[11px] text-slate-500 font-medium">Founder & Managing Proprietor • Global Mediquips</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FOUNDER / TEAM PHOTO CARD -->
+        <div class="md:col-span-5 flex justify-center">
+          <div class="bg-white rounded-2xl p-3 border border-slate-200 shadow-xl w-full max-w-sm">
+            <div class="relative overflow-hidden rounded-xl bg-slate-100">
+              <img id="about-founder-img" src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80" alt="Shivashankar Katari - Founder Global Mediquips" class="w-full h-64 sm:h-72 object-cover object-top hover:scale-105 transition-transform duration-500">
+              <div class="absolute bottom-2 left-2 right-2 bg-navy-dark/85 backdrop-blur-md text-white p-2.5 rounded-lg border border-white/10 text-center">
+                <div class="font-extrabold text-xs tracking-wide">Shivashankar Katari</div>
+                <div class="text-[10px] text-yellow-warm font-semibold">Founder & Executive Director</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="grid md:grid-cols-3 gap-6">
@@ -1028,7 +1056,7 @@
         </button>
 
         <button onclick="switchAdminTab('analytics')" id="admin-tab-btn-analytics" class="admin-tab-btn px-5 py-3 text-xs font-bold text-slate-600 hover:text-slate-900 rounded-t-xl transition flex items-center gap-2 border-b-2 border-transparent">
-          <span>📊 Statutory & Profile</span>
+          <span>🎨 Storefront & Profile</span>
         </button>
       </div>
 
@@ -1203,31 +1231,120 @@
         </form>
       </div>
 
-      <!-- TAB 4: STATUTORY & PROFILE PANEL -->
-      <div id="admin-tab-panel-analytics" class="admin-tab-panel master-card p-6 md:p-8 hidden">
-        <h3 class="text-lg font-black text-slate-900 mb-4">Statutory & Business Registration Summary</h3>
-        <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-4 text-xs">
-          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-            <div class="text-slate-400 font-bold">GSTIN Registration</div>
-            <div class="text-base font-extrabold text-navy-primary">36BHGPK3813B1ZS</div>
-            <div class="text-emerald-600 font-bold text-[10px]">✔ Active (Telangana)</div>
+      <!-- TAB 4: STOREFRONT CUSTOMIZATION & STATUTORY PANEL -->
+      <div id="admin-tab-panel-analytics" class="admin-tab-panel master-card p-6 md:p-8 hidden space-y-8">
+        
+        <!-- SECTION 1: TOP HERO FEATURED PRODUCT SELECTOR -->
+        <div class="p-6 bg-slate-50 border border-slate-200 rounded-2xl space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-200">
+            <div>
+              <div class="inline-flex items-center gap-1.5 text-xs font-black text-amber-600 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200">
+                <span>⭐ Top Hero Showcase Control</span>
+              </div>
+              <h3 class="text-base font-black text-slate-900 mt-1">Select Featured Product for Customer Site Top</h3>
+              <p class="text-xs text-slate-500">The selected equipment will be displayed in the prominent featured card at the very top of the customer home page.</p>
+            </div>
+            <button onclick="handleSaveHeroFeatured()" class="px-5 py-2.5 bg-navy-primary hover:bg-navy-dark text-white rounded-xl text-xs font-extrabold shadow transition flex items-center gap-1.5 shrink-0">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              <span>Save Hero Product</span>
+            </button>
           </div>
-          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-            <div class="text-slate-400 font-bold">Primary HSN Code</div>
-            <div class="text-base font-extrabold text-navy-primary">90181100</div>
-            <div class="text-slate-500 font-medium text-[10px]">Medical Devices</div>
-          </div>
-          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-            <div class="text-slate-400 font-bold">Primary Proprietor</div>
-            <div class="text-base font-extrabold text-navy-primary">S. Katari</div>
-            <div class="text-slate-500 font-medium text-[10px]">Sole Proprietorship</div>
-          </div>
-          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-            <div class="text-slate-400 font-bold">Registered Office</div>
-            <div class="text-sm font-bold text-slate-800">Amberpet, Hyderabad</div>
-            <div class="text-slate-500 font-medium text-[10px]">Telangana, India</div>
+
+          <div class="grid md:grid-cols-12 gap-6 items-center">
+            <div class="md:col-span-8 space-y-3">
+              <label class="block text-xs font-bold text-slate-700">Choose Equipment from Live Catalog:</label>
+              <select id="admin-featured-product-select" onchange="previewFeaturedSelection(this.value)" class="w-full p-3 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-900 outline-none focus:border-navy-primary">
+                <!-- Dynamically populated by app.js -->
+              </select>
+              <p class="text-[11px] text-slate-400">Selecting a product will instantly update the featured showcase image, pricing, and specs for visiting buyers.</p>
+            </div>
+
+            <!-- PREVIEW CARD OF SELECTED HERO PRODUCT -->
+            <div class="md:col-span-4 flex justify-center">
+              <div class="p-3 bg-white rounded-xl border border-slate-200 shadow-sm text-center w-full max-w-[200px]">
+                <div class="text-[10px] font-extrabold text-navy-primary uppercase tracking-wider mb-1">Live Top Preview</div>
+                <img id="admin-featured-preview-img" src="https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png" class="h-24 w-auto object-contain mx-auto my-1">
+                <div id="admin-featured-preview-title" class="font-bold text-xs text-slate-900 truncate">Philips BiPAP Auto Machine</div>
+                <div id="admin-featured-preview-price" class="text-xs font-black text-navy-primary mt-0.5">₹81,000</div>
+              </div>
+            </div>
           </div>
         </div>
+
+        <!-- SECTION 2: FOUNDER / TEAM PHOTO UPLOAD (ABOUT SECTION) -->
+        <div class="p-6 bg-slate-50 border border-slate-200 rounded-2xl space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-200">
+            <div>
+              <div class="inline-flex items-center gap-1.5 text-xs font-black text-indigo-600 bg-indigo-50 px-2.5 py-0.5 rounded-full border border-indigo-200">
+                <span>📸 Executive Media & Branding</span>
+              </div>
+              <h3 class="text-base font-black text-slate-900 mt-1">Upload Founder / Team Photo (About Section)</h3>
+              <p class="text-xs text-slate-500">Upload Shivashankar Katari or company team photo to display in the "About Global Mediquips" card on the storefront.</p>
+            </div>
+            <button onclick="handleSaveFounderPhoto()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold shadow transition flex items-center gap-1.5 shrink-0">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              <span>Save Photo to Site</span>
+            </button>
+          </div>
+
+          <div class="grid md:grid-cols-12 gap-6 items-center">
+            <div class="md:col-span-8 space-y-4 text-xs">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Option A: Upload Photo from Phone Gallery / Computer</label>
+                <div class="flex items-center gap-3">
+                  <input type="file" id="admin-founder-file" accept="image/*" onchange="previewFounderUpload(event)" class="text-xs text-slate-600 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-navy-primary file:text-white hover:file:bg-navy-dark cursor-pointer">
+                </div>
+              </div>
+
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Option B: Or Enter Public Web Image URL</label>
+                <input type="text" id="admin-founder-url" oninput="previewFounderUrl(this.value)" placeholder="https://images.unsplash.com/... or your image link" class="w-full p-3 bg-white border border-slate-300 rounded-xl outline-none focus:border-navy-primary font-medium text-xs">
+              </div>
+
+              <div class="p-3 bg-blue-50 border border-blue-200 rounded-xl text-[11px] text-blue-900 flex items-center gap-2">
+                <span>💡 Supported: JPG, PNG, WEBP. Your photo will appear in the About page card alongside founder credentials.</span>
+              </div>
+            </div>
+
+            <!-- PREVIEW CARD OF FOUNDER PHOTO -->
+            <div class="md:col-span-4 flex justify-center">
+              <div class="bg-white rounded-2xl p-2.5 border border-slate-200 shadow-md w-full max-w-[200px] text-center">
+                <div class="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider mb-1">About Card Preview</div>
+                <img id="admin-founder-preview-img" src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80" class="w-full h-36 object-cover object-top rounded-xl border border-slate-100">
+                <div class="mt-1.5 font-bold text-[11px] text-slate-800">Shivashankar Katari</div>
+                <div class="text-[9px] text-slate-500 font-semibold">Founder • Global Mediquips</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 3: STATUTORY & BUSINESS REGISTRATION SUMMARY -->
+        <div>
+          <h3 class="text-sm font-extrabold text-slate-900 mb-3 uppercase tracking-wider text-slate-400">Statutory Business Registrations</h3>
+          <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+              <div class="text-slate-400 font-bold">GSTIN Registration</div>
+              <div class="text-base font-extrabold text-navy-primary">36BHGPK3813B1ZS</div>
+              <div class="text-emerald-600 font-bold text-[10px]">✔ Active (Telangana)</div>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+              <div class="text-slate-400 font-bold">Primary HSN Code</div>
+              <div class="text-base font-extrabold text-navy-primary">90181100</div>
+              <div class="text-slate-500 font-medium text-[10px]">Medical Devices</div>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+              <div class="text-slate-400 font-bold">Primary Proprietor</div>
+              <div class="text-base font-extrabold text-navy-primary">S. Katari</div>
+              <div class="text-slate-500 font-medium text-[10px]">Sole Proprietorship</div>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+              <div class="text-slate-400 font-bold">Registered Office</div>
+              <div class="text-sm font-bold text-slate-800">Amberpet, Hyderabad</div>
+              <div class="text-slate-500 font-medium text-[10px]">Telangana, India</div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
     </div>

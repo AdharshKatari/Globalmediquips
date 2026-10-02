@@ -417,6 +417,21 @@ app.put('/api/admin/quotes/:quoteRef', (req, res) => {
   res.json({ success: true, data: quote });
 });
 
+// Update Storefront Settings (Founder Photo & Hero Featured Product)
+app.post('/api/admin/settings', (req, res) => {
+  const db = loadDatabase();
+  const { founderImage, featuredProductId } = req.body;
+  if (!db.company) db.company = {};
+  if (founderImage !== undefined) {
+    db.company.founderImage = founderImage;
+  }
+  if (featuredProductId !== undefined) {
+    db.company.featuredProductId = featuredProductId;
+  }
+  saveDatabase(db);
+  res.json({ success: true, message: 'Storefront settings saved successfully', data: db.company });
+});
+
 app.get('/api/admin/dashboard', (req, res) => {
   const db = loadDatabase();
   const totalPipeline = db.quotes.reduce((sum, q) => sum + q.totalAmount, 0);

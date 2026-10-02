@@ -1,5 +1,10 @@
 /* Global Mediquips Master Application Engine & Admin Portal Controller */
 
+let SITE_SETTINGS = {
+  featuredProductId: '2857152264362',
+  founderImage: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80'
+};
+let pendingFounderImage = '';
 let PRODUCTS_DATA = [];
 let quoteBasket = [];
 let activeCategoryFilter = "all";
@@ -50,6 +55,7 @@ function playStartupChime() {
 
 document.addEventListener("DOMContentLoaded", () => {
   fetchProducts();
+  fetchCompanySettings();
   setupNavigation();
   updateQuoteBasketUI();
   setupFileInputHandler();
@@ -88,6 +94,48 @@ function setupFileInputHandler() {
 }
 
 // Fetch Live Inventory from Server API
+
+// Fetch Storefront Settings (Founder Photo & Featured Product)
+async function fetchCompanySettings() {
+  try {
+    const res = await fetch('/api/company');
+    const data = await res.json();
+    if (data.success && data.data) {
+      if (data.data.featuredProductId) SITE_SETTINGS.featuredProductId = data.data.featuredProductId;
+      if (data.data.founderImage) SITE_SETTINGS.founderImage = data.data.founderImage;
+      applyStorefrontSettings();
+    }
+  } catch (err) {
+    console.error("Company fetch error", err);
+  }
+}
+
+function applyStorefrontSettings() {
+  const founderImg = document.getElementById("about-founder-img");
+  if (founderImg && SITE_SETTINGS.founderImage) {
+    founderImg.src = SITE_SETTINGS.founderImage;
+  }
+  applyHeroFeaturedProduct();
+}
+
+function applyHeroFeaturedProduct() {
+  if (!PRODUCTS_DATA || PRODUCTS_DATA.length === 0) return;
+  const featured = PRODUCTS_DATA.find(p => p.id === SITE_SETTINGS.featuredProductId) || PRODUCTS_DATA[0];
+  if (!featured) return;
+
+  const imgEl = document.getElementById("hero-featured-image");
+  const titleEl = document.getElementById("hero-featured-title");
+  const subtitleEl = document.getElementById("hero-featured-subtitle");
+  const priceEl = document.getElementById("hero-featured-price");
+  const btnEl = document.getElementById("hero-featured-btn");
+
+  if (imgEl) imgEl.src = featured.image;
+  if (titleEl) titleEl.innerText = featured.title;
+  if (subtitleEl) subtitleEl.innerText = `${featured.brand || 'Global Mediquips'} • ${featured.categoryName || 'Medical Equipment'} • Verified GST`;
+  if (priceEl) priceEl.innerText = featured.priceDisplay || `₹${featured.price.toLocaleString('en-IN')}`;
+  if (btnEl) btnEl.setAttribute("onclick", `addToBasket('${featured.id}')`);
+}
+
 async function fetchProducts() {
   try {
     const res = await fetch('/api/products');
@@ -96,6 +144,7 @@ async function fetchProducts() {
       PRODUCTS_DATA = data.data;
       renderProducts();
       renderAdminProductsTable();
+      applyStorefrontSettings();
     }
   } catch (err) {
     console.error("API Fetch Error", err);
@@ -501,6 +550,7 @@ async function fetchAdminDashboard() {
 
       renderAdminProductsTable();
       renderAdminQuotesTable(data.data.quotes);
+      populateAdminFeaturedSelect();
     }
   } catch (err) {
     console.error("Admin dashboard fetch error", err);
@@ -521,8 +571,12 @@ function renderAdminProductsTable() {
       <td class="py-3 px-3 font-semibold text-slate-600">${p.brand}</td>
       <td class="py-3 px-3 text-slate-600">${p.categoryName}</td>
       <td class="py-3 px-3 font-extrabold text-navy-primary">${p.priceDisplay}</td>
-      <td class="py-3 px-3">
-        <button onclick="deleteProductAdmin('${p.id}')" class="px-2.5 py-1 bg-rose-500 text-white rounded-lg text-[11px] font-bold hover:bg-rose-700 transition">Delete</button>
+      <td class="py-3 px-3 flex items-center gap-1.5 flex-wrap">
+        ${p.id === SITE_SETTINGS.featuredProductId 
+          ? '<span class="px-2 py-1 bg-amber-100 text-amber-800 rounded-lg text-[10px] font-black border border-amber-300">⭐ HERO TOP</span>' 
+          : `<button onclick="setFeaturedProductFromTable('${p.id}')" class="px-2 py-1 bg-amber-50 text-amber-700 border border-amber-200 rounded-lg text-[10px] font-bold hover:bg-amber-100 transition">⭐ Feature on Top</button>`
+        }
+        <button onclick="deleteProductAdmin('${p.id}')" class="px-2.5 py-1 bg-rose-500 text-white rounded-lg text-[10px] font-bold hover:bg-rose-700 transition">Delete</button>
       </td>
     </tr>
   `).join("");
@@ -802,4 +856,126 @@ function showToast(msg) {
     toast.style.opacity = "0";
     setTimeout(() => toast.remove(), 300);
   }, 2500);
+}
+
+
+// ==========================================
+// ADMIN STOREFRONT CUSTOMIZATION HANDLERS
+// ==========================================
+function populateAdminFeaturedSelect() {
+  const select = document.getElementById("admin-featured-product-select");
+  if (!select) return;
+  select.innerHTML = PRODUCTS_DATA.map(p => `
+    <option value="${p.id}" ${p.id === SITE_SETTINGS.featuredProductId ? 'selected' : ''}>
+      ${p.title} (${p.brand}) — ${p.priceDisplay || '₹' + p.price}
+    </option>
+  `).join("");
+  previewFeaturedSelection(SITE_SETTINGS.featuredProductId);
+
+  // Setup founder photo preview in admin
+  const founderPreview = document.getElementById("admin-founder-preview-img");
+  const founderUrlInput = document.getElementById("admin-founder-url");
+  if (founderPreview && SITE_SETTINGS.founderImage) {
+    founderPreview.src = SITE_SETTINGS.founderImage;
+  }
+  if (founderUrlInput && SITE_SETTINGS.founderImage && !SITE_SETTINGS.founderImage.startsWith('data:')) {
+    founderUrlInput.value = SITE_SETTINGS.founderImage;
+  }
+}
+
+function previewFeaturedSelection(productId) {
+  const p = PRODUCTS_DATA.find(x => x.id === productId);
+  if (!p) return;
+  const img = document.getElementById("admin-featured-preview-img");
+  const title = document.getElementById("admin-featured-preview-title");
+  const price = document.getElementById("admin-featured-preview-price");
+  if (img) img.src = p.image;
+  if (title) title.innerText = p.title;
+  if (price) price.innerText = p.priceDisplay || `₹${p.price.toLocaleString('en-IN')}`;
+}
+
+async function handleSaveHeroFeatured() {
+  const select = document.getElementById("admin-featured-product-select");
+  if (!select) return;
+  const chosenId = select.value;
+  try {
+    const res = await fetch('/api/admin/settings', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ featuredProductId: chosenId })
+    });
+    const data = await res.json();
+    if (data.success) {
+      SITE_SETTINGS.featuredProductId = chosenId;
+      applyHeroFeaturedProduct();
+      renderAdminProductsTable();
+      alert("✅ Hero Top Featured Product updated successfully! It is now featured at the top of the customer website.");
+    }
+  } catch (err) {
+    alert("Error updating featured product: " + err.message);
+  }
+}
+
+async function setFeaturedProductFromTable(productId) {
+  const p = PRODUCTS_DATA.find(x => x.id === productId);
+  if (!p) return;
+  try {
+    const res = await fetch('/api/admin/settings', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ featuredProductId: productId })
+    });
+    const data = await res.json();
+    if (data.success) {
+      SITE_SETTINGS.featuredProductId = productId;
+      applyHeroFeaturedProduct();
+      renderAdminProductsTable();
+      populateAdminFeaturedSelect();
+      alert(`⭐ "${p.title}" is now set as the Top Hero Featured Product on the customer site!`);
+    }
+  } catch (err) {
+    alert("Error setting featured product: " + err.message);
+  }
+}
+
+function previewFounderUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    pendingFounderImage = e.target.result;
+    const preview = document.getElementById("admin-founder-preview-img");
+    if (preview) preview.src = pendingFounderImage;
+  };
+  reader.readAsDataURL(file);
+}
+
+function previewFounderUrl(url) {
+  if (!url) return;
+  pendingFounderImage = url.trim();
+  const preview = document.getElementById("admin-founder-preview-img");
+  if (preview) preview.src = pendingFounderImage;
+}
+
+async function handleSaveFounderPhoto() {
+  const imgToSave = pendingFounderImage || (document.getElementById("admin-founder-url") ? document.getElementById("admin-founder-url").value.trim() : "");
+  if (!imgToSave) {
+    alert("Please select a photo file or enter an image URL first.");
+    return;
+  }
+  try {
+    const res = await fetch('/api/admin/settings', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ founderImage: imgToSave })
+    });
+    const data = await res.json();
+    if (data.success) {
+      SITE_SETTINGS.founderImage = imgToSave;
+      applyStorefrontSettings();
+      alert("✅ Founder / Team photo successfully updated on the customer site!");
+    }
+  } catch (err) {
+    alert("Error saving founder photo: " + err.message);
+  }
 }
