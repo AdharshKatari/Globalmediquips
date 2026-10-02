@@ -145,20 +145,23 @@ async function handleGlobalContactSubmit(e) {
     const data = await res.json();
     const refId = (data.data && data.data.quoteRef) ? data.data.quoteRef : "GM-Q-REC";
 
-    // Show inline green success banner with reference ID
+    // Show inline green success banner with reference ID — no toast popup
     const banner = document.getElementById('contact-form-success-banner');
     const refEl = document.getElementById('success-ref-id');
     if (refEl) refEl.innerText = refId;
-    if (banner) banner.classList.remove('hidden');
-
-    showToast(`Inquiry sent! Ref ID: ${refId}`);
+    if (banner) {
+      banner.classList.remove('hidden');
+      banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
     document.getElementById("global-contact-form").reset();
     fetchAdminDashboard();
   } catch (err) {
-    // Still show banner on network error (optimistic UX — data may have been saved)
+    // Still show banner on network error
     const banner = document.getElementById('contact-form-success-banner');
-    if (banner) banner.classList.remove('hidden');
-    showToast("Inquiry received by Executive Desk!");
+    if (banner) {
+      banner.classList.remove('hidden');
+      banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
     document.getElementById("global-contact-form").reset();
   }
 }
