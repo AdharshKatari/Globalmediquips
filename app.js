@@ -6,31 +6,56 @@ let activeCategoryFilter = "all";
 let activeBrandFilter = "all";
 let searchQuery = "";
 
+let audioCtx = null;
+let chimePlayed = false;
+
+function playStartupChime() {
+  if (chimePlayed) return;
+  try {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return;
+    if (!audioCtx) {
+      audioCtx = new AudioContextClass();
+    }
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+    
+    // Four-tone harmonious medical chime (C5, E5, G5, C6)
+    const notes = [523.25, 659.25, 783.99, 1046.5];
+    notes.forEach((freq, i) => {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      const startAt = audioCtx.currentTime + i * 0.16;
+      gain.gain.setValueAtTime(0, startAt);
+      gain.gain.linearRampToValueAtTime(0.18, startAt + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.0001, startAt + 0.55);
+      osc.start(startAt);
+      osc.stop(startAt + 0.6);
+    });
+    chimePlayed = true;
+  } catch (e) {
+    // Autoplay blocked by browser policy until user gesture
+  }
+}
+
+// Mobile and desktop gesture unlock for audio (browsers require 1 user gesture to allow audio)
+['pointerdown', 'touchstart', 'click', 'keydown'].forEach(evt => {
+  window.addEventListener(evt, playStartupChime, { once: true, passive: true });
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   fetchProducts();
   setupNavigation();
   updateQuoteBasketUI();
   setupFileInputHandler();
 
-  // Play soft professional startup chime using Web Audio API
-  try {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    const notes = [523.25, 659.25, 783.99, 1046.5]; // C5, E5, G5, C6
-    notes.forEach((freq, i) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.type = 'sine';
-      osc.frequency.value = freq;
-      const startAt = ctx.currentTime + i * 0.18;
-      gain.gain.setValueAtTime(0, startAt);
-      gain.gain.linearRampToValueAtTime(0.15, startAt + 0.08);
-      gain.gain.exponentialRampToValueAtTime(0.001, startAt + 0.6);
-      osc.start(startAt);
-      osc.stop(startAt + 0.7);
-    });
-  } catch(e) { /* Audio not supported — silent fail */ }
+  // Attempt direct chime playback (will succeed if browser media engagement permits)
+  playStartupChime();
 
   // Cinematic Movie-Title Preloader Handler (Zoom-out 1.1s + 0.7s hold = 1.8s total)
   setTimeout(() => {
