@@ -13,36 +13,164 @@ let searchQuery = "";
 
 let audioCtx = null;
 let chimePlayed = false;
+let introFinished = false;
+
+// First-time-visitor gate: the intro sound plays once ever, then never again
+const INTRO_SOUND_FLAG = 'gm_intro_sound_played';
+
+function introSoundAlreadyPlayed() {
+  try { return localStorage.getItem(INTRO_SOUND_FLAG) === '1'; } catch (e) { return false; }
+}
+
+function markIntroSoundPlayed() {
+  try { localStorage.setItem(INTRO_SOUND_FLAG, '1'); } catch (e) {}
+}
+
+// Cinematic intro audio logo: whoosh sweep + sub impact + glass-bell motif.
+// Designed to ride the preloader animation — whoosh during the zoom-out (0→1.1s),
+// impact as the logo lands (~0.95s), bell arpeggio during the hold (1.0→1.5s).
+function buildIntroSound(ctx) {
+  const t0 = ctx.currentTime + 0.03;
+
+  // Master bus: soft compression for a polished, controlled logo sound
+  const master = ctx.createGain();
+  master.gain.value = 0.9;
+  const comp = ctx.createDynamicsCompressor();
+  comp.threshold.value = -16;
+  comp.knee.value = 24;
+  comp.ratio.value = 4;
+  comp.attack.value = 0.003;
+  comp.release.value = 0.25;
+  master.connect(comp);
+  comp.connect(ctx.destination);
+
+  // Space bus: short feedback delay acting as a light reverb tail
+  const spaceIn = ctx.createGain();
+  const delay = ctx.createDelay(1.0);
+  delay.delayTime.value = 0.085;
+  const feedback = ctx.createGain();
+  feedback.gain.value = 0.3;
+  const delayOut = ctx.createGain();
+  delayOut.gain.value = 0.4;
+  spaceIn.connect(delay);
+  delay.connect(feedback);
+  feedback.connect(delay);
+  delay.connect(delayOut);
+  delayOut.connect(master);
+
+  const send = (node, amount) => {
+    node.connect(master);
+    if (amount > 0) {
+      const s = ctx.createGain();
+      s.gain.value = amount;
+      node.connect(s);
+      s.connect(spaceIn);
+    }
+  };
+
+  // 1) WHOOSH — band-passed noise sweep riding the logo zoom-out
+  const noiseDur = 1.3;
+  const buffer = ctx.createBuffer(1, Math.floor(ctx.sampleRate * noiseDur), ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+  const noise = ctx.createBufferSource();
+  noise.buffer = buffer;
+  const sweep = ctx.createBiquadFilter();
+  sweep.type = 'bandpass';
+  sweep.Q.value = 0.7;
+  sweep.frequency.setValueAtTime(160, t0);
+  sweep.frequency.exponentialRampToValueAtTime(3600, t0 + 0.85);
+  const whooshGain = ctx.createGain();
+  whooshGain.gain.setValueAtTime(0.0001, t0);
+  whooshGain.gain.exponentialRampToValueAtTime(0.14, t0 + 0.8);
+  whooshGain.gain.exponentialRampToValueAtTime(0.0001, t0 + 1.25);
+  noise.connect(sweep);
+  sweep.connect(whooshGain);
+  send(whooshGain, 0.15);
+  noise.start(t0);
+  noise.stop(t0 + noiseDur);
+
+  // 2) SUB IMPACT — the "landing" as the logo settles
+  const impactAt = t0 + 0.92;
+  const sub = ctx.createOscillator();
+  sub.type = 'sine';
+  sub.frequency.setValueAtTime(115, impactAt);
+  sub.frequency.exponentialRampToValueAtTime(44, impactAt + 0.5);
+  const subGain = ctx.createGain();
+  subGain.gain.setValueAtTime(0.0001, impactAt);
+  subGain.gain.exponentialRampToValueAtTime(0.55, impactAt + 0.05);
+  subGain.gain.exponentialRampToValueAtTime(0.0001, impactAt + 0.95);
+  sub.connect(subGain);
+  send(subGain, 0.05);
+  sub.start(impactAt);
+  sub.stop(impactAt + 1.0);
+
+  // 3) GLASS-BELL LOGO MOTIF — ascending G-major arpeggio with layered partials
+  const notes = [
+    { f: 392.0, at: 1.0, v: 0.26 },   // G4
+    { f: 493.88, at: 1.16, v: 0.23 },  // B4
+    { f: 587.33, at: 1.32, v: 0.2 },   // D5
+    { f: 784.0, at: 1.52, v: 0.18 }    // G5
+  ];
+  const partials = [[1, 1], [2.0, 0.35], [3.01, 0.15], [4.18, 0.07]];
+  notes.forEach(n => {
+    const start = t0 + n.at;
+    const env = ctx.createGain();
+    env.gain.setValueAtTime(0.0001, start);
+    env.gain.exponentialRampToValueAtTime(n.v, start + 0.015);
+    env.gain.exponentialRampToValueAtTime(0.0001, start + 1.7);
+    partials.forEach(pair => {
+      const osc = ctx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.value = n.f * pair[0];
+      const pg = ctx.createGain();
+      pg.gain.value = pair[1];
+      osc.connect(pg);
+      pg.connect(env);
+      osc.start(start);
+      osc.stop(start + 1.75);
+    });
+    send(env, 0.4);
+  });
+}
 
 function playStartupChime() {
   if (chimePlayed) return;
+
+  // First-time visitors only — no sound on any later visit
+  if (introSoundAlreadyPlayed()) return;
+
+  // The intro sound only ever plays together with the intro animation
+  if (introFinished) return;
+
   try {
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
     if (!AudioContextClass) return;
     if (!audioCtx) {
       audioCtx = new AudioContextClass();
     }
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
+
+    const startIntro = () => {
+      if (chimePlayed || introFinished || introSoundAlreadyPlayed()) return;
+      try {
+        buildIntroSound(audioCtx);
+        chimePlayed = true;
+        markIntroSoundPlayed();
+        const hint = document.getElementById("intro-sound-hint");
+        if (hint) hint.classList.add("hidden");
+      } catch (e) {}
+    };
+
+    if (audioCtx.state === 'running') {
+      startIntro();
+    } else {
+      // Autoplay blocked — the pending promise resolves on the visitor's first tap,
+      // starting the sound in sync with the still-playing animation
+      const resumeResult = audioCtx.resume();
+      if (resumeResult && typeof resumeResult.then === 'function') {
+        resumeResult.then(startIntro).catch(() => {});
+      }
     }
-    
-    // Four-tone harmonious medical chime (C5, E5, G5, C6)
-    const notes = [523.25, 659.25, 783.99, 1046.5];
-    notes.forEach((freq, i) => {
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-      const startAt = audioCtx.currentTime + i * 0.16;
-      gain.gain.setValueAtTime(0, startAt);
-      gain.gain.linearRampToValueAtTime(0.18, startAt + 0.05);
-      gain.gain.exponentialRampToValueAtTime(0.0001, startAt + 0.55);
-      osc.start(startAt);
-      osc.stop(startAt + 0.6);
-    });
-    chimePlayed = true;
   } catch (e) {
     // Autoplay blocked by browser policy until user gesture
   }
@@ -63,10 +191,18 @@ document.addEventListener("DOMContentLoaded", () => {
   // Attempt direct chime playback (will succeed if browser media engagement permits)
   playStartupChime();
 
+  // If the browser blocked autoplay, invite the visitor to tap while the intro plays
+  // (first-time visitors only — returning visitors get no sound at all)
+  setTimeout(() => {
+    const hint = document.getElementById("intro-sound-hint");
+    if (hint && !chimePlayed && !introSoundAlreadyPlayed()) hint.classList.remove("hidden");
+  }, 700);
+
   // Cinematic Movie-Title Preloader Handler (Zoom-out 1.1s + 0.7s hold = 1.8s total)
   setTimeout(() => {
     const preloader = document.getElementById("initial-loader-screen");
     if (preloader) {
+      introFinished = true;
       preloader.style.opacity = "0";
       setTimeout(() => preloader.style.display = "none", 400);
     }
