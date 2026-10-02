@@ -829,7 +829,7 @@ function sendWhatsAppQuote() {
   msg += `*GST Verification:* 36BHGPK3813B1ZS%0A%0A`;
   msg += `Hello Shivashankar Katari ji, please send your best B2B wholesale quotation.`;
 
-  window.open(`https://wa.me/919876543210?text=${msg}`, "_blank");
+  window.open(`https://wa.me/919666999185?text=${msg}`, "_blank");
 }
 
 // ADMIN PORTAL CONTROLLER & SUB-TAB NAVIGATOR
@@ -1186,7 +1186,7 @@ function openProductModal(productId) {
       brochureLink.classList.remove("hidden");
     } else {
       brochureLink.href = "#";
-      brochureLink.onclick = (e) => { e.preventDefault(); alert("Official brochure request initiated. Calling sales desk..."); window.location.href="tel:+919876543210"; };
+      brochureLink.onclick = (e) => { e.preventDefault(); alert("Official brochure request initiated. Calling sales desk..."); window.location.href="tel:+919666999185"; };
     }
   }
 
@@ -1268,7 +1268,7 @@ function sendWhatsAppSingleQuoteModal() {
   msg += `━━━━━━━━━━━━━━━━━━━━%0A`;
   msg += `Hello Shivashankar Katari ji, I saw this product on your official catalog and would like your best B2B wholesale quotation and delivery timeline to Hyderabad/Telangana.`;
 
-  window.open(`https://wa.me/919876543210?text=${msg}`, "_blank");
+  window.open(`https://wa.me/919666999185?text=${msg}`, "_blank");
 }
 
 function closeProductModal() {

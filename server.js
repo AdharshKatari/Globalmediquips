@@ -256,7 +256,7 @@ function loadDatabase() {
         hsnDefault: "90181100",
         banker: "ICICI BANK LIMITED",
         location: "Amberpet, Hyderabad, Telangana, India",
-        helpline: "+91 98765 43210"
+        helpline: "+91 96669 99185"
       },
       products: IN_DEPTH_PRODUCTS,
       quotes: [
@@ -339,7 +339,7 @@ app.post('/api/quotes', (req, res) => {
     quoteRef,
     buyerName: buyerName || "Hospital Procurement Officer",
     hospitalName: hospitalName || "Private Hospital / Clinic",
-    phone: phone || "+91 98765 43210",
+    phone: phone || "+91 96669 99185",
     location: location || "Hyderabad, Telangana",
     items,
     totalAmount,
