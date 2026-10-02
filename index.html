@@ -532,57 +532,82 @@
   <!-- =================================================================== -->
   <!-- PAGE 6: ADMIN PORTAL & MANAGEMENT SYSTEM PAGE -->
   <!-- =================================================================== -->
-  <main id="admin-page" class="page-section py-10 px-4 max-w-7xl mx-auto w-full">
-    <div class="space-y-8">
+  <main id="admin-page" class="page-section py-8 px-4 max-w-7xl mx-auto w-full">
+    <div class="space-y-6">
       
-      <!-- ADMIN HEADER & ANALYTICS CARDS -->
-      <div class="master-card p-8">
+      <!-- ADMIN EXECUTIVE HEADER & TOP STATS -->
+      <div class="master-card p-6 md:p-8 bg-gradient-to-r from-navy-dark via-navy-primary to-slate-900 text-white border-0 shadow-xl">
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
           <div>
-            <div class="inline-flex items-center gap-2 text-xs font-extrabold text-navy-primary bg-navy-primary/10 px-3 py-1 rounded-lg mb-2">
-              <svg class="w-4 h-4 text-navy-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-              <span>Authorized Management Portal</span>
+            <div class="inline-flex items-center gap-2 text-xs font-extrabold text-cyan-accent bg-white/10 px-3 py-1 rounded-lg border border-white/10 mb-2">
+              <svg class="w-4 h-4 text-cyan-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+              <span>Executive Management Control Center</span>
             </div>
-            <h1 class="text-2xl font-black text-slate-900 tracking-tight">Executive Operations & Inquiries Desk</h1>
-            <p class="text-xs text-slate-500 mt-0.5">Live B2B Inquiry Inbox, Hospital Quote Processing & Inventory Control</p>
+            <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-white">Global Mediquips Operations Desk</h1>
+            <p class="text-xs text-slate-300 mt-1">Authorized Operations Portal • Amberpet, Hyderabad Desk</p>
           </div>
+          
           <div class="flex items-center gap-3">
-            <span class="px-3.5 py-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold rounded-xl flex items-center gap-1.5 shadow-sm">
-              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span class="px-3 py-1.5 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-xs font-bold rounded-xl flex items-center gap-1.5 shadow-sm">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
               GST Active: 36BHGPK3813B1ZS
             </span>
-            <button onclick="logoutAdmin()" class="px-3.5 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-bold rounded-xl transition flex items-center gap-1.5 shadow-sm">
+            <button onclick="logoutAdmin()" class="px-3.5 py-1.5 bg-rose-500/20 hover:bg-rose-500/30 text-rose-200 border border-rose-400/30 text-xs font-bold rounded-xl transition flex items-center gap-1.5 shadow-sm">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
               <span>Sign Out</span>
             </button>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
-          <div class="p-6 bg-slate-50 border border-slate-200 rounded-2xl">
-            <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Live Catalog Products</div>
-            <div id="admin-count-products" class="text-3xl font-black text-navy-primary mt-1">0</div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+          <div class="p-4 bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl">
+            <div class="text-[11px] font-bold text-slate-300 uppercase tracking-wider">Live Catalog Devices</div>
+            <div id="admin-count-products" class="text-2xl font-black text-cyan-accent mt-0.5">0</div>
           </div>
-          <div class="p-6 bg-slate-50 border border-slate-200 rounded-2xl">
-            <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">B2B Inquiries Received</div>
-            <div id="admin-count-quotes" class="text-3xl font-black text-navy-primary mt-1">0</div>
+          <div class="p-4 bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl">
+            <div class="text-[11px] font-bold text-slate-300 uppercase tracking-wider">B2B Inquiries Received</div>
+            <div id="admin-count-quotes" class="text-2xl font-black text-yellow-warm mt-0.5">0</div>
           </div>
-          <div class="p-6 bg-slate-50 border border-slate-200 rounded-2xl">
-            <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Estimated Pipeline Value</div>
-            <div id="admin-pipeline-value" class="text-3xl font-black text-emerald-600 mt-1">₹0</div>
+          <div class="p-4 bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl">
+            <div class="text-[11px] font-bold text-slate-300 uppercase tracking-wider">Pipeline Value</div>
+            <div id="admin-pipeline-value" class="text-2xl font-black text-emerald-300 mt-0.5">₹0</div>
           </div>
         </div>
       </div>
 
-      <!-- B2B QUOTES & LEADS INBOX (REFLECTS MAIN PAGE FORM SUBMISSIONS) -->
-      <div class="master-card p-8">
+      <!-- ADMIN SUB-TAB NAVIGATION BAR -->
+      <div class="flex items-center gap-2 border-b border-slate-200 overflow-x-auto pb-1">
+        <button onclick="switchAdminTab('inquiries')" id="admin-tab-btn-inquiries" class="admin-tab-btn px-5 py-3 text-xs font-extrabold rounded-t-xl transition flex items-center gap-2 border-b-2 border-navy-primary text-navy-primary bg-white shadow-sm">
+          <span>📥 Inquiries Inbox</span>
+          <span class="bg-navy-primary text-white text-[10px] px-2 py-0.5 rounded-full font-black" id="admin-tab-badge-inquiries">0</span>
+        </button>
+        
+        <button onclick="switchAdminTab('inventory')" id="admin-tab-btn-inventory" class="admin-tab-btn px-5 py-3 text-xs font-bold text-slate-600 hover:text-slate-900 rounded-t-xl transition flex items-center gap-2 border-b-2 border-transparent">
+          <span>📦 Equipment Inventory</span>
+        </button>
+        
+        <button onclick="switchAdminTab('add-product')" id="admin-tab-btn-add-product" class="admin-tab-btn px-5 py-3 text-xs font-bold text-slate-600 hover:text-slate-900 rounded-t-xl transition flex items-center gap-2 border-b-2 border-transparent">
+          <span>➕ Publish New Equipment</span>
+        </button>
+
+        <button onclick="switchAdminTab('analytics')" id="admin-tab-btn-analytics" class="admin-tab-btn px-5 py-3 text-xs font-bold text-slate-600 hover:text-slate-900 rounded-t-xl transition flex items-center gap-2 border-b-2 border-transparent">
+          <span>📊 Statutory & Profile</span>
+        </button>
+      </div>
+
+      <!-- TAB 1: INQUIRIES & LEADS INBOX PANEL -->
+      <div id="admin-tab-panel-inquiries" class="admin-tab-panel master-card p-6 md:p-8">
         <div class="flex items-center justify-between mb-4">
           <div>
-            <h3 class="text-lg font-black text-slate-900">B2B Inquiries & Quotations Inbox</h3>
-            <p class="text-xs text-slate-500">Real-time buyer requests received from main page & product pages</p>
+            <h3 class="text-lg font-black text-slate-900">B2B Customer Inquiries Inbox</h3>
+            <p class="text-xs text-slate-500 mt-0.5">Real-time buyer requests received from main page customer form</p>
           </div>
-          <span class="text-xs font-bold text-navy-primary bg-navy-primary/10 px-3 py-1 rounded-lg">Auto-Sync Active</span>
+          <button onclick="fetchAdminDashboard()" class="text-xs font-bold text-navy-primary hover:text-cyan-accent flex items-center gap-1 transition">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+            <span>Refresh Inbox</span>
+          </button>
         </div>
+        
         <div class="overflow-x-auto">
           <table class="w-full text-left border-collapse">
             <thead>
@@ -603,30 +628,125 @@
         </div>
       </div>
 
-      <!-- INVENTORY MANAGEMENT & STOCK CONTROL TABLE -->
-      <div class="master-card p-8">
+      <!-- TAB 2: INVENTORY & STOCK CONTROL PANEL -->
+      <div id="admin-tab-panel-inventory" class="admin-tab-panel master-card p-6 md:p-8 hidden">
         <div class="flex items-center justify-between mb-4">
           <div>
-            <h3 class="text-lg font-black text-slate-900">Inventory & Stock Control</h3>
-            <p class="text-xs text-slate-500">Manage live equipment stock and pricing</p>
+            <h3 class="text-lg font-black text-slate-900">Live Equipment Inventory & Stock</h3>
+            <p class="text-xs text-slate-500 mt-0.5">Manage stock availability and wholesale pricing</p>
           </div>
+          <button onclick="switchAdminTab('add-product')" class="px-3.5 py-2 bg-navy-primary hover:bg-navy-dark text-white rounded-xl text-xs font-bold shadow-sm transition flex items-center gap-1.5">
+            <span>+ Add New Device</span>
+          </button>
         </div>
+        
         <div class="overflow-x-auto">
           <table class="w-full text-left border-collapse">
             <thead>
-              <tr class="border-b border-slate-200 text-xs text-slate-400 font-bold uppercase">
-                <th class="py-3 px-3">#</th>
+              <tr class="border-b border-slate-200 text-xs text-slate-400 font-bold uppercase bg-slate-50">
+                <th class="py-3 px-3 rounded-tl-xl">#</th>
                 <th class="py-3 px-3">Product Name</th>
                 <th class="py-3 px-3">Brand</th>
                 <th class="py-3 px-3">Category</th>
                 <th class="py-3 px-3">Price</th>
-                <th class="py-3 px-3">Action</th>
+                <th class="py-3 px-3 rounded-tr-xl">Action</th>
               </tr>
             </thead>
             <tbody id="admin-products-body">
               <!-- Rendered dynamically by app.js -->
             </tbody>
           </table>
+        </div>
+      </div>
+
+      <!-- TAB 3: PUBLISH NEW PRODUCT FORM PANEL -->
+      <div id="admin-tab-panel-add-product" class="admin-tab-panel master-card p-6 md:p-8 hidden">
+        <div class="mb-6 pb-4 border-b border-slate-200">
+          <h3 class="text-lg font-black text-slate-900">Publish New Medical Equipment to Catalog</h3>
+          <p class="text-xs text-slate-500 mt-0.5">Fill device parameters to list new product in live wholesale catalog</p>
+        </div>
+
+        <form id="add-product-form" onsubmit="handleAddProductForm(event)" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 text-xs">
+          <div class="sm:col-span-2">
+            <label class="block font-bold text-slate-700 mb-1">Equipment Title / Model Name *</label>
+            <input type="text" id="admin-form-title" placeholder="e.g. Philips Evita V800 ICU Ventilator" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-navy-primary font-medium">
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Brand / Manufacturer *</label>
+            <input type="text" id="admin-form-brand" placeholder="e.g. Philips / ResMed / BPL / Oxymed" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-navy-primary font-medium">
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Device Category *</label>
+            <select id="admin-form-category" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none font-medium">
+              <option value="cpap-bipap">CPAP & BiPAP Respiratory Care</option>
+              <option value="oxygen-concentrators">Medical Oxygen Concentrators</option>
+              <option value="hospital-furniture">Hospital Furniture & ICU Beds</option>
+              <option value="ecg-machines">ECG & Diagnostic Instruments</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Wholesale Price (₹ INR) *</label>
+            <input type="number" id="admin-form-price" placeholder="e.g. 45000" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-navy-primary font-medium">
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Product Photo URL *</label>
+            <input type="text" id="admin-form-image" placeholder="https://5.imimg.com/data5/...png" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-navy-primary font-medium">
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Country of Origin</label>
+            <input type="text" id="admin-form-origin" placeholder="e.g. Made in India / USA" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-navy-primary font-medium">
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Clinical Application</label>
+            <input type="text" id="admin-form-application" placeholder="e.g. Hospital / Home Care" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-navy-primary font-medium">
+          </div>
+
+          <div class="sm:col-span-2 lg:col-span-3">
+            <label class="block font-bold text-slate-700 mb-1">Product Overview & Clinical Details *</label>
+            <textarea id="admin-form-description" rows="3" placeholder="Clinical description, warranty info, and features..." required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none text-xs font-medium"></textarea>
+          </div>
+
+          <div class="sm:col-span-2 lg:col-span-3 pt-2 flex items-center gap-3">
+            <button type="submit" class="px-6 py-3.5 bg-navy-primary hover:bg-navy-dark text-white rounded-xl font-bold shadow-md transition">
+              Publish to Live Catalog
+            </button>
+            <button type="button" onclick="switchAdminTab('inventory')" class="px-5 py-3.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold transition">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- TAB 4: STATUTORY & PROFILE PANEL -->
+      <div id="admin-tab-panel-analytics" class="admin-tab-panel master-card p-6 md:p-8 hidden">
+        <h3 class="text-lg font-black text-slate-900 mb-4">Statutory & Business Registration Summary</h3>
+        <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+            <div class="text-slate-400 font-bold">GSTIN Registration</div>
+            <div class="text-base font-extrabold text-navy-primary">36BHGPK3813B1ZS</div>
+            <div class="text-emerald-600 font-bold text-[10px]">✔ Active (Telangana)</div>
+          </div>
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+            <div class="text-slate-400 font-bold">Primary HSN Code</div>
+            <div class="text-base font-extrabold text-navy-primary">90181100</div>
+            <div class="text-slate-500 font-medium text-[10px]">Medical Devices</div>
+          </div>
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+            <div class="text-slate-400 font-bold">Primary Proprietor</div>
+            <div class="text-base font-extrabold text-navy-primary">S. Katari</div>
+            <div class="text-slate-500 font-medium text-[10px]">Sole Proprietorship</div>
+          </div>
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+            <div class="text-slate-400 font-bold">Registered Office</div>
+            <div class="text-sm font-bold text-slate-800">Amberpet, Hyderabad</div>
+            <div class="text-slate-500 font-medium text-[10px]">Telangana, India</div>
+          </div>
         </div>
       </div>
 
@@ -861,63 +981,102 @@
 
       <!-- RIGHT COLUMN: HIGH-CONVERSION B2B REQUEST FORM -->
       <div class="lg:col-span-7 bg-white text-slate-900 rounded-3xl p-8 shadow-2xl border border-slate-200">
-        <div class="mb-6">
-          <h3 class="text-xl font-extrabold text-slate-900">Direct Equipment Quotation Form</h3>
-          <p class="text-xs text-slate-500 mt-1">Receive official quotation with GST tax breakdown within 15 minutes.</p>
+        
+        <!-- FORM CONTAINER (Hides on submission) -->
+        <div id="contact-form-container">
+          <div class="mb-6">
+            <h3 class="text-xl font-extrabold text-slate-900">Direct Equipment Quotation Form</h3>
+            <p class="text-xs text-slate-500 mt-1">Receive official quotation with GST tax breakdown within 15 minutes.</p>
+          </div>
+
+          <form id="global-contact-form" onsubmit="handleGlobalContactSubmit(event)" class="grid sm:grid-cols-2 gap-4 text-xs">
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Your Name / Hospital Name *</label>
+              <input type="text" id="contact-form-name" placeholder="e.g. Dr. Ramesh / Sunshine Hospital" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-navy-primary font-medium">
+            </div>
+
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Phone / WhatsApp Number *</label>
+              <input type="tel" id="contact-form-phone" placeholder="e.g. +91 98765 43210" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-navy-primary font-medium">
+            </div>
+
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Select Medical Device Category *</label>
+              <select id="contact-form-category" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none font-medium">
+                <option value="CPAP & BiPAP Respiratory Care">CPAP & BiPAP Respiratory Care</option>
+                <option value="Medical Oxygen Concentrators">Medical Oxygen Concentrators</option>
+                <option value="Hospital Furniture & ICU Beds">Hospital Furniture & ICU Beds</option>
+                <option value="ECG & Diagnostic Instruments">ECG & Diagnostic Instruments</option>
+                <option value="ICU Infusion & Syringe Pumps">ICU Infusion & Syringe Pumps</option>
+                <option value="Bulk Turnkey Facility Requirement">Bulk Turnkey Facility Requirement</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Delivery City / Facility Location *</label>
+              <input type="text" id="contact-form-location" placeholder="e.g. Amberpet, Secunderabad, Hyderabad" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-navy-primary font-medium">
+            </div>
+
+            <div class="sm:col-span-2">
+              <label class="block font-bold text-slate-700 mb-1">Specific Requirement / Quantity Needed</label>
+              <textarea id="contact-form-message" rows="3" placeholder="Specify brand preference (Philips, Oxymed, ResMed, BPL), quantity, or urgency..." class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none text-xs font-medium"></textarea>
+            </div>
+
+            <div class="sm:col-span-2 pt-2">
+              <button type="submit" class="w-full bg-navy-primary hover:bg-navy-dark text-white font-extrabold py-3.5 rounded-xl text-xs shadow-lg transition flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                <span>Submit Instant Quotation Request</span>
+              </button>
+            </div>
+          </form>
         </div>
 
-        <!-- INLINE FORM SUCCESS CONFIRMATION BANNER -->
-        <div id="contact-form-success-banner" class="hidden mb-6 p-4 bg-emerald-50 border border-emerald-300 text-emerald-900 rounded-2xl space-y-1 shadow-sm transition-all duration-300">
-          <div class="flex items-center gap-2 font-black text-sm text-emerald-800">
-            <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            <span>Quotation Request Submitted Successfully!</span>
+        <!-- FULL SUCCESS CARD (Replaces form entirely after submission) -->
+        <div id="enquiry-success-card" class="hidden flex-col items-center justify-center text-center py-6 space-y-5">
+          <!-- Solid Green Circle with White Tick -->
+          <div class="w-20 h-20 rounded-full bg-emerald-500 flex items-center justify-center shadow-xl shadow-emerald-200">
+            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+            </svg>
           </div>
-          <p class="text-xs text-emerald-700 leading-relaxed font-medium">
-            Your request <strong id="success-ref-id" class="font-mono text-emerald-900 bg-emerald-200/70 px-1.5 py-0.5 rounded font-bold">GM-Q-REC</strong> has been recorded and transmitted directly to Global Mediquips Executive Operations Desk.
-          </p>
-          <div class="text-[11px] text-emerald-600 font-bold pt-1">⚡ Sales Desk Response: Within 15 Minutes</div>
+          
+          <div class="space-y-1.5">
+            <div class="text-2xl font-black text-slate-900">Your Enquiry Has Been Sent!</div>
+            <p class="text-xs text-slate-500 font-medium max-w-sm mx-auto">
+              Our executive sales desk in Amberpet has received your request and will contact you within <strong class="text-navy-primary">15 minutes</strong>.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 w-full text-left text-xs space-y-2.5">
+            <div class="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 mb-1">Enquiry Summary</div>
+            <div class="flex items-center justify-between border-b border-slate-200/60 pb-2">
+              <span class="text-slate-500 font-semibold">Reference ID:</span>
+              <span id="card-ref-id" class="font-mono font-extrabold text-navy-primary bg-navy-primary/10 px-2.5 py-0.5 rounded-md">GM-Q-REC</span>
+            </div>
+            <div class="flex items-center justify-between border-b border-slate-200/60 pb-2">
+              <span class="text-slate-500 font-semibold">Name / Facility:</span>
+              <span id="card-buyer-name" class="font-bold text-slate-800">—</span>
+            </div>
+            <div class="flex items-center justify-between border-b border-slate-200/60 pb-2">
+              <span class="text-slate-500 font-semibold">Phone:</span>
+              <span id="card-buyer-phone" class="font-bold text-emerald-700">—</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-slate-500 font-semibold">Category Needed:</span>
+              <span id="card-buyer-category" class="font-bold text-slate-800 max-w-[60%] text-right truncate">—</span>
+            </div>
+          </div>
+
+          <div class="p-3 bg-yellow-50 border border-yellow-200 rounded-xl text-[11px] text-yellow-800 font-semibold w-full text-center">
+            ⚡ Official GST Tax Invoice & Wholesale Rates will be sent via WhatsApp / Call.
+          </div>
+
+          <button onclick="resetContactForm()" class="text-xs font-bold text-navy-primary hover:text-cyan-accent transition flex items-center gap-1.5 pt-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            <span>Submit Another Enquiry</span>
+          </button>
         </div>
 
-        <form id="global-contact-form" onsubmit="handleGlobalContactSubmit(event)" class="grid sm:grid-cols-2 gap-4 text-xs">
-          <div>
-            <label class="block font-bold text-slate-700 mb-1">Your Name / Hospital Name *</label>
-            <input type="text" id="contact-form-name" placeholder="e.g. Dr. Ramesh / Sunshine Hospital" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-navy-primary font-medium">
-          </div>
-
-          <div>
-            <label class="block font-bold text-slate-700 mb-1">Phone / WhatsApp Number *</label>
-            <input type="tel" id="contact-form-phone" placeholder="e.g. +91 98765 43210" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-navy-primary font-medium">
-          </div>
-
-          <div>
-            <label class="block font-bold text-slate-700 mb-1">Select Medical Device Category *</label>
-            <select id="contact-form-category" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none font-medium">
-              <option value="CPAP & BiPAP Respiratory Care">CPAP & BiPAP Respiratory Care</option>
-              <option value="Medical Oxygen Concentrators">Medical Oxygen Concentrators</option>
-              <option value="Hospital Furniture & ICU Beds">Hospital Furniture & ICU Beds</option>
-              <option value="ECG & Diagnostic Instruments">ECG & Diagnostic Instruments</option>
-              <option value="ICU Infusion & Syringe Pumps">ICU Infusion & Syringe Pumps</option>
-              <option value="Bulk Turnkey Facility Requirement">Bulk Turnkey Facility Requirement</option>
-            </select>
-          </div>
-
-          <div>
-            <label class="block font-bold text-slate-700 mb-1">Delivery City / Facility Location *</label>
-            <input type="text" id="contact-form-location" placeholder="e.g. Amberpet, Secunderabad, Hyderabad" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-navy-primary font-medium">
-          </div>
-
-          <div class="sm:col-span-2">
-            <label class="block font-bold text-slate-700 mb-1">Specific Requirement / Quantity Needed</label>
-            <textarea id="contact-form-message" rows="3" placeholder="Specify brand preference (Philips, Oxymed, ResMed, BPL), quantity, or urgency..." class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none text-xs font-medium"></textarea>
-          </div>
-
-          <div class="sm:col-span-2 pt-2">
-            <button type="submit" class="w-full bg-navy-primary hover:bg-navy-dark text-white font-extrabold py-3.5 rounded-xl text-xs shadow-lg transition flex items-center justify-center gap-2">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
-              <span>Submit Instant Quotation Request</span>
-            </button>
-          </div>
-        </form>
       </div>
 
     </div>

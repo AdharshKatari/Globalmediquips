@@ -118,7 +118,7 @@ function handleAdminAuthSubmit(e) {
   }
 }
 
-// Global B2B Inquiry Contact Request Form Handler (Before Footer)
+// Global B2B Inquiry Contact Request Form Handler
 async function handleGlobalContactSubmit(e) {
   e.preventDefault();
   const name = document.getElementById("contact-form-name").value.trim();
@@ -126,6 +126,8 @@ async function handleGlobalContactSubmit(e) {
   const category = document.getElementById("contact-form-category").value;
   const location = document.getElementById("contact-form-location").value.trim();
   const message = document.getElementById("contact-form-message").value.trim();
+
+  let refId = "GM-Q-" + Math.floor(100000 + Math.random() * 900000);
 
   try {
     const res = await fetch('/api/quotes', {
@@ -141,26 +143,51 @@ async function handleGlobalContactSubmit(e) {
     });
 
     const data = await res.json();
-    const refId = (data.data && data.data.quoteRef) ? data.data.quoteRef : "GM-Q-REC";
-
-    // Show inline green success banner with reference ID — no toast popup
-    const banner = document.getElementById('contact-form-success-banner');
-    const refEl = document.getElementById('success-ref-id');
-    if (refEl) refEl.innerText = refId;
-    if (banner) {
-      banner.classList.remove('hidden');
-      banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (data.data && data.data.quoteRef) {
+      refId = data.data.quoteRef;
     }
-    document.getElementById("global-contact-form").reset();
-    fetchAdminDashboard();
   } catch (err) {
-    // Still show banner on network error
-    const banner = document.getElementById('contact-form-success-banner');
-    if (banner) {
-      banner.classList.remove('hidden');
-      banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-    document.getElementById("global-contact-form").reset();
+    console.warn("Offline or direct save:", err);
+  }
+
+  // Populate Success Card Details
+  const cardRef = document.getElementById('card-ref-id');
+  const cardName = document.getElementById('card-buyer-name');
+  const cardPhone = document.getElementById('card-buyer-phone');
+  const cardCat = document.getElementById('card-buyer-category');
+
+  if (cardRef) cardRef.innerText = refId;
+  if (cardName) cardName.innerText = name;
+  if (cardPhone) cardPhone.innerText = phone;
+  if (cardCat) cardCat.innerText = category;
+
+  // Swap Views: Hide Form, Display Clean Green Tick Success Card
+  const formBox = document.getElementById('contact-form-container');
+  const successBox = document.getElementById('enquiry-success-card');
+
+  if (formBox) formBox.classList.add('hidden');
+  if (successBox) {
+    successBox.classList.remove('hidden');
+    successBox.classList.add('flex');
+    successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  fetchAdminDashboard();
+}
+
+function resetContactForm() {
+  const formBox = document.getElementById('contact-form-container');
+  const successBox = document.getElementById('enquiry-success-card');
+  const form = document.getElementById('global-contact-form');
+
+  if (form) form.reset();
+  if (successBox) {
+    successBox.classList.add('hidden');
+    successBox.classList.remove('flex');
+  }
+  if (formBox) {
+    formBox.classList.remove('hidden');
+    formBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 }
 
@@ -393,15 +420,38 @@ function sendWhatsAppQuote() {
   window.open(`https://wa.me/919876543210?text=${msg}`, "_blank");
 }
 
-// ADMIN PORTAL CONTROLLER
+// ADMIN PORTAL CONTROLLER & SUB-TAB NAVIGATOR
+function switchAdminTab(tabName) {
+  document.querySelectorAll(".admin-tab-panel").forEach(panel => {
+    panel.classList.add("hidden");
+  });
+
+  document.querySelectorAll(".admin-tab-btn").forEach(btn => {
+    btn.classList.remove("border-navy-primary", "text-navy-primary", "bg-white", "shadow-sm", "font-extrabold");
+    btn.classList.add("border-transparent", "text-slate-600", "font-bold");
+  });
+
+  const selectedPanel = document.getElementById(`admin-tab-panel-${tabName}`);
+  if (selectedPanel) {
+    selectedPanel.classList.remove("hidden");
+  }
+
+  const selectedBtn = document.getElementById(`admin-tab-btn-${tabName}`);
+  if (selectedBtn) {
+    selectedBtn.classList.remove("border-transparent", "text-slate-600", "font-bold");
+    selectedBtn.classList.add("border-navy-primary", "text-navy-primary", "bg-white", "shadow-sm", "font-extrabold");
+  }
+}
+
 async function fetchAdminDashboard() {
   try {
     const res = await fetch('/api/admin/dashboard');
     const data = await res.json();
     if (data.success) {
-      document.getElementById("admin-count-products").innerText = data.data.productsCount;
-      document.getElementById("admin-count-quotes").innerText = data.data.quotesCount;
-      document.getElementById("admin-pipeline-value").innerText = data.data.pipelineValue;
+      if (document.getElementById("admin-count-products")) document.getElementById("admin-count-products").innerText = data.data.productsCount;
+      if (document.getElementById("admin-count-quotes")) document.getElementById("admin-count-quotes").innerText = data.data.quotesCount;
+      if (document.getElementById("admin-pipeline-value")) document.getElementById("admin-pipeline-value").innerText = data.data.pipelineValue;
+      if (document.getElementById("admin-tab-badge-inquiries")) document.getElementById("admin-tab-badge-inquiries").innerText = data.data.quotesCount;
 
       renderAdminProductsTable();
       renderAdminQuotesTable(data.data.quotes);
@@ -524,6 +574,7 @@ async function handleAddProductForm(e) {
       fetchProducts();
       fetchAdminDashboard();
       document.getElementById("add-product-form").reset();
+      switchAdminTab('inventory');
     }
   } catch (err) {
     alert("Error adding product");
