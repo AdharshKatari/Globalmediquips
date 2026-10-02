@@ -11,6 +11,15 @@ document.addEventListener("DOMContentLoaded", () => {
   setupNavigation();
   updateQuoteBasketUI();
   setupFileInputHandler();
+
+  // Animated Logo Preloader Screen Handler
+  setTimeout(() => {
+    const preloader = document.getElementById("initial-loader-screen");
+    if (preloader) {
+      preloader.style.opacity = "0";
+      setTimeout(() => preloader.style.display = "none", 700);
+    }
+  }, 1000);
 });
 
 // Mobile Gallery & File Input Handler
@@ -52,6 +61,10 @@ let isAdminAuthenticated = false;
 
 // Executive Admin Authentication Gateway
 function openAdminAuthModal() {
+  if (isAdminAuthenticated) {
+    navigateToPage('admin-page');
+    return;
+  }
   const modal = document.getElementById("admin-auth-modal");
   const err = document.getElementById("admin-auth-error");
   const userInput = document.getElementById("admin-username-input");
@@ -71,6 +84,12 @@ function openAdminAuthModal() {
 function closeAdminAuthModal() {
   const modal = document.getElementById("admin-auth-modal");
   if (modal) modal.classList.add("hidden"), modal.classList.remove("flex");
+}
+
+function logoutAdmin() {
+  isAdminAuthenticated = false;
+  showToast("Signed Out from Executive Management Portal");
+  navigateToPage('home-page');
 }
 
 function handleAdminAuthSubmit(e) {
@@ -111,34 +130,27 @@ async function handleGlobalContactSubmit(e) {
   const message = document.getElementById("contact-form-message").value.trim();
 
   try {
-    await fetch('/api/quotes', {
+    const res = await fetch('/api/quotes', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         buyerName: name,
-        hospitalName: `${name} (${location})`,
+        hospitalName: location ? `${name} (${location})` : name,
         phone: phone,
         location: location,
-        items: [{ title: category, price: 0, quantity: 1 }]
+        items: [{ title: category, price: 0, quantity: 1, notes: message }]
       })
     });
 
-    showToast("B2B Quotation Request Submitted!");
+    const data = await res.json();
+    const refId = (data.data && data.data.quoteRef) ? data.data.quoteRef : "GM-Q-REC";
 
-    let msg = `*New B2B Quotation Request — Global Mediquips*%0A`;
-    msg += `━━━━━━━━━━━━━━━━━━━━%0A`;
-    msg += `*Client / Hospital:* ${name}%0A`;
-    msg += `*Phone:* ${phone}%0A`;
-    msg += `*Device Category:* ${category}%0A`;
-    msg += `*Location:* ${location}%0A`;
-    if (message) msg += `*Notes / Specs:* ${message}%0A`;
-    msg += `━━━━━━━━━━━━━━━━━━━━%0A`;
-    msg += `Hello Shivashankar Katari ji, please send your best B2B wholesale price quotation to this client.`;
-
-    window.open(`https://wa.me/919876543210?text=${msg}`, "_blank");
+    showToast(`Quotation Request Submitted! Ref ID: ${refId}. Sent directly to Executive Admin Inbox.`);
     document.getElementById("global-contact-form").reset();
+    fetchAdminDashboard();
   } catch (err) {
-    showToast("Quotation request recorded. Contacting sales desk...");
+    showToast("Quotation request submitted directly to Executive Desk!");
+    document.getElementById("global-contact-form").reset();
   }
 }
 
@@ -415,28 +427,35 @@ function renderAdminQuotesTable(quotes) {
   if (!tableBody) return;
 
   if (!quotes || quotes.length === 0) {
-    tableBody.innerHTML = `<tr><td colspan="5" class="py-6 text-center text-slate-400 text-xs">No B2B quotes submitted yet.</td></tr>`;
+    tableBody.innerHTML = `<tr><td colspan="6" class="py-6 text-center text-slate-400 text-xs">No B2B inquiries submitted yet.</td></tr>`;
     return;
   }
 
-  tableBody.innerHTML = quotes.map(q => `
-    <tr class="border-b border-slate-200 text-xs hover:bg-slate-50">
-      <td class="py-3 px-3 font-mono font-bold text-navy-primary">${q.quoteRef}</td>
-      <td class="py-3 px-3">
-        <div class="font-bold text-slate-800">${q.buyerName}</div>
-        <div class="text-[10px] text-slate-400">${q.hospitalName}</div>
-      </td>
-      <td class="py-3 px-3 font-extrabold text-slate-800">${q.totalAmountDisplay}</td>
-      <td class="py-3 px-3">
-        <span class="px-2 py-0.5 rounded text-[10px] font-bold ${q.status === 'Pending' ? 'bg-amber-100 text-amber-800' : 'bg-green-100 text-green-800'}">
-          ${q.status}
-        </span>
-      </td>
-      <td class="py-3 px-3">
-        <button onclick="updateQuoteStatusAdmin('${q.quoteRef}', 'Quotation Sent')" class="px-2.5 py-1 bg-cyan-accent text-white rounded-lg text-[10px] font-bold hover:bg-cyan-hover transition">Mark Sent</button>
-      </td>
-    </tr>
-  `).join("");
+  tableBody.innerHTML = quotes.map(q => {
+    const itemTitle = (q.items && q.items[0]) ? q.items[0].title : "Medical Equipment";
+    return `
+      <tr class="border-b border-slate-200 text-xs hover:bg-slate-50 transition">
+        <td class="py-3 px-3 font-mono font-bold text-navy-primary">${q.quoteRef}</td>
+        <td class="py-3 px-3">
+          <div class="font-bold text-slate-800">${q.buyerName}</div>
+          <div class="text-[10px] text-slate-400">${q.hospitalName}</div>
+        </td>
+        <td class="py-3 px-3">
+          <div class="font-semibold text-emerald-700">${q.phone || '+91 98765 43210'}</div>
+          <div class="text-[10px] text-slate-400">${q.location || 'Hyderabad'}</div>
+        </td>
+        <td class="py-3 px-3 font-bold text-slate-700">${itemTitle}</td>
+        <td class="py-3 px-3">
+          <span class="px-2.5 py-1 rounded-lg text-[10px] font-extrabold ${q.status === 'Pending' ? 'bg-amber-100 text-amber-800 border border-amber-200' : 'bg-green-100 text-green-800 border border-green-200'}">
+            ${q.status}
+          </span>
+        </td>
+        <td class="py-3 px-3">
+          <button onclick="updateQuoteStatusAdmin('${q.quoteRef}', 'Quotation Sent')" class="px-3 py-1.5 bg-navy-primary hover:bg-navy-dark text-white rounded-lg text-[11px] font-bold shadow-sm transition">Mark Sent</button>
+        </td>
+      </tr>
+    `;
+  }).join("");
 }
 
 let currentModalProduct = null;

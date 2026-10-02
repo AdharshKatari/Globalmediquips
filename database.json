@@ -434,6 +434,24 @@
       "totalAmountDisplay": "₹45,600",
       "status": "Pending",
       "createdAt": "2026-10-02T04:15:07.724Z"
+    },
+    {
+      "quoteRef": "GM-Q-960131",
+      "buyerName": "Adharsh Katari",
+      "hospitalName": "Adharsh Katari (MADANAPALLE)",
+      "phone": "+916309189339",
+      "location": "MADANAPALLE",
+      "items": [
+        {
+          "title": "Medical Oxygen Concentrators",
+          "price": 0,
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 0,
+      "totalAmountDisplay": "₹0",
+      "status": "Pending",
+      "createdAt": "2026-10-02T05:12:40.132Z"
     }
   ],
   "reviews": [

@@ -18,6 +18,24 @@
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col justify-between">
 
+  <!-- INITIAL ANIMATED LOGO PRELOADER SCREEN -->
+  <div id="initial-loader-screen" class="fixed inset-0 bg-slate-950 z-[100] flex flex-col items-center justify-center transition-opacity duration-700 ease-out">
+    <div class="relative flex flex-col items-center">
+      <div class="absolute -inset-6 bg-cyan-accent/20 rounded-full blur-2xl animate-pulse"></div>
+      <div class="relative p-5 bg-white rounded-3xl shadow-2xl border border-white/20 animate-bounce">
+        <img src="logo.png" alt="Global Mediquips Logo" class="h-16 w-auto object-contain">
+      </div>
+      <div class="mt-6 text-center space-y-1">
+        <div class="text-2xl font-black text-white tracking-wider">Global Mediquips</div>
+        <div class="text-xs text-cyan-accent font-semibold tracking-widest uppercase">Premier Medical Equipment & ICU Supplies</div>
+        <div class="flex items-center justify-center gap-2 pt-4">
+          <span class="w-2 h-2 rounded-full bg-cyan-accent animate-ping"></span>
+          <span class="text-xs text-slate-400 font-medium">Loading Enterprise Portal...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- CORPORATE HEADER & NAVIGATION BAR WITH OFFICIAL LOGO -->
   <header class="bg-navy-primary text-white sticky top-0 z-40 shadow-lg border-b border-navy-dark">
     <div class="max-w-7xl mx-auto px-4 py-3.5 flex items-center justify-between gap-4">
@@ -170,6 +188,80 @@
           <p class="text-xs text-slate-500">3 Devices</p>
         </div>
 
+      </div>
+    </section>
+
+    <!-- FEATURED EQUIPMENT RUNNING MARQUEE DISPLAY -->
+    <section class="py-6 bg-navy-dark text-white border-y border-navy-primary/40 overflow-hidden relative">
+      <div class="max-w-7xl mx-auto px-4 mb-3 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-cyan-accent animate-ping"></span>
+          <span class="text-xs font-extrabold uppercase tracking-widest text-cyan-accent">Live Wholesale Equipment Showcase</span>
+        </div>
+        <span class="text-[11px] text-slate-400 font-semibold">Continuous Stock Broadcast</span>
+      </div>
+
+      <div class="relative w-full overflow-hidden py-1">
+        <div class="marquee-track flex items-center gap-6 whitespace-nowrap">
+          
+          <div onclick="openProductModal('2857152264362')" class="inline-flex items-center gap-3 bg-slate-900/90 border border-slate-700/80 px-4 py-2.5 rounded-2xl cursor-pointer hover:border-cyan-accent transition shadow-md">
+            <img src="https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png" class="h-10 w-10 object-contain bg-white rounded-lg p-1">
+            <div>
+              <div class="font-bold text-xs text-white">Philips BiPAP Auto Machine</div>
+              <div class="text-[11px] text-cyan-accent font-black">₹81,000 <span class="text-slate-400 font-normal">| DreamStation</span></div>
+            </div>
+          </div>
+
+          <div onclick="openProductModal('2857152145630')" class="inline-flex items-center gap-3 bg-slate-900/90 border border-slate-700/80 px-4 py-2.5 rounded-2xl cursor-pointer hover:border-cyan-accent transition shadow-md">
+            <img src="https://5.imimg.com/data5/SELLER/PDFImage/2025/1/482782601/HT/QT/NK/25122208/resmed-lumis-100-vpap-st-bipap-500x500.png" class="h-10 w-10 object-contain bg-white rounded-lg p-1">
+            <div>
+              <div class="font-bold text-xs text-white">ResMed Lumis 100 VPAP S</div>
+              <div class="text-[11px] text-cyan-accent font-black">₹72,000 <span class="text-slate-400 font-normal">| ResMed</span></div>
+            </div>
+          </div>
+
+          <div onclick="openProductModal('2857152129412')" class="inline-flex items-center gap-3 bg-slate-900/90 border border-slate-700/80 px-4 py-2.5 rounded-2xl cursor-pointer hover:border-cyan-accent transition shadow-md">
+            <img src="https://5.imimg.com/data5/SELLER/PDFImage/2025/2/492186901/WQ/JG/FH/25122208/bpl-oxy-5-neo-dual-oxygen-concentrator-500x500.png" class="h-10 w-10 object-contain bg-white rounded-lg p-1">
+            <div>
+              <div class="font-bold text-xs text-white">BPL Oxy 5 Neo Dual Concentrator</div>
+              <div class="text-[11px] text-cyan-accent font-black">₹38,000 <span class="text-slate-400 font-normal">| BPL Medical</span></div>
+            </div>
+          </div>
+
+          <div onclick="openProductModal('2857152146255')" class="inline-flex items-center gap-3 bg-slate-900/90 border border-slate-700/80 px-4 py-2.5 rounded-2xl cursor-pointer hover:border-cyan-accent transition shadow-md">
+            <img src="https://5.imimg.com/data5/SELLER/PDFImage/2025/1/482782601/HT/QT/NK/25122208/resmed-lumis-100-vpap-st-bipap-500x500.png" class="h-10 w-10 object-contain bg-white rounded-lg p-1">
+            <div>
+              <div class="font-bold text-xs text-white">Oxymed BiPAP ST I Series P1</div>
+              <div class="text-[11px] text-cyan-accent font-black">₹45,600 <span class="text-slate-400 font-normal">| Oxymed</span></div>
+            </div>
+          </div>
+
+          <div onclick="openProductModal('2857152146256')" class="inline-flex items-center gap-3 bg-slate-900/90 border border-slate-700/80 px-4 py-2.5 rounded-2xl cursor-pointer hover:border-cyan-accent transition shadow-md">
+            <img src="https://5.imimg.com/data5/SELLER/PDFImage/2025/4/510293812/AA/BB/CC/25122208/5-function-icu-bed-500x500.png" class="h-10 w-10 object-contain bg-white rounded-lg p-1">
+            <div>
+              <div class="font-bold text-xs text-white">5-Function Motorized ICU Bed</div>
+              <div class="text-[11px] text-cyan-accent font-black">₹68,500 <span class="text-slate-400 font-normal">| Hospital Grade</span></div>
+            </div>
+          </div>
+
+          <!-- DUPLICATE TRACK FOR CONTINUOUS INFINITE LOOP -->
+          <div onclick="openProductModal('2857152264362')" class="inline-flex items-center gap-3 bg-slate-900/90 border border-slate-700/80 px-4 py-2.5 rounded-2xl cursor-pointer hover:border-cyan-accent transition shadow-md">
+            <img src="https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png" class="h-10 w-10 object-contain bg-white rounded-lg p-1">
+            <div>
+              <div class="font-bold text-xs text-white">Philips BiPAP Auto Machine</div>
+              <div class="text-[11px] text-cyan-accent font-black">₹81,000 <span class="text-slate-400 font-normal">| DreamStation</span></div>
+            </div>
+          </div>
+
+          <div onclick="openProductModal('2857152145630')" class="inline-flex items-center gap-3 bg-slate-900/90 border border-slate-700/80 px-4 py-2.5 rounded-2xl cursor-pointer hover:border-cyan-accent transition shadow-md">
+            <img src="https://5.imimg.com/data5/SELLER/PDFImage/2025/1/482782601/HT/QT/NK/25122208/resmed-lumis-100-vpap-st-bipap-500x500.png" class="h-10 w-10 object-contain bg-white rounded-lg p-1">
+            <div>
+              <div class="font-bold text-xs text-white">ResMed Lumis 100 VPAP S</div>
+              <div class="text-[11px] text-cyan-accent font-black">₹72,000 <span class="text-slate-400 font-normal">| ResMed</span></div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
 
@@ -458,10 +550,16 @@
             <h1 class="text-2xl font-black text-slate-900 tracking-tight">Executive Operations & Inquiries Desk</h1>
             <p class="text-xs text-slate-500 mt-0.5">Live B2B Inquiry Inbox, Hospital Quote Processing & Inventory Control</p>
           </div>
-          <span class="px-3.5 py-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold rounded-xl flex items-center gap-1.5 shadow-sm">
-            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-            GST Active: 36BHGPK3813B1ZS
-          </span>
+          <div class="flex items-center gap-3">
+            <span class="px-3.5 py-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold rounded-xl flex items-center gap-1.5 shadow-sm">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              GST Active: 36BHGPK3813B1ZS
+            </span>
+            <button onclick="logoutAdmin()" class="px-3.5 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-bold rounded-xl transition flex items-center gap-1.5 shadow-sm">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+              <span>Sign Out</span>
+            </button>
+          </div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
@@ -495,7 +593,8 @@
               <tr class="border-b border-slate-200 text-xs text-slate-400 font-bold uppercase">
                 <th class="py-3 px-3">Ref ID</th>
                 <th class="py-3 px-3">Buyer / Hospital</th>
-                <th class="py-3 px-3">Total Value</th>
+                <th class="py-3 px-3">Phone & Location</th>
+                <th class="py-3 px-3">Device Category</th>
                 <th class="py-3 px-3">Status</th>
                 <th class="py-3 px-3">Action</th>
               </tr>
