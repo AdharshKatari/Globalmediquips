@@ -2,7 +2,7 @@
 
 let SITE_SETTINGS = {
   featuredProductId: '2857152264362',
-  founderImage: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80'
+  founderImage: 'founder.jpg'
 };
 let pendingFounderImage = '';
 let PRODUCTS_DATA = [];
