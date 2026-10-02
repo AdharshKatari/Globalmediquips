@@ -99,15 +99,31 @@ function setupFileInputHandler() {
 async function fetchCompanySettings() {
   try {
     const res = await fetch('/api/company');
-    const data = await res.json();
-    if (data.success && data.data) {
-      if (data.data.featuredProductId) SITE_SETTINGS.featuredProductId = data.data.featuredProductId;
-      if (data.data.founderImage) SITE_SETTINGS.founderImage = data.data.founderImage;
-      applyStorefrontSettings();
+    if (res.ok) {
+      const data = await res.json();
+      if (data.success && data.data) {
+        if (data.data.featuredProductId) SITE_SETTINGS.featuredProductId = data.data.featuredProductId;
+        if (data.data.founderImage) SITE_SETTINGS.founderImage = data.data.founderImage;
+        applyStorefrontSettings();
+        return;
+      }
     }
   } catch (err) {
-    console.error("Company fetch error", err);
+    // Static host fallback
   }
+
+  // Fallback for static platforms like Netlify
+  try {
+    const fallbackRes = await fetch('./database.json');
+    if (fallbackRes.ok) {
+      const fallbackData = await fallbackRes.json();
+      if (fallbackData && fallbackData.company) {
+        if (fallbackData.company.featuredProductId) SITE_SETTINGS.featuredProductId = fallbackData.company.featuredProductId;
+        if (fallbackData.company.founderImage) SITE_SETTINGS.founderImage = fallbackData.company.founderImage;
+        applyStorefrontSettings();
+      }
+    }
+  } catch(e) {}
 }
 
 function applyStorefrontSettings() {
@@ -139,15 +155,34 @@ function applyHeroFeaturedProduct() {
 async function fetchProducts() {
   try {
     const res = await fetch('/api/products');
-    const data = await res.json();
-    if (data.success) {
-      PRODUCTS_DATA = data.data;
-      renderProducts();
-      renderAdminProductsTable();
-      applyStorefrontSettings();
+    if (res.ok) {
+      const data = await res.json();
+      if (data.success && data.data && data.data.length > 0) {
+        PRODUCTS_DATA = data.data;
+        renderProducts();
+        renderAdminProductsTable();
+        applyStorefrontSettings();
+        return;
+      }
     }
   } catch (err) {
-    console.error("API Fetch Error", err);
+    // Static host fallback
+  }
+
+  // Fallback for static platforms like Netlify
+  try {
+    const fallbackRes = await fetch('./database.json');
+    if (fallbackRes.ok) {
+      const fallbackData = await fallbackRes.json();
+      if (fallbackData && fallbackData.products) {
+        PRODUCTS_DATA = fallbackData.products;
+        renderProducts();
+        renderAdminProductsTable();
+        applyStorefrontSettings();
+      }
+    }
+  } catch(e) {
+    console.error("Products load error", e);
   }
 }
 

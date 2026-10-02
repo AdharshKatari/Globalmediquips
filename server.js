@@ -455,3 +455,5 @@ app.listen(PORT, () => {
   console.log(`====================================================`);
   loadDatabase();
 });
+
+module.exports = app;
