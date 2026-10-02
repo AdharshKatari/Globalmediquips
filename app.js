@@ -12,14 +12,14 @@ document.addEventListener("DOMContentLoaded", () => {
   updateQuoteBasketUI();
   setupFileInputHandler();
 
-  // Animated Logo Preloader Screen Handler
+  // Cinematic Movie-Title Preloader Handler (Zoom-out 1.1s, total < 2s)
   setTimeout(() => {
     const preloader = document.getElementById("initial-loader-screen");
     if (preloader) {
       preloader.style.opacity = "0";
-      setTimeout(() => preloader.style.display = "none", 700);
+      setTimeout(() => preloader.style.display = "none", 400);
     }
-  }, 1000);
+  }, 1100);
 });
 
 // Mobile Gallery & File Input Handler

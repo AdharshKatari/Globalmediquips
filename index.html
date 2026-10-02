@@ -18,20 +18,16 @@
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col justify-between">
 
-  <!-- INITIAL ANIMATED LOGO PRELOADER SCREEN -->
-  <div id="initial-loader-screen" class="fixed inset-0 bg-slate-950 z-[100] flex flex-col items-center justify-center transition-opacity duration-700 ease-out">
-    <div class="relative flex flex-col items-center">
-      <div class="absolute -inset-6 bg-cyan-accent/20 rounded-full blur-2xl animate-pulse"></div>
-      <div class="relative p-5 bg-white rounded-3xl shadow-2xl border border-white/20 animate-bounce">
+  <!-- INITIAL ANIMATED LOGO PRELOADER SCREEN (CINEMATIC MOVIE TITLE ZOOM-OUT) -->
+  <div id="initial-loader-screen" class="fixed inset-0 bg-slate-950 z-[100] flex flex-col items-center justify-center transition-opacity duration-500 ease-out">
+    <div class="relative flex flex-col items-center cinematic-preloader-logo">
+      <div class="absolute -inset-8 bg-cyan-accent/25 rounded-full blur-3xl"></div>
+      <div class="relative p-5 bg-white rounded-3xl shadow-2xl border border-white/20">
         <img src="logo.png" alt="Global Mediquips Logo" class="h-16 w-auto object-contain">
       </div>
       <div class="mt-6 text-center space-y-1">
         <div class="text-2xl font-black text-white tracking-wider">Global Mediquips</div>
         <div class="text-xs text-cyan-accent font-semibold tracking-widest uppercase">Premier Medical Equipment & ICU Supplies</div>
-        <div class="flex items-center justify-center gap-2 pt-4">
-          <span class="w-2 h-2 rounded-full bg-cyan-accent animate-ping"></span>
-          <span class="text-xs text-slate-400 font-medium">Loading Enterprise Portal...</span>
-        </div>
       </div>
     </div>
   </div>
@@ -1033,13 +1029,6 @@
               <div class="text-[11px] text-slate-400">Hyderabad, Telangana 500013</div>
             </div>
           </div>
-        </div>
-
-        <div class="pt-3">
-          <button onclick="openAdminAuthModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-sm">
-            <svg class="w-3.5 h-3.5 text-cyan-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-            <span>Executive Management Portal</span>
-          </button>
         </div>
       </div>
 

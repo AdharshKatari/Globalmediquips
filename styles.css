@@ -178,3 +178,25 @@ input:focus, select:focus, textarea:focus {
 .marquee-track:hover {
   animation-play-state: paused;
 }
+
+/* Cinematic Movie-Title Zoom-Out Preloader Animation */
+@keyframes cinematic-zoom-out {
+  0% {
+    transform: scale(2.4);
+    opacity: 0;
+    filter: blur(12px);
+  }
+  60% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+.cinematic-preloader-logo {
+  animation: cinematic-zoom-out 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
