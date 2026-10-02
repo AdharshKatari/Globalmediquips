@@ -222,7 +222,23 @@ document.addEventListener("DOMContentLoaded", () => {
   }, INTRO_REVEAL_AT_MS);
 });
 
-// Mobile Gallery & File Input Handler
+// Mobile Gallery & File Input Handler — picks the product photo from the
+// device gallery (or camera) and shows a live preview next to the form
+function updateAddFormPreview(src) {
+  const img = document.getElementById("admin-form-preview-img");
+  const empty = document.getElementById("admin-form-preview-empty");
+  if (!img) return;
+  if (src) {
+    img.src = src;
+    img.classList.remove("hidden");
+    if (empty) empty.classList.add("hidden");
+  } else {
+    img.removeAttribute("src");
+    img.classList.add("hidden");
+    if (empty) empty.classList.remove("hidden");
+  }
+}
+
 function setupFileInputHandler() {
   const fileInput = document.getElementById("admin-form-file");
   const imageUrlInput = document.getElementById("admin-form-image");
@@ -233,13 +249,17 @@ function setupFileInputHandler() {
       if (file) {
         const reader = new FileReader();
         reader.onload = (event) => {
-          imageUrlInput.value = event.target.result;
+          if (imageUrlInput) imageUrlInput.value = event.target.result;
+          updateAddFormPreview(event.target.result);
           showToast("Photo loaded from device gallery!");
         };
         reader.readAsDataURL(file);
       }
     });
   }
+
+  // Reflect any pre-filled URL/image in the preview
+  updateAddFormPreview(imageUrlInput ? imageUrlInput.value.trim() : '');
 }
 
 // Fetch Live Inventory from Server API
@@ -1053,6 +1073,7 @@ async function handleAddProductForm(e) {
     fetchProducts();
     fetchAdminDashboard();
     document.getElementById("add-product-form").reset();
+    updateAddFormPreview('');
     switchAdminTab('inventory');
     return;
   } catch (err) {
@@ -1099,6 +1120,7 @@ async function handleAddProductForm(e) {
   renderAdminProductsTable();
   populateAdminFeaturedSelect();
   document.getElementById("add-product-form").reset();
+  updateAddFormPreview('');
   switchAdminTab('inventory');
   showToast("✅ Product added (saved locally — deploy on Vercel for central saving)");
 }
