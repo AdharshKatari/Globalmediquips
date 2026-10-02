@@ -490,6 +490,63 @@
       "totalAmountDisplay": "₹0",
       "status": "Pending",
       "createdAt": "2026-10-02T05:48:33.762Z"
+    },
+    {
+      "quoteRef": "GM-Q-453979",
+      "buyerName": "Ramesh",
+      "hospitalName": "Ramesh (vayalpad)",
+      "phone": "+916309189339",
+      "location": "vayalpad",
+      "items": [
+        {
+          "title": "CPAP & BiPAP Respiratory Care",
+          "price": 0,
+          "quantity": 1,
+          "notes": "BPL mission"
+        }
+      ],
+      "totalAmount": 0,
+      "totalAmountDisplay": "₹0",
+      "status": "Pending",
+      "createdAt": "2026-10-02T05:54:13.982Z"
+    },
+    {
+      "quoteRef": "GM-Q-515120",
+      "buyerName": "rahul",
+      "hospitalName": "rahul (banglore)",
+      "phone": "9000781865",
+      "location": "banglore",
+      "items": [
+        {
+          "title": "CPAP & BiPAP Respiratory Care",
+          "price": 0,
+          "quantity": 1,
+          "notes": "Wheel chair"
+        }
+      ],
+      "totalAmount": 0,
+      "totalAmountDisplay": "₹0",
+      "status": "Pending",
+      "createdAt": "2026-10-02T05:55:15.121Z"
+    },
+    {
+      "quoteRef": "GM-Q-097134",
+      "buyerName": "Ram charan",
+      "hospitalName": "Ram charan (Madanapalli)",
+      "phone": "870770709",
+      "location": "Madanapalli",
+      "items": [
+        {
+          "title": "Hospital Furniture & ICU Beds",
+          "price": 0,
+          "quantity": 1,
+          "notes": "Hospital Beds"
+        }
+      ],
+      "totalAmount": 0,
+      "totalAmountDisplay": "₹0",
+      "status": "Pending",
+      "createdAt": "2026-10-02T06:04:57.135Z"
     }
   ],
   "reviews": [

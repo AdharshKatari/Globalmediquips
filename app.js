@@ -98,17 +98,15 @@ function handleAdminAuthSubmit(e) {
   const password = (document.getElementById("admin-pin-input") ? document.getElementById("admin-pin-input").value.trim() : "");
   const err = document.getElementById("admin-auth-error");
 
-  // Executive Credentials Check (katari / Katari@Mediquips2026)
-  if ((username === "katari" || username === "admin" || username === "admin@globalmediquips.com") && 
-      (password === "Katari@Mediquips2026" || password === "1234" || password === "admin123" || password === "katari")) {
+  // Executive Credentials — single authorised login only
+  if (username === "katari" && password === "Katari@Mediquips2026") {
     isAdminAuthenticated = true;
     closeAdminAuthModal();
-    showToast("Executive Management Portal Authenticated");
-    
+
     // Direct page display after authentication
     document.querySelectorAll(".page-section").forEach(page => page.classList.remove("active-page"));
     document.querySelectorAll(".nav-link").forEach(link => link.classList.remove("text-cyan-accent", "font-bold"));
-    
+
     const adminPage = document.getElementById("admin-page");
     if (adminPage) {
       adminPage.classList.add("active-page");
@@ -439,31 +437,57 @@ function renderAdminQuotesTable(quotes) {
   if (!tableBody) return;
 
   if (!quotes || quotes.length === 0) {
-    tableBody.innerHTML = `<tr><td colspan="6" class="py-6 text-center text-slate-400 text-xs">No B2B inquiries submitted yet.</td></tr>`;
+    tableBody.innerHTML = `<tr><td colspan="7" class="py-10 text-center text-slate-400 text-xs">
+      <div class="flex flex-col items-center gap-2">
+        <svg class="w-8 h-8 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+        <span class="font-semibold text-slate-400">No B2B inquiries yet. When customers submit the form, they appear here.</span>
+      </div>
+    </td></tr>`;
     return;
   }
 
-  tableBody.innerHTML = quotes.map(q => {
-    const itemTitle = (q.items && q.items[0]) ? q.items[0].title : "Medical Equipment";
+  // Newest first
+  const sorted = [...quotes].reverse();
+
+  tableBody.innerHTML = sorted.map(q => {
+    const item = (q.items && q.items[0]) ? q.items[0] : {};
+    const category = item.title || "Medical Equipment";
+    const notes = item.notes || "—";
+    const date = q.createdAt ? new Date(q.createdAt).toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : "—";
+    const isPending = q.status === 'Pending';
+
     return `
-      <tr class="border-b border-slate-200 text-xs hover:bg-slate-50 transition">
-        <td class="py-3 px-3 font-mono font-bold text-navy-primary">${q.quoteRef}</td>
-        <td class="py-3 px-3">
-          <div class="font-bold text-slate-800">${q.buyerName}</div>
-          <div class="text-[10px] text-slate-400">${q.hospitalName}</div>
+      <tr class="border-b border-slate-100 hover:bg-blue-50/40 transition group">
+        <td class="py-4 px-3">
+          <span class="font-mono text-[11px] font-extrabold text-navy-primary bg-navy-primary/10 px-2 py-1 rounded-lg">${q.quoteRef}</span>
+          <div class="text-[10px] text-slate-400 mt-1">${date}</div>
         </td>
-        <td class="py-3 px-3">
-          <div class="font-semibold text-emerald-700">${q.phone || '+91 98765 43210'}</div>
-          <div class="text-[10px] text-slate-400">${q.location || 'Hyderabad'}</div>
+        <td class="py-4 px-3">
+          <div class="font-bold text-slate-900 text-xs">${q.buyerName}</div>
+          <div class="text-[10px] text-slate-400 mt-0.5">${q.hospitalName || '—'}</div>
         </td>
-        <td class="py-3 px-3 font-bold text-slate-700">${itemTitle}</td>
-        <td class="py-3 px-3">
-          <span class="px-2.5 py-1 rounded-lg text-[10px] font-extrabold ${q.status === 'Pending' ? 'bg-amber-100 text-amber-800 border border-amber-200' : 'bg-green-100 text-green-800 border border-green-200'}">
+        <td class="py-4 px-3">
+          <div class="text-xs font-bold text-emerald-700 flex items-center gap-1">
+            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            ${q.phone || '—'}
+          </div>
+          <div class="text-[10px] text-slate-400 mt-0.5">📍 ${q.location || '—'}</div>
+        </td>
+        <td class="py-4 px-3">
+          <span class="text-xs font-bold text-slate-700 bg-slate-100 px-2 py-1 rounded-lg">${category}</span>
+        </td>
+        <td class="py-4 px-3 max-w-[180px]">
+          <div class="text-xs text-slate-600 italic line-clamp-2">${notes}</div>
+        </td>
+        <td class="py-4 px-3">
+          <span class="px-2.5 py-1 rounded-lg text-[10px] font-extrabold ${isPending ? 'bg-amber-100 text-amber-800 border border-amber-200' : 'bg-green-100 text-green-800 border border-green-200'}">
             ${q.status}
           </span>
         </td>
-        <td class="py-3 px-3">
-          <button onclick="updateQuoteStatusAdmin('${q.quoteRef}', 'Quotation Sent')" class="px-3 py-1.5 bg-navy-primary hover:bg-navy-dark text-white rounded-lg text-[11px] font-bold shadow-sm transition">Mark Sent</button>
+        <td class="py-4 px-3">
+          <button onclick="updateQuoteStatusAdmin('${q.quoteRef}', 'Quotation Sent')" class="px-3 py-1.5 bg-navy-primary hover:bg-navy-dark text-white rounded-lg text-[11px] font-bold shadow-sm transition whitespace-nowrap">
+            ✓ Mark Sent
+          </button>
         </td>
       </tr>
     `;
