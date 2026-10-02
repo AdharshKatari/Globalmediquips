@@ -85,7 +85,7 @@
       "price": 81000,
       "priceDisplay": "₹81,000",
       "hsnCode": "90181100",
-      "image": "https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png",
+      "image": "/philips-dreamstation.png",
       "brochureUrl": "http://5.imimg.com/data5/SELLER/Doc/2025/8/533175933/HQ/AY/RW/25122208/philips-bipap-auto-machine.pdf",
       "countryOfOrigin": "USA",
       "application": "Clinical & Home Respiratory Care",
@@ -400,6 +400,69 @@
       "totalAmountDisplay": "₹0",
       "status": "Quotation Sent",
       "createdAt": "2026-10-02T06:28:26.959Z"
+    },
+    {
+      "quoteRef": "GM-Q-782341",
+      "buyerName": "Yashoda Hospital Procurement",
+      "hospitalName": "Yashoda Hospitals Somajiguda",
+      "phone": "+91 98490 11223",
+      "location": "Somajiguda, Hyderabad",
+      "items": [
+        {
+          "title": "Philips BiPAP Auto Machine (DreamStation)",
+          "price": 81000,
+          "quantity": 2,
+          "notes": "Home ICU setup for two patients. Please share a demo slot and GST invoice details."
+        }
+      ],
+      "totalAmount": 162000,
+      "totalAmountDisplay": "₹1,62,000",
+      "gstNumber": "36BHGPK3813B1ZS",
+      "hsnCode": "90181100",
+      "status": "Pending",
+      "createdAt": "2026-10-02T08:15:00.000Z"
+    },
+    {
+      "quoteRef": "GM-Q-618207",
+      "buyerName": "KIMS Hospital Procurement",
+      "hospitalName": "KIMS Hospitals Bowrampet",
+      "phone": "+91 90000 55667",
+      "location": "Bowrampet, Hyderabad",
+      "items": [
+        {
+          "title": "BPL Oxy 5 Neo Dual Oxygen Concentrator",
+          "price": 38000,
+          "quantity": 5,
+          "notes": "Bulk order for the new 20-bed ward. Need 5 units with extended warranty and installation."
+        }
+      ],
+      "totalAmount": 190000,
+      "totalAmountDisplay": "₹1,90,000",
+      "gstNumber": "36BHGPK3813B1ZS",
+      "hsnCode": "90181100",
+      "status": "Quotation Sent",
+      "createdAt": "2026-10-02T09:42:00.000Z"
+    },
+    {
+      "quoteRef": "GM-Q-449013",
+      "buyerName": "Care Hospitals Home Care Desk",
+      "hospitalName": "Care Hospitals Banjara Hills",
+      "phone": "+91 99590 88441",
+      "location": "Banjara Hills, Hyderabad",
+      "items": [
+        {
+          "title": "5-Function Manual ICU Hospital Bed",
+          "price": 42000,
+          "quantity": 1,
+          "notes": "Patient home care. Require delivery and installation at Begumpet within 48 hours."
+        }
+      ],
+      "totalAmount": 42000,
+      "totalAmountDisplay": "₹42,000",
+      "gstNumber": "36BHGPK3813B1ZS",
+      "hsnCode": "90181100",
+      "status": "Pending",
+      "createdAt": "2026-10-02T10:05:00.000Z"
     }
   ],
   "reviews": [

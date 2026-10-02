@@ -354,8 +354,18 @@ app.post('/api/quotes', (req, res) => {
 });
 
 // ADMIN CRUD ROUTES
+
+// Canonical display names for every product category (keeps catalog labels consistent)
+const CATEGORY_NAMES = {
+  'cpap-bipap': 'CPAP & BiPAP Care',
+  'oxygen-concentrators': 'Oxygen Concentrators',
+  'hospital-furniture': 'Hospital Furniture',
+  'ecg-machines': 'ECG & Diagnostics',
+  'icu-pumps': 'ICU Pumps'
+};
+
 app.post('/api/admin/products', (req, res) => {
-  const { title, category, categoryName, brand, price, hsnCode, image, description, countryOfOrigin, application, pressureRange, rampRate, dataStorage, brochureUrl, videoUrl } = req.body;
+  const { title, category, categoryName, brand, price, hsnCode, image, description, countryOfOrigin, application, pressureRange, rampRate, dataStorage, warranty, brochureUrl, videoUrl } = req.body;
   if (!title || !price) {
     return res.status(400).json({ success: false, error: 'Title and Price required' });
   }
@@ -365,7 +375,7 @@ app.post('/api/admin/products', (req, res) => {
     id: Date.now().toString(),
     title,
     category: category || 'cpap-bipap',
-    categoryName: categoryName || 'Medical Equipment',
+    categoryName: categoryName || CATEGORY_NAMES[category] || 'Medical Equipment',
     brand: brand || 'Global Mediquips',
     price: Number(price),
     priceDisplay: `₹${Number(price).toLocaleString('en-IN')}`,
@@ -378,11 +388,13 @@ app.post('/api/admin/products', (req, res) => {
     pressureRange: pressureRange || 'Standard Medical Range',
     rampRate: rampRate || '0 - 60 Mins',
     dataStorage: dataStorage || 'Digital Logging',
+    warranty: warranty || '2 Years Manufacturer Warranty',
     inStock: true,
     requiresPrescription: false,
     description: description || 'Certified medical equipment supplied by Global Mediquips.',
     specs: [
       { key: "Brand", value: brand || "Global Mediquips" },
+      { key: "Warranty", value: warranty || "2 Years Manufacturer Warranty" },
       { key: "Country of Origin", value: countryOfOrigin || "Made in India" },
       { key: "Application / Usage", value: application || "Hospital / Home Care" },
       { key: "Pressure Range", value: pressureRange || "Standard" },
@@ -395,6 +407,71 @@ app.post('/api/admin/products', (req, res) => {
   db.products.unshift(newProduct);
   saveDatabase(db);
   res.status(201).json({ success: true, message: 'Product added', data: newProduct });
+});
+
+// Edit Existing Medical Equipment
+app.put('/api/admin/products/:id', (req, res) => {
+  const db = loadDatabase();
+  const productIndex = db.products.findIndex(p => p.id === req.params.id);
+  if (productIndex === -1) {
+    return res.status(404).json({ success: false, error: 'Product not found' });
+  }
+
+  const existing = db.products[productIndex];
+  const {
+    title, category, categoryName, brand, price, hsnCode, image, description,
+    countryOfOrigin, application, pressureRange, rampRate, dataStorage,
+    warranty, brochureUrl, videoUrl, specs, inStock
+  } = req.body;
+
+  if (title) existing.title = title;
+  if (category) {
+    existing.category = category;
+    // Keep the displayed category name in sync with the selected category
+    existing.categoryName = CATEGORY_NAMES[category] || categoryName || existing.categoryName;
+  } else if (categoryName) {
+    existing.categoryName = categoryName;
+  }
+  if (brand) existing.brand = brand;
+  if (price !== undefined && price !== "") {
+    existing.price = parseFloat(price) || existing.price;
+    existing.priceDisplay = `₹${existing.price.toLocaleString('en-IN')}`;
+  }
+  if (hsnCode) existing.hsnCode = hsnCode;
+  if (image) existing.image = image;
+  if (description) existing.description = description;
+  if (countryOfOrigin) existing.countryOfOrigin = countryOfOrigin;
+  if (application) existing.application = application;
+  if (pressureRange) existing.pressureRange = pressureRange;
+  if (rampRate) existing.rampRate = rampRate;
+  if (dataStorage) existing.dataStorage = dataStorage;
+  if (warranty) existing.warranty = warranty;
+  if (brochureUrl !== undefined) existing.brochureUrl = brochureUrl;
+  if (videoUrl !== undefined) existing.videoUrl = videoUrl;
+  if (inStock !== undefined) existing.inStock = !!inStock;
+
+  // Full specification matrix provided by the admin editor — replace it wholesale
+  if (Array.isArray(specs)) {
+    existing.specs = specs.filter(s => s && s.key && s.value);
+  } else if (existing.specs && Array.isArray(existing.specs)) {
+    // Legacy partial sync for older clients
+
+    const setSpec = (k, v) => {
+      if (!v) return;
+      const s = existing.specs.find(x => x.key.toLowerCase().includes(k.toLowerCase()));
+      if (s) s.value = v;
+      else existing.specs.push({ key: k, value: v });
+    };
+    if (brand) setSpec("Brand", brand);
+    if (countryOfOrigin) setSpec("Country of Origin", countryOfOrigin);
+    if (application) setSpec("Application / Usage", application);
+    if (pressureRange) setSpec("Pressure Range", pressureRange);
+    if (rampRate) setSpec("Ramp Rate", rampRate);
+    if (hsnCode) setSpec("HSN & GST Compliance", `HSN ${hsnCode} - 12% GST`);
+  }
+
+  saveDatabase(db);
+  res.json({ success: true, message: 'Product updated successfully', data: existing });
 });
 
 app.delete('/api/admin/products/:id', (req, res) => {
@@ -425,8 +502,9 @@ app.post('/api/admin/settings', (req, res) => {
   if (founderImage !== undefined) {
     db.company.founderImage = founderImage;
   }
-  if (featuredProductId !== undefined) {
-    db.company.featuredProductId = featuredProductId;
+  // Guard: an empty/invalid featured product id would break the home hero card
+  if (typeof featuredProductId === 'string' && featuredProductId.trim() !== '') {
+    db.company.featuredProductId = featuredProductId.trim();
   }
   saveDatabase(db);
   res.json({ success: true, message: 'Storefront settings saved successfully', data: db.company });

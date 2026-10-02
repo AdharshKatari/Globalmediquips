@@ -126,7 +126,28 @@ async function fetchCompanySettings() {
   } catch(e) {}
 }
 
+// Local preview-mode setting overrides — used when the backend API is unreachable
+const FEATURED_OVERRIDE_KEY = 'gm_featured_product_override';
+const FOUNDER_OVERRIDE_KEY = 'gm_founder_image_override';
+
+function getLocalSetting(key) {
+  try { return localStorage.getItem(key) || ''; } catch (e) { return ''; }
+}
+
+function setLocalSetting(key, value) {
+  try {
+    if (value) localStorage.setItem(key, value);
+    else localStorage.removeItem(key);
+  } catch (e) {}
+}
+
 function applyStorefrontSettings() {
+  // Apply local preview overrides last so they always win when present
+  const featuredOverride = getLocalSetting(FEATURED_OVERRIDE_KEY);
+  if (featuredOverride) SITE_SETTINGS.featuredProductId = featuredOverride;
+  const founderOverride = getLocalSetting(FOUNDER_OVERRIDE_KEY);
+  if (founderOverride) SITE_SETTINGS.founderImage = founderOverride;
+
   const founderImg = document.getElementById("about-founder-img");
   if (founderImg && SITE_SETTINGS.founderImage) {
     founderImg.src = SITE_SETTINGS.founderImage;
@@ -162,6 +183,7 @@ async function fetchProducts() {
         renderProducts();
         renderAdminProductsTable();
         applyStorefrontSettings();
+        populateAdminFeaturedSelect();
         return;
       }
     }
@@ -179,6 +201,7 @@ async function fetchProducts() {
         renderProducts();
         renderAdminProductsTable();
         applyStorefrontSettings();
+        populateAdminFeaturedSelect();
       }
     }
   } catch(e) {
@@ -190,6 +213,7 @@ let isAdminAuthenticated = false;
 
 // Executive Admin Authentication Gateway
 function openAdminAuthModal() {
+  closeMobileMenu();
   if (isAdminAuthenticated) {
     navigateToPage('admin-page');
     return;
@@ -349,9 +373,44 @@ function navigateToPage(pageId) {
     navLink.classList.add("text-cyan-accent", "font-bold");
   }
 
+  // Highlight the matching link inside the mobile hamburger menu as well
+  document.querySelectorAll(`.mobile-nav-link[data-nav-page="${pageId}"]`).forEach(link => {
+    link.classList.remove("text-slate-200");
+    link.classList.add("text-cyan-accent", "font-bold");
+  });
+
+  // Always collapse the mobile menu after any page change
+  closeMobileMenu();
+
   if (pageId === 'admin-page') {
     fetchAdminDashboard();
   }
+}
+
+// MOBILE HAMBURGER MENU CONTROLLER
+function toggleMobileMenu() {
+  const menu = document.getElementById("mobile-nav-menu");
+  const btn = document.getElementById("mobile-menu-btn");
+  const icon = document.getElementById("mobile-menu-icon");
+  if (!menu) return;
+
+  const willOpen = menu.classList.contains("hidden");
+  menu.classList.toggle("hidden");
+  if (btn) btn.setAttribute("aria-expanded", String(willOpen));
+  if (icon) {
+    icon.innerHTML = willOpen
+      ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>'
+      : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+  }
+}
+
+function closeMobileMenu() {
+  const menu = document.getElementById("mobile-nav-menu");
+  const btn = document.getElementById("mobile-menu-btn");
+  const icon = document.getElementById("mobile-menu-icon");
+  if (menu) menu.classList.add("hidden");
+  if (btn) btn.setAttribute("aria-expanded", "false");
+  if (icon) icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
 }
 
 function setupNavigation() {
@@ -402,9 +461,13 @@ function renderProducts() {
           <span class="absolute top-3 left-3 px-2.5 py-1 bg-navy-primary text-white text-[10px] font-extrabold rounded-lg shadow-sm">
             ${product.brand}
           </span>
-          <span class="absolute top-3 right-3 px-2.5 py-1 bg-green-50 text-green-700 border border-green-200 text-[10px] font-bold rounded-lg flex items-center gap-1 shadow-sm">
+          ${product.inStock === false
+            ? `<span class="absolute top-3 right-3 px-2.5 py-1 bg-rose-50 text-rose-700 border border-rose-200 text-[10px] font-bold rounded-lg flex items-center gap-1 shadow-sm">
+            <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span> Out of Stock
+          </span>`
+            : `<span class="absolute top-3 right-3 px-2.5 py-1 bg-green-50 text-green-700 border border-green-200 text-[10px] font-bold rounded-lg flex items-center gap-1 shadow-sm">
             <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> In Stock
-          </span>
+          </span>`}
         </div>
 
         <div class="text-[11px] text-slate-400 font-medium mb-1">${product.categoryName} • HSN ${product.hsnCode}</div>
@@ -534,6 +597,8 @@ function sendWhatsAppQuote() {
       hospitalName: "Private Hospital / Clinic",
       items: quoteBasket
     })
+  }).catch(() => {
+    // Offline / static-host fallback — WhatsApp flow continues regardless
   });
 
   let msg = `*B2B Quote Request — Global Mediquips*%0A`;
@@ -573,23 +638,51 @@ function switchAdminTab(tabName) {
   }
 }
 
+function setAdminStat(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.innerText = value;
+}
+
 async function fetchAdminDashboard() {
+  let loaded = false;
+
   try {
     const res = await fetch('/api/admin/dashboard');
     const data = await res.json();
     if (data.success) {
-      if (document.getElementById("admin-count-products")) document.getElementById("admin-count-products").innerText = data.data.productsCount;
-      if (document.getElementById("admin-count-quotes")) document.getElementById("admin-count-quotes").innerText = data.data.quotesCount;
-      if (document.getElementById("admin-pipeline-value")) document.getElementById("admin-pipeline-value").innerText = data.data.pipelineValue;
-      if (document.getElementById("admin-tab-badge-inquiries")) document.getElementById("admin-tab-badge-inquiries").innerText = data.data.quotesCount;
-
-      renderAdminProductsTable();
+      setAdminStat('admin-count-products', data.data.productsCount);
+      setAdminStat('admin-count-quotes', data.data.quotesCount);
+      setAdminStat('admin-pipeline-value', data.data.pipelineValue);
+      setAdminStat('admin-tab-badge-inquiries', data.data.quotesCount);
       renderAdminQuotesTable(data.data.quotes);
-      populateAdminFeaturedSelect();
+      loaded = true;
     }
   } catch (err) {
-    console.error("Admin dashboard fetch error", err);
+    // API unavailable — fall back to the static database below
   }
+
+  if (!loaded) {
+    // Static-host fallback: keep inbox, inventory and Featured Product selector fully usable
+    try {
+      const fallbackRes = await fetch('./database.json');
+      const db = await fallbackRes.json();
+      const quotes = (db && db.quotes) || [];
+      const products = (db && db.products) || [];
+      const pipeline = quotes.reduce((sum, q) => sum + (q.totalAmount || 0), 0);
+      setAdminStat('admin-count-products', products.length);
+      setAdminStat('admin-count-quotes', quotes.length);
+      setAdminStat('admin-pipeline-value', `₹${pipeline.toLocaleString('en-IN')}`);
+      setAdminStat('admin-tab-badge-inquiries', quotes.length);
+      renderAdminQuotesTable(quotes);
+    } catch (err) {
+      console.error("Admin dashboard fetch error", err);
+    }
+  }
+
+  // Always refresh the inventory table and the Featured Product selector,
+  // even if the dashboard API failed — this is what previously left them empty
+  renderAdminProductsTable();
+  populateAdminFeaturedSelect();
 }
 
 function renderAdminProductsTable() {
@@ -607,6 +700,7 @@ function renderAdminProductsTable() {
       <td class="py-3 px-3 text-slate-600">${p.categoryName}</td>
       <td class="py-3 px-3 font-extrabold text-navy-primary">${p.priceDisplay}</td>
       <td class="py-3 px-3 flex items-center gap-1.5 flex-wrap">
+        <button onclick="openEditProductModal('${p.id}')" class="px-2.5 py-1 bg-blue-600 text-white rounded-lg text-[10px] font-bold hover:bg-blue-700 transition">✏️ Edit</button>
         ${p.id === SITE_SETTINGS.featuredProductId 
           ? '<span class="px-2 py-1 bg-amber-100 text-amber-800 rounded-lg text-[10px] font-black border border-amber-300">⭐ HERO TOP</span>' 
           : `<button onclick="setFeaturedProductFromTable('${p.id}')" class="px-2 py-1 bg-amber-50 text-amber-700 border border-amber-200 rounded-lg text-[10px] font-bold hover:bg-amber-100 transition">⭐ Feature on Top</button>`
@@ -929,31 +1023,14 @@ function previewFeaturedSelection(productId) {
   if (price) price.innerText = p.priceDisplay || `₹${p.price.toLocaleString('en-IN')}`;
 }
 
-async function handleSaveHeroFeatured() {
-  const select = document.getElementById("admin-featured-product-select");
-  if (!select) return;
-  const chosenId = select.value;
-  try {
-    const res = await fetch('/api/admin/settings', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ featuredProductId: chosenId })
-    });
-    const data = await res.json();
-    if (data.success) {
-      SITE_SETTINGS.featuredProductId = chosenId;
-      applyHeroFeaturedProduct();
-      renderAdminProductsTable();
-      alert("✅ Hero Top Featured Product updated successfully! It is now featured at the top of the customer website.");
-    }
-  } catch (err) {
-    alert("Error updating featured product: " + err.message);
+// Shared featured-product saver: writes to the API, and falls back to a local
+// preview-mode override when the backend is unreachable (no more hard errors)
+async function saveFeaturedProduct(productId) {
+  if (!productId) {
+    alert("Please select a product from the list first.");
+    return false;
   }
-}
 
-async function setFeaturedProductFromTable(productId) {
-  const p = PRODUCTS_DATA.find(x => x.id === productId);
-  if (!p) return;
   try {
     const res = await fetch('/api/admin/settings', {
       method: 'POST',
@@ -961,16 +1038,37 @@ async function setFeaturedProductFromTable(productId) {
       body: JSON.stringify({ featuredProductId: productId })
     });
     const data = await res.json();
-    if (data.success) {
-      SITE_SETTINGS.featuredProductId = productId;
-      applyHeroFeaturedProduct();
-      renderAdminProductsTable();
-      populateAdminFeaturedSelect();
-      alert(`⭐ "${p.title}" is now set as the Top Hero Featured Product on the customer site!`);
-    }
+    if (!data.success) throw new Error(data.error || 'Save failed');
+    setLocalSetting(FEATURED_OVERRIDE_KEY, '');
   } catch (err) {
-    alert("Error setting featured product: " + err.message);
+    // Server unavailable (static preview) — persist locally so the site still updates here
+    setLocalSetting(FEATURED_OVERRIDE_KEY, productId);
+    SITE_SETTINGS.featuredProductId = productId;
+    applyHeroFeaturedProduct();
+    renderAdminProductsTable();
+    populateAdminFeaturedSelect();
+    showToast("⭐ Featured product saved in local preview mode (server unreachable)");
+    return true;
   }
+
+  SITE_SETTINGS.featuredProductId = productId;
+  applyHeroFeaturedProduct();
+  renderAdminProductsTable();
+  populateAdminFeaturedSelect();
+  showToast("⭐ Featured product updated on the customer site!");
+  return true;
+}
+
+async function handleSaveHeroFeatured() {
+  const select = document.getElementById("admin-featured-product-select");
+  if (!select) return;
+  await saveFeaturedProduct(select.value);
+}
+
+async function setFeaturedProductFromTable(productId) {
+  const p = PRODUCTS_DATA.find(x => x.id === productId);
+  if (!p) return;
+  await saveFeaturedProduct(productId);
 }
 
 function previewFounderUpload(event) {
@@ -1005,12 +1103,196 @@ async function handleSaveFounderPhoto() {
       body: JSON.stringify({ founderImage: imgToSave })
     });
     const data = await res.json();
+    if (!data.success) throw new Error(data.error || 'Save failed');
+    setLocalSetting(FOUNDER_OVERRIDE_KEY, '');
+    SITE_SETTINGS.founderImage = imgToSave;
+    applyStorefrontSettings();
+    showToast("✅ Founder photo updated on the About page!");
+  } catch (err) {
+    // Server unavailable (static preview) — persist locally so the change still applies here
+    setLocalSetting(FOUNDER_OVERRIDE_KEY, imgToSave);
+    SITE_SETTINGS.founderImage = imgToSave;
+    applyStorefrontSettings();
+    showToast("✅ Founder photo saved in local preview mode (server unreachable)");
+  }
+}
+
+// ==========================================
+// ADMIN EDIT PRODUCT MODAL HANDLERS
+// ==========================================
+let editProductPendingImage = '';
+
+// --- Dynamic specification matrix editor (add / remove / edit spec rows) ---
+function escapeAttr(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function specRowHtml(key, value) {
+  return `
+    <div class="flex items-center gap-2 spec-edit-row">
+      <input type="text" class="spec-key w-2/5 p-2 bg-white border border-slate-300 rounded-lg outline-none text-xs font-bold" placeholder="e.g. Noise Level" value="${escapeAttr(key || '')}">
+      <input type="text" class="spec-value flex-1 p-2 bg-white border border-slate-300 rounded-lg outline-none text-xs" placeholder="e.g. Ultra-Quiet (< 28 dBA)" value="${escapeAttr(value || '')}">
+      <button type="button" onclick="removeSpecRow(this)" title="Remove row" class="w-7 h-7 shrink-0 bg-rose-50 text-rose-600 border border-rose-200 rounded-lg text-xs font-black hover:bg-rose-100 transition">✕</button>
+    </div>`;
+}
+
+function renderSpecEditor(specs) {
+  const list = document.getElementById("admin-edit-specs-list");
+  if (!list) return;
+  const rows = (Array.isArray(specs) && specs.length) ? specs : [{ key: '', value: '' }];
+  list.innerHTML = rows.map(s => specRowHtml(s.key, s.value)).join("");
+}
+
+function addSpecRow() {
+  const list = document.getElementById("admin-edit-specs-list");
+  if (!list) return;
+  list.insertAdjacentHTML('beforeend', specRowHtml('', ''));
+}
+
+function removeSpecRow(btn) {
+  const row = btn.closest('.spec-edit-row');
+  const list = document.getElementById('admin-edit-specs-list');
+  if (row) row.remove();
+  if (list && list.children.length === 0) addSpecRow();
+}
+
+function collectSpecRows() {
+  const list = document.getElementById("admin-edit-specs-list");
+  if (!list) return [];
+  return Array.from(list.querySelectorAll('.spec-edit-row'))
+    .map(row => ({
+      key: (row.querySelector('.spec-key') || {}).value ? row.querySelector('.spec-key').value.trim() : '',
+      value: (row.querySelector('.spec-value') || {}).value ? row.querySelector('.spec-value').value.trim() : ''
+    }))
+    .filter(s => s.key && s.value);
+}
+
+function openEditProductModal(productId) {
+  const p = PRODUCTS_DATA.find(x => x.id === productId);
+  if (!p) return;
+
+  const setValue = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.value = val !== undefined ? val : '';
+  };
+
+  setValue("admin-edit-id", p.id);
+  setValue("admin-edit-title", p.title);
+  setValue("admin-edit-brand", p.brand);
+  setValue("admin-edit-category", p.category || 'cpap-bipap');
+  setValue("admin-edit-price", p.price);
+  setValue("admin-edit-hsn", p.hsnCode || '90181100');
+  setValue("admin-edit-origin", p.countryOfOrigin || 'Made in India');
+  setValue("admin-edit-application", p.application || 'Hospital / Home Care');
+  setValue("admin-edit-pressure", p.pressureRange || 'Standard');
+  setValue("admin-edit-ramp", p.rampRate || '0-45 Mins');
+  setValue("admin-edit-warranty", p.warranty || '2 Years Manufacturer Warranty');
+  setValue("admin-edit-brochure", p.brochureUrl || '');
+  setValue("admin-edit-description", p.description || '');
+  setValue("admin-edit-video", p.videoUrl || '');
+
+  const stockSel = document.getElementById("admin-edit-stock");
+  if (stockSel) stockSel.value = p.inStock === false ? 'false' : 'true';
+  renderSpecEditor(p.specs);
+
+  editProductPendingImage = p.image || '';
+  setValue("admin-edit-image", p.image || '');
+  
+  const imgPreview = document.getElementById("admin-edit-preview-img");
+  if (imgPreview) imgPreview.src = p.image || '';
+
+  const modal = document.getElementById("admin-edit-product-modal");
+  if (modal) {
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+  }
+}
+
+function closeEditProductModal() {
+  const modal = document.getElementById("admin-edit-product-modal");
+  if (modal) {
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+  }
+}
+
+function previewEditImageUrl(url) {
+  if (!url) return;
+  editProductPendingImage = url.trim();
+  const imgPreview = document.getElementById("admin-edit-preview-img");
+  if (imgPreview) imgPreview.src = editProductPendingImage;
+}
+
+function handleEditImageUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    editProductPendingImage = e.target.result;
+    const imgPreview = document.getElementById("admin-edit-preview-img");
+    const imgInput = document.getElementById("admin-edit-image");
+    if (imgPreview) imgPreview.src = editProductPendingImage;
+    if (imgInput) imgInput.value = '';
+  };
+  reader.readAsDataURL(file);
+}
+
+async function handleEditProductSubmit(event) {
+  event.preventDefault();
+  const productId = document.getElementById("admin-edit-id").value;
+  if (!productId) return;
+
+  const categorySelect = document.getElementById("admin-edit-category");
+  const category = categorySelect.value;
+  const categoryName = categorySelect.options[categorySelect.selectedIndex].text;
+
+  const payload = {
+    title: document.getElementById("admin-edit-title").value.trim(),
+    brand: document.getElementById("admin-edit-brand").value.trim(),
+    category: category,
+    categoryName: categoryName,
+    price: parseFloat(document.getElementById("admin-edit-price").value) || 0,
+    hsnCode: document.getElementById("admin-edit-hsn").value.trim(),
+    image: editProductPendingImage || document.getElementById("admin-edit-image").value.trim() || '/philips-dreamstation.png',
+    countryOfOrigin: document.getElementById("admin-edit-origin").value.trim(),
+    application: document.getElementById("admin-edit-application").value.trim(),
+    pressureRange: document.getElementById("admin-edit-pressure").value.trim(),
+    rampRate: document.getElementById("admin-edit-ramp").value.trim(),
+    warranty: document.getElementById("admin-edit-warranty").value.trim(),
+    brochureUrl: document.getElementById("admin-edit-brochure").value.trim(),
+    videoUrl: document.getElementById("admin-edit-video") ? document.getElementById("admin-edit-video").value.trim() : "",
+    inStock: document.getElementById("admin-edit-stock") ? document.getElementById("admin-edit-stock").value === 'true' : true,
+    specs: collectSpecRows(),
+    description: document.getElementById("admin-edit-description").value.trim()
+  };
+
+  try {
+    const res = await fetch(`/api/admin/products/${productId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
     if (data.success) {
-      SITE_SETTINGS.founderImage = imgToSave;
+      // Update local array
+      const idx = PRODUCTS_DATA.findIndex(p => p.id === productId);
+      if (idx !== -1) {
+        PRODUCTS_DATA[idx] = { ...PRODUCTS_DATA[idx], ...data.data };
+      }
+      renderProducts();
+      renderAdminProductsTable();
+      populateAdminFeaturedSelect();
       applyStorefrontSettings();
-      alert("✅ Founder / Team photo successfully updated on the customer site!");
+      closeEditProductModal();
+      showToast("✅ Product details and photo updated in the live catalog!");
+    } else {
+      alert("Error updating product: " + (data.error || "Unknown error"));
     }
   } catch (err) {
-    alert("Error saving founder photo: " + err.message);
+    alert("Connection error: " + err.message);
   }
 }

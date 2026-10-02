@@ -144,6 +144,11 @@ input:focus, select:focus, textarea:focus {
   color: #ffffff !important;
 }
 
+/* Navbar Elevation — soft drop shadow instead of the old solid bottom outline */
+.navbar-elevation {
+  box-shadow: 0 14px 28px -12px rgba(18, 26, 88, 0.5), 0 6px 14px -8px rgba(18, 26, 88, 0.35);
+}
+
 /* Page Transitions */
 .page-section {
   display: none;

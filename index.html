@@ -33,7 +33,7 @@
   </div>
 
   <!-- CORPORATE HEADER & NAVIGATION BAR WITH OFFICIAL LOGO -->
-  <header class="bg-navy-primary text-white sticky top-0 z-40 shadow-lg border-b border-navy-dark">
+  <header class="bg-navy-primary text-white sticky top-0 z-40 navbar-elevation">
     <div class="max-w-7xl mx-auto px-4 py-3.5 flex items-center justify-between gap-4">
       
       <!-- OFFICIAL LOGO BRANDING -->
@@ -68,9 +68,29 @@
           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
           <span>WhatsApp Quote</span>
         </button>
+
+        <!-- MOBILE HAMBURGER MENU TRIGGER (VISIBLE ONLY ON SMALL SCREENS) -->
+        <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Open navigation menu" aria-expanded="false" class="md:hidden bg-white/10 hover:bg-white/20 text-white p-2.5 rounded-xl border border-white/20 transition">
+          <svg id="mobile-menu-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
       </div>
 
     </div>
+
+    <!-- MOBILE MULTI-PAGE NAVIGATION PANEL (ALL PAGES REACHABLE ON MOBILE) -->
+    <nav id="mobile-nav-menu" class="hidden md:hidden bg-navy-dark border-t border-white/10 px-4 py-3">
+      <div class="max-w-7xl mx-auto flex flex-col gap-1 text-sm font-semibold">
+        <a href="#" data-target-page="home-page" data-nav-page="home-page" class="mobile-nav-link nav-link text-cyan-accent font-bold px-3 py-2.5 rounded-xl flex items-center justify-between transition">Home <span class="text-cyan-accent text-xs">→</span></a>
+        <a href="#" data-target-page="catalog-page" data-nav-page="catalog-page" class="mobile-nav-link nav-link text-slate-200 px-3 py-2.5 rounded-xl flex items-center justify-between hover:bg-white/10 transition">Products Catalog <span class="text-white/40 text-xs">→</span></a>
+        <a href="#" data-target-page="about-page" data-nav-page="about-page" class="mobile-nav-link nav-link text-slate-200 px-3 py-2.5 rounded-xl flex items-center justify-between hover:bg-white/10 transition">About Us <span class="text-white/40 text-xs">→</span></a>
+        <a href="#" data-target-page="contact-page" data-nav-page="contact-page" class="mobile-nav-link nav-link text-slate-200 px-3 py-2.5 rounded-xl flex items-center justify-between hover:bg-white/10 transition">Contact & Location <span class="text-white/40 text-xs">→</span></a>
+        <a href="#" data-target-page="compliance-page" data-nav-page="compliance-page" class="mobile-nav-link nav-link text-slate-200 px-3 py-2.5 rounded-xl flex items-center justify-between hover:bg-white/10 transition">Statutory & GST <span class="text-white/40 text-xs">→</span></a>
+        <button onclick="openAdminAuthModal()" class="mt-1 text-left px-3 py-2.5 rounded-xl flex items-center gap-2 text-slate-300 hover:bg-white/10 transition border-t border-white/10">
+          <svg class="w-3.5 h-3.5 text-cyan-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+          Executive Portal (Admin)
+        </button>
+      </div>
+    </nav>
   </header>
 
   <!-- =================================================================== -->
@@ -111,7 +131,7 @@
             <span class="absolute top-3 right-3 bg-yellow-warm text-navy-dark text-[10px] font-black px-2 py-0.5 rounded">
               FEATURED
             </span>
-            <img id="hero-featured-image" src="https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png" alt="Featured Medical Device" class="h-44 mx-auto object-contain my-2">
+            <img id="hero-featured-image" src="/philips-dreamstation.png" alt="Featured Medical Device" class="h-44 mx-auto object-contain my-2">
             <div id="hero-featured-title" class="font-bold text-slate-900 text-base">Philips BiPAP Auto Machine</div>
             <div id="hero-featured-subtitle" class="text-xs text-slate-500 mt-0.5">DreamStation • 4-25 cm H2O • 2 Yr Warranty</div>
             <div id="hero-featured-price" class="mt-3 text-xl font-black text-navy-primary">₹81,000</div>
@@ -201,7 +221,7 @@
         <!-- marquee-track: Set A (24 items) + Set B (24 items). -50% translates seamlessly on any screen with ZERO empty gap -->
         <div class="marquee-track flex items-center gap-4 py-1" style="width:max-content">
           <div onclick="openProductModal('2857152264362')" class="flex-shrink-0 flex flex-col items-center justify-center gap-1.5 bg-white rounded-2xl p-3 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-200 border border-slate-100 shadow-md group" style="width:136px;height:124px">
-            <img src="https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Philips BiPAP">
+            <img src="/philips-dreamstation.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Philips BiPAP">
             <div class="text-center w-full px-1">
               <div class="font-extrabold text-[11px] text-slate-800 truncate">Philips BiPAP</div>
               <div class="text-[11px] text-navy-primary font-black mt-0.5">₹81,000</div>
@@ -222,7 +242,7 @@
             </div>
           </div>
           <div onclick="openProductModal('1790913306007')" class="flex-shrink-0 flex flex-col items-center justify-center gap-1.5 bg-white rounded-2xl p-3 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-200 border border-slate-100 shadow-md group" style="width:136px;height:124px">
-            <img src="https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Oxymed BiPAP">
+            <img src="/philips-dreamstation.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Oxymed BiPAP">
             <div class="text-center w-full px-1">
               <div class="font-extrabold text-[11px] text-slate-800 truncate">Oxymed BiPAP</div>
               <div class="text-[11px] text-navy-primary font-black mt-0.5">₹45,600</div>
@@ -243,7 +263,7 @@
             </div>
           </div>
           <div onclick="openProductModal('2857152264362')" class="flex-shrink-0 flex flex-col items-center justify-center gap-1.5 bg-white rounded-2xl p-3 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-200 border border-slate-100 shadow-md group" style="width:136px;height:124px">
-            <img src="https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Philips BiPAP">
+            <img src="/philips-dreamstation.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Philips BiPAP">
             <div class="text-center w-full px-1">
               <div class="font-extrabold text-[11px] text-slate-800 truncate">Philips BiPAP</div>
               <div class="text-[11px] text-navy-primary font-black mt-0.5">₹81,000</div>
@@ -264,7 +284,7 @@
             </div>
           </div>
           <div onclick="openProductModal('1790913306007')" class="flex-shrink-0 flex flex-col items-center justify-center gap-1.5 bg-white rounded-2xl p-3 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-200 border border-slate-100 shadow-md group" style="width:136px;height:124px">
-            <img src="https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Oxymed BiPAP">
+            <img src="/philips-dreamstation.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Oxymed BiPAP">
             <div class="text-center w-full px-1">
               <div class="font-extrabold text-[11px] text-slate-800 truncate">Oxymed BiPAP</div>
               <div class="text-[11px] text-navy-primary font-black mt-0.5">₹45,600</div>
@@ -285,7 +305,7 @@
             </div>
           </div>
           <div onclick="openProductModal('2857152264362')" class="flex-shrink-0 flex flex-col items-center justify-center gap-1.5 bg-white rounded-2xl p-3 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-200 border border-slate-100 shadow-md group" style="width:136px;height:124px">
-            <img src="https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Philips BiPAP">
+            <img src="/philips-dreamstation.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Philips BiPAP">
             <div class="text-center w-full px-1">
               <div class="font-extrabold text-[11px] text-slate-800 truncate">Philips BiPAP</div>
               <div class="text-[11px] text-navy-primary font-black mt-0.5">₹81,000</div>
@@ -306,7 +326,7 @@
             </div>
           </div>
           <div onclick="openProductModal('1790913306007')" class="flex-shrink-0 flex flex-col items-center justify-center gap-1.5 bg-white rounded-2xl p-3 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-200 border border-slate-100 shadow-md group" style="width:136px;height:124px">
-            <img src="https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Oxymed BiPAP">
+            <img src="/philips-dreamstation.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Oxymed BiPAP">
             <div class="text-center w-full px-1">
               <div class="font-extrabold text-[11px] text-slate-800 truncate">Oxymed BiPAP</div>
               <div class="text-[11px] text-navy-primary font-black mt-0.5">₹45,600</div>
@@ -327,7 +347,7 @@
             </div>
           </div>
           <div onclick="openProductModal('2857152264362')" class="flex-shrink-0 flex flex-col items-center justify-center gap-1.5 bg-white rounded-2xl p-3 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-200 border border-slate-100 shadow-md group" style="width:136px;height:124px">
-            <img src="https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Philips BiPAP">
+            <img src="/philips-dreamstation.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Philips BiPAP">
             <div class="text-center w-full px-1">
               <div class="font-extrabold text-[11px] text-slate-800 truncate">Philips BiPAP</div>
               <div class="text-[11px] text-navy-primary font-black mt-0.5">₹81,000</div>
@@ -348,7 +368,7 @@
             </div>
           </div>
           <div onclick="openProductModal('1790913306007')" class="flex-shrink-0 flex flex-col items-center justify-center gap-1.5 bg-white rounded-2xl p-3 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-200 border border-slate-100 shadow-md group" style="width:136px;height:124px">
-            <img src="https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Oxymed BiPAP">
+            <img src="/philips-dreamstation.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Oxymed BiPAP">
             <div class="text-center w-full px-1">
               <div class="font-extrabold text-[11px] text-slate-800 truncate">Oxymed BiPAP</div>
               <div class="text-[11px] text-navy-primary font-black mt-0.5">₹45,600</div>
@@ -369,7 +389,7 @@
             </div>
           </div>
           <div onclick="openProductModal('2857152264362')" class="flex-shrink-0 flex flex-col items-center justify-center gap-1.5 bg-white rounded-2xl p-3 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-200 border border-slate-100 shadow-md group" style="width:136px;height:124px">
-            <img src="https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Philips BiPAP">
+            <img src="/philips-dreamstation.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Philips BiPAP">
             <div class="text-center w-full px-1">
               <div class="font-extrabold text-[11px] text-slate-800 truncate">Philips BiPAP</div>
               <div class="text-[11px] text-navy-primary font-black mt-0.5">₹81,000</div>
@@ -390,7 +410,7 @@
             </div>
           </div>
           <div onclick="openProductModal('1790913306007')" class="flex-shrink-0 flex flex-col items-center justify-center gap-1.5 bg-white rounded-2xl p-3 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-200 border border-slate-100 shadow-md group" style="width:136px;height:124px">
-            <img src="https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Oxymed BiPAP">
+            <img src="/philips-dreamstation.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Oxymed BiPAP">
             <div class="text-center w-full px-1">
               <div class="font-extrabold text-[11px] text-slate-800 truncate">Oxymed BiPAP</div>
               <div class="text-[11px] text-navy-primary font-black mt-0.5">₹45,600</div>
@@ -411,7 +431,7 @@
             </div>
           </div>
           <div onclick="openProductModal('2857152264362')" class="flex-shrink-0 flex flex-col items-center justify-center gap-1.5 bg-white rounded-2xl p-3 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-200 border border-slate-100 shadow-md group" style="width:136px;height:124px">
-            <img src="https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Philips BiPAP">
+            <img src="/philips-dreamstation.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Philips BiPAP">
             <div class="text-center w-full px-1">
               <div class="font-extrabold text-[11px] text-slate-800 truncate">Philips BiPAP</div>
               <div class="text-[11px] text-navy-primary font-black mt-0.5">₹81,000</div>
@@ -432,7 +452,7 @@
             </div>
           </div>
           <div onclick="openProductModal('1790913306007')" class="flex-shrink-0 flex flex-col items-center justify-center gap-1.5 bg-white rounded-2xl p-3 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-200 border border-slate-100 shadow-md group" style="width:136px;height:124px">
-            <img src="https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Oxymed BiPAP">
+            <img src="/philips-dreamstation.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Oxymed BiPAP">
             <div class="text-center w-full px-1">
               <div class="font-extrabold text-[11px] text-slate-800 truncate">Oxymed BiPAP</div>
               <div class="text-[11px] text-navy-primary font-black mt-0.5">₹45,600</div>
@@ -453,7 +473,7 @@
             </div>
           </div>
           <div onclick="openProductModal('2857152264362')" class="flex-shrink-0 flex flex-col items-center justify-center gap-1.5 bg-white rounded-2xl p-3 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-200 border border-slate-100 shadow-md group" style="width:136px;height:124px">
-            <img src="https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Philips BiPAP">
+            <img src="/philips-dreamstation.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Philips BiPAP">
             <div class="text-center w-full px-1">
               <div class="font-extrabold text-[11px] text-slate-800 truncate">Philips BiPAP</div>
               <div class="text-[11px] text-navy-primary font-black mt-0.5">₹81,000</div>
@@ -474,7 +494,7 @@
             </div>
           </div>
           <div onclick="openProductModal('1790913306007')" class="flex-shrink-0 flex flex-col items-center justify-center gap-1.5 bg-white rounded-2xl p-3 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-200 border border-slate-100 shadow-md group" style="width:136px;height:124px">
-            <img src="https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Oxymed BiPAP">
+            <img src="/philips-dreamstation.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Oxymed BiPAP">
             <div class="text-center w-full px-1">
               <div class="font-extrabold text-[11px] text-slate-800 truncate">Oxymed BiPAP</div>
               <div class="text-[11px] text-navy-primary font-black mt-0.5">₹45,600</div>
@@ -495,7 +515,7 @@
             </div>
           </div>
           <div onclick="openProductModal('2857152264362')" class="flex-shrink-0 flex flex-col items-center justify-center gap-1.5 bg-white rounded-2xl p-3 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-200 border border-slate-100 shadow-md group" style="width:136px;height:124px">
-            <img src="https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Philips BiPAP">
+            <img src="/philips-dreamstation.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Philips BiPAP">
             <div class="text-center w-full px-1">
               <div class="font-extrabold text-[11px] text-slate-800 truncate">Philips BiPAP</div>
               <div class="text-[11px] text-navy-primary font-black mt-0.5">₹81,000</div>
@@ -516,7 +536,7 @@
             </div>
           </div>
           <div onclick="openProductModal('1790913306007')" class="flex-shrink-0 flex flex-col items-center justify-center gap-1.5 bg-white rounded-2xl p-3 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-200 border border-slate-100 shadow-md group" style="width:136px;height:124px">
-            <img src="https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Oxymed BiPAP">
+            <img src="/philips-dreamstation.png" class="h-14 w-14 object-contain group-hover:scale-105 transition-transform" alt="Oxymed BiPAP">
             <div class="text-center w-full px-1">
               <div class="font-extrabold text-[11px] text-slate-800 truncate">Oxymed BiPAP</div>
               <div class="text-[11px] text-navy-primary font-black mt-0.5">₹45,600</div>
@@ -1263,7 +1283,7 @@
             <div class="md:col-span-4 flex justify-center">
               <div class="p-3 bg-white rounded-xl border border-slate-200 shadow-sm text-center w-full max-w-[200px]">
                 <div class="text-[10px] font-extrabold text-navy-primary uppercase tracking-wider mb-1">Live Top Preview</div>
-                <img id="admin-featured-preview-img" src="https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png" class="h-24 w-auto object-contain mx-auto my-1">
+                <img id="admin-featured-preview-img" src="/philips-dreamstation.png" class="h-24 w-auto object-contain mx-auto my-1">
                 <div id="admin-featured-preview-title" class="font-bold text-xs text-slate-900 truncate">Philips BiPAP Auto Machine</div>
                 <div id="admin-featured-preview-price" class="text-xs font-black text-navy-primary mt-0.5">₹81,000</div>
               </div>
@@ -1522,6 +1542,148 @@
         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
         <span>Submit B2B Quote via WhatsApp</span>
       </button>
+    </div>
+  </div>
+
+  <!-- ADMIN EDIT PRODUCT MODAL -->
+  <div id="admin-edit-product-modal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 hidden items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-3xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200 my-auto max-h-[92vh] overflow-y-auto relative">
+      <button onclick="closeEditProductModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-900 p-1 font-bold text-xl rounded-lg hover:bg-slate-100 transition">✕</button>
+      
+      <div class="mb-6 pb-4 border-b border-slate-200">
+        <div class="inline-flex items-center gap-1.5 text-xs font-black text-navy-primary bg-navy-primary/10 px-3 py-1 rounded-full mb-2">
+          <span>✏️ Product Catalog Editor</span>
+        </div>
+        <h3 class="text-xl font-black text-slate-900">Edit Medical Equipment Details</h3>
+        <p class="text-xs text-slate-500 mt-1">Update device specifications, wholesale pricing, or change the primary product image.</p>
+      </div>
+
+      <form id="admin-edit-product-form" onsubmit="handleEditProductSubmit(event)" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
+        <input type="hidden" id="admin-edit-id">
+
+        <div class="sm:col-span-2">
+          <label class="block font-bold text-slate-700 mb-1">Equipment Name / Title *</label>
+          <input type="text" id="admin-edit-title" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-navy-primary font-bold text-slate-900">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Brand / Manufacturer *</label>
+          <input type="text" id="admin-edit-brand" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-navy-primary font-medium">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Category *</label>
+          <select id="admin-edit-category" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-navy-primary font-medium">
+            <option value="cpap-bipap">CPAP & BiPAP Respiratory Care</option>
+            <option value="oxygen-concentrators">Medical Oxygen Concentrators</option>
+            <option value="hospital-furniture">Hospital Furniture & ICU Beds</option>
+            <option value="ecg-machines">ECG & Diagnostic Instruments</option>
+            <option value="icu-pumps">ICU Infusion & Syringe Pumps</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Wholesale Price (₹) *</label>
+          <input type="number" id="admin-edit-price" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-navy-primary font-bold text-navy-primary">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">HSN Code</label>
+          <input type="text" id="admin-edit-hsn" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none font-mono">
+        </div>
+
+        <!-- MAIN PRODUCT IMAGE EDIT & UPLOAD -->
+        <div class="sm:col-span-2 lg:col-span-3 p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
+          <div class="font-extrabold text-slate-900 text-xs flex items-center justify-between">
+            <span>📷 Change Main Product Photo</span>
+            <span class="text-[10px] text-slate-400 font-normal">Upload from gallery or paste web link</span>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <img id="admin-edit-preview-img" src="" class="h-20 w-20 object-contain p-1.5 bg-white border border-slate-200 rounded-xl shrink-0 shadow-sm">
+            <div class="flex-1 space-y-2">
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-0.5">Upload New Photo from Device:</label>
+                <input type="file" id="admin-edit-file" accept="image/*" onchange="handleEditImageUpload(event)" class="text-xs text-slate-600 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-navy-primary file:text-white hover:file:bg-navy-dark cursor-pointer">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-0.5">Or Photo Web URL:</label>
+                <input type="text" id="admin-edit-image" oninput="previewEditImageUrl(this.value)" placeholder="/images/... or https://..." class="w-full p-2 bg-white border border-slate-300 rounded-lg outline-none text-xs font-mono">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Country of Origin</label>
+          <input type="text" id="admin-edit-origin" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none font-medium">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Application / Usage</label>
+          <input type="text" id="admin-edit-application" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none font-medium">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Pressure Range</label>
+          <input type="text" id="admin-edit-pressure" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none font-medium">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Modes / Ramp Time</label>
+          <input type="text" id="admin-edit-ramp" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none font-medium">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Warranty</label>
+          <input type="text" id="admin-edit-warranty" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none font-medium">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Brochure URL</label>
+          <input type="text" id="admin-edit-brochure" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none font-medium">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Video Demo URL</label>
+          <input type="text" id="admin-edit-video" placeholder="https://youtube.com/..." class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none font-medium">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Stock Availability</label>
+          <select id="admin-edit-stock" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none font-medium">
+            <option value="true">✔ In Stock — available for dispatch</option>
+            <option value="false">✖ Out of Stock — currently unavailable</option>
+          </select>
+        </div>
+
+        <!-- FULL SPECIFICATION MATRIX EDITOR -->
+        <div class="sm:col-span-2 lg:col-span-3 p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">
+          <div class="font-extrabold text-slate-900 text-xs flex items-center justify-between gap-3">
+            <span>🧾 Technical Specification Matrix</span>
+            <button type="button" onclick="addSpecRow()" class="px-3 py-1.5 bg-navy-primary hover:bg-navy-dark text-white rounded-lg text-[10px] font-bold transition shrink-0">+ Add Row</button>
+          </div>
+          <div id="admin-edit-specs-list" class="space-y-2 max-h-56 overflow-y-auto pr-1">
+            <!-- Dynamic spec rows rendered by app.js -->
+          </div>
+          <p class="text-[10px] text-slate-400">These rows appear in the product's specification table on the customer site. Leave a row empty to discard it.</p>
+        </div>
+
+        <div class="sm:col-span-2 lg:col-span-3">
+          <label class="block font-bold text-slate-700 mb-1">Clinical Overview & Specifications *</label>
+          <textarea id="admin-edit-description" rows="3" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none text-xs font-medium"></textarea>
+        </div>
+
+        <div class="sm:col-span-2 lg:col-span-3 pt-3 flex items-center gap-3">
+          <button type="submit" class="px-7 py-3 bg-navy-primary hover:bg-navy-dark text-white rounded-xl font-extrabold shadow-lg transition text-xs flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            <span>Save Product Changes</span>
+          </button>
+          <button type="button" onclick="closeEditProductModal()" class="px-5 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold transition text-xs">
+            Cancel
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 
