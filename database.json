@@ -1,0 +1,477 @@
+{
+  "company": {
+    "name": "Global Mediquips",
+    "owner": "Shivashankar Katari",
+    "year": 2013,
+    "turnover": "Rs. 2 - 5 Crore",
+    "gst": "36BHGPK3813B1ZS",
+    "hsnDefault": "90181100",
+    "banker": "ICICI BANK LIMITED",
+    "location": "Amberpet, Hyderabad, Telangana, India",
+    "helpline": "+91 98765 43210"
+  },
+  "products": [
+    {
+      "id": "1790913306007",
+      "title": "Oxymed BiPAP I Series P1 / AirSmart BPAP ST",
+      "category": "cpap-bipap",
+      "categoryName": "CPAP & BiPAP Care",
+      "brand": "Oxymed",
+      "price": 45600,
+      "priceDisplay": "₹45,600",
+      "hsnCode": "90181100",
+      "image": "https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png",
+      "brochureUrl": "http://5.imimg.com/data5/SELLER/Doc/2025/8/533175933/HQ/AY/RW/25122208/philips-bipap-auto-machine.pdf",
+      "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "countryOfOrigin": "Made in India",
+      "application": "Hospital / Home Care",
+      "pressureRange": "4-30 cm H2O",
+      "rampRate": "60 Mins",
+      "dataStorage": "1 Year SD Card Storage",
+      "inStock": true,
+      "requiresPrescription": true,
+      "description": "Oxymed's respiratory and sleep devices are recognized by top doctors in India for therapeutic benefits and design excellence. Oxymed i-series helps patients sleep better and live healthier. Includes Backup Rate, Assured Tidal Volume, CSA Detection, CPAP/S/T/S-T/VAT/PC modes, and quiet travel-friendly nasal mask integration.",
+      "specs": [
+        {
+          "key": "Brand",
+          "value": "Oxymed"
+        },
+        {
+          "key": "Type",
+          "value": "BiPAP ST / Auto BiPAP"
+        },
+        {
+          "key": "Pressure Range (cm H2O)",
+          "value": "4 to 30 cm H2O"
+        },
+        {
+          "key": "Ramp Rate",
+          "value": "60 Minutes"
+        },
+        {
+          "key": "Data Storage Capacity",
+          "value": "1 Year SD Card Storage"
+        },
+        {
+          "key": "Application / Usage",
+          "value": "Hospital / Home Care"
+        },
+        {
+          "key": "Country of Origin",
+          "value": "Made in India"
+        },
+        {
+          "key": "Operating Modes",
+          "value": "CPAP, S, T, S/T, VAT, PC"
+        },
+        {
+          "key": "Noise Level",
+          "value": "Ultra-Quiet (< 28 dBA)"
+        },
+        {
+          "key": "Warranty",
+          "value": "2 Years Official Manufacturer Warranty"
+        }
+      ]
+    },
+    {
+      "id": "2857152264362",
+      "title": "Philips BiPAP Auto Machine (DreamStation)",
+      "category": "cpap-bipap",
+      "categoryName": "CPAP & BiPAP Care",
+      "brand": "Philips Respironics",
+      "price": 81000,
+      "priceDisplay": "₹81,000",
+      "hsnCode": "90181100",
+      "image": "https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png",
+      "brochureUrl": "http://5.imimg.com/data5/SELLER/Doc/2025/8/533175933/HQ/AY/RW/25122208/philips-bipap-auto-machine.pdf",
+      "countryOfOrigin": "USA",
+      "application": "Clinical & Home Respiratory Care",
+      "pressureRange": "4-25 cm H2O",
+      "rampRate": "45 Mins",
+      "dataStorage": "6 Months On-board SD Storage",
+      "inStock": true,
+      "requiresPrescription": true,
+      "description": "DreamStation BiPAP Auto is an advanced auto-titrating bi-level positive airway pressure device designed for OSA and respiratory insufficiency. Features Bi-Flex relief, SmartRamp, adaptive heated humidifier, color LCD display, and SD data logging.",
+      "specs": [
+        {
+          "key": "Brand",
+          "value": "Philips Respironics"
+        },
+        {
+          "key": "Type",
+          "value": "Auto BiPAP / CPAP"
+        },
+        {
+          "key": "IPAP Pressure Range",
+          "value": "4 to 25 cm H2O"
+        },
+        {
+          "key": "EPAP Pressure Range",
+          "value": "4 to 25 cm H2O"
+        },
+        {
+          "key": "Flex Relief Technology",
+          "value": "Bi-Flex Pressure Relief (Settings 1, 2, 3)"
+        },
+        {
+          "key": "Ramp Feature",
+          "value": "SmartRamp (0 - 45 Mins)"
+        },
+        {
+          "key": "Humidification",
+          "value": "Adaptive Heated Humidifier with Heated Tube"
+        },
+        {
+          "key": "Application / Usage",
+          "value": "Hospital & Home Respiratory Care"
+        },
+        {
+          "key": "Country of Origin",
+          "value": "USA"
+        },
+        {
+          "key": "Warranty",
+          "value": "2 Years Manufacturer Warranty"
+        }
+      ]
+    },
+    {
+      "id": "2857152145630",
+      "title": "ResMed Lumis 100 VPAP S BiPAP Machine",
+      "category": "cpap-bipap",
+      "categoryName": "CPAP & BiPAP Care",
+      "brand": "ResMed",
+      "price": 72000,
+      "priceDisplay": "₹72,000",
+      "hsnCode": "90181100",
+      "image": "https://5.imimg.com/data5/SELLER/PDFImage/2025/1/482782601/HT/QT/NK/25122208/resmed-lumis-100-vpap-st-bipap-500x500.png",
+      "countryOfOrigin": "Australia / USA",
+      "application": "Non-Invasive Mechanical Ventilation",
+      "pressureRange": "2-25 cm H2O",
+      "rampRate": "45 Mins",
+      "dataStorage": "AirView Cloud Telemetry & SD Card",
+      "inStock": true,
+      "requiresPrescription": true,
+      "description": "ResMed Lumis 100 VPAP S is a non-invasive ventilator designed for non-dependent respiratory patients. Features TiControl inspiratory time control, VSync leak management, 5-level Trigger/Cycle sensitivity, and integrated HumidAir heated humidifier.",
+      "specs": [
+        {
+          "key": "Brand",
+          "value": "ResMed"
+        },
+        {
+          "key": "Type",
+          "value": "Non-Invasive VPAP / BiPAP"
+        },
+        {
+          "key": "Pressure Range",
+          "value": "2 to 25 cm H2O"
+        },
+        {
+          "key": "Inspiratory Control",
+          "value": "TiControl (Ti Max & Ti Min)"
+        },
+        {
+          "key": "Leak Management",
+          "value": "VSync Automatic Leak Compensation"
+        },
+        {
+          "key": "Data Storage",
+          "value": "AirView Cloud Telemetry + SD Card"
+        },
+        {
+          "key": "Country of Origin",
+          "value": "Australia"
+        }
+      ]
+    },
+    {
+      "id": "2857152129412",
+      "title": "BPL Oxy 5 Neo Dual Oxygen Concentrator",
+      "category": "oxygen-concentrators",
+      "categoryName": "Oxygen Concentrators",
+      "brand": "BPL",
+      "price": 38000,
+      "priceDisplay": "₹38,000",
+      "hsnCode": "90181100",
+      "image": "https://5.imimg.com/data5/SELLER/PDFImage/2025/2/492186901/WQ/JG/FH/25122208/bpl-oxy-5-neo-dual-oxygen-concentrator-500x500.png",
+      "countryOfOrigin": "Made in India",
+      "application": "Hospital & Home Oxygen Therapy",
+      "pressureRange": "0.04-0.07 MPa",
+      "rampRate": "Continuous Flow",
+      "dataStorage": "LCD Run-Time Counter",
+      "inStock": true,
+      "requiresPrescription": false,
+      "description": "Medical-grade 5L dual-flow oxygen concentrator equipped with high-efficiency French PSA sieve beds, built-in oxygen purity analyzer, flame retardant ABS cabinet, dual flowmeter outlets, and low oxygen purity safety alarms.",
+      "specs": [
+        {
+          "key": "Brand",
+          "value": "BPL Medical Technologies"
+        },
+        {
+          "key": "Oxygen Flow",
+          "value": "0.5 to 5 Liters per Minute (Dual Flow Outlets)"
+        },
+        {
+          "key": "Oxygen Purity",
+          "value": "93% ± 3% Concentration"
+        },
+        {
+          "key": "Outlet Pressure",
+          "value": "0.04 to 0.07 MPa"
+        },
+        {
+          "key": "Noise Level",
+          "value": "< 45 dBA"
+        },
+        {
+          "key": "Power Consumption",
+          "value": "350 Watts"
+        },
+        {
+          "key": "Country of Origin",
+          "value": "Made in India"
+        }
+      ]
+    },
+    {
+      "id": "2857152156188",
+      "title": "5-Function Manual ICU Hospital Bed",
+      "category": "hospital-furniture",
+      "categoryName": "Hospital Furniture",
+      "brand": "Global Mediquips",
+      "price": 42000,
+      "priceDisplay": "₹42,000",
+      "hsnCode": "90181100",
+      "image": "https://5.imimg.com/data5/SELLER/PDFImage/2025/4/500732864/IG/JP/DZ/25122208/5-function-manual-icu-hospital-bed-health-shine-250x250.png",
+      "countryOfOrigin": "Made in India",
+      "application": "ICU & Critical Care Units",
+      "pressureRange": "Load Capacity 250 kg",
+      "rampRate": "5 Independent Cranks",
+      "dataStorage": "Manual Mechanical Operation",
+      "inStock": true,
+      "requiresPrescription": false,
+      "description": "Premium 5-function manual ICU bed constructed with perforated CRCA steel top, removable ABS head/foot boards, collapsible aluminum alloy side safety rails, 4-wheel central braking system, and 5 independent smooth-crank operations.",
+      "specs": [
+        {
+          "key": "Manufacturer",
+          "value": "Global Mediquips"
+        },
+        {
+          "key": "Overall Dimensions",
+          "value": "2150 L × 980 W × 450-700 H mm"
+        },
+        {
+          "key": "Crank Functions",
+          "value": "Backrest, Kneerest, Height, Trendelenburg & Rev. Trendelenburg"
+        },
+        {
+          "key": "Side Rails",
+          "value": "Collapsible Aluminum Alloy Side Rails"
+        },
+        {
+          "key": "Casters",
+          "value": "125mm Heavy-duty Swivel Casters with Central Lock"
+        },
+        {
+          "key": "Load Capacity",
+          "value": "Up to 250 kg"
+        },
+        {
+          "key": "Country of Origin",
+          "value": "Made in India"
+        }
+      ]
+    },
+    {
+      "id": "2857152231788",
+      "title": "Nidek 12 Channel ECG Machine (Model ECG-712)",
+      "category": "ecg-machines",
+      "categoryName": "ECG & Diagnostics",
+      "brand": "Nidek",
+      "price": 52000,
+      "priceDisplay": "₹52,000",
+      "hsnCode": "90181100",
+      "image": "https://5.imimg.com/data5/SELLER/PDFImage/2025/2/486279737/JU/HF/UM/25122208/ecg-machine-12-channel-nidek-model-ecg-712-500x500.png",
+      "countryOfOrigin": "Japan / India",
+      "application": "Cardiology Clinics & Hospitals",
+      "pressureRange": "12 Lead Simultaneous Acquisition",
+      "rampRate": "Thermal Printer 210mm",
+      "dataStorage": "1000 Patient ECG Records",
+      "inStock": true,
+      "requiresPrescription": false,
+      "description": "Nidek ECG-712 is a high-precision 12-channel digital electrocardiograph equipped with a 7-inch color touch screen, Glasgow automatic ECG analysis algorithm, internal memory storing up to 1000 ECG records, thermal printing, USB data transfer, and rechargeable lithium battery.",
+      "specs": [
+        {
+          "key": "Brand",
+          "value": "Nidek Medical"
+        },
+        {
+          "key": "Channels",
+          "value": "12 Channel Simultaneous Lead Acquisition"
+        },
+        {
+          "key": "Display Screen",
+          "value": "7-Inch Color TFT Touch Screen (800 × 480)"
+        },
+        {
+          "key": "Interpretation",
+          "value": "Built-in Automatic ECG Analysis Algorithm"
+        },
+        {
+          "key": "Printer",
+          "value": "210mm Thermal Paper Roll / Z-fold"
+        },
+        {
+          "key": "Internal Storage",
+          "value": "1000 Patient ECG Records"
+        },
+        {
+          "key": "Battery Backup",
+          "value": "Built-in Li-ion Battery (Up to 3 Hours)"
+        },
+        {
+          "key": "Country of Origin",
+          "value": "Japan / India"
+        }
+      ]
+    }
+  ],
+  "quotes": [
+    {
+      "quoteRef": "GM-Q-253492",
+      "buyerName": "Apollo Hospital Procurement",
+      "hospitalName": "Apollo Hospitals Hyderabad",
+      "phone": "+919876500000",
+      "location": "Hyderabad / Telangana",
+      "items": [
+        {
+          "title": "Oxymed BiPAP I Series P1 / AirSmart BPAP ST",
+          "price": 45600,
+          "quantity": 2
+        }
+      ],
+      "totalAmount": 91200,
+      "totalAmountDisplay": "₹91,200",
+      "gstNumber": "36BHGPK3813B1ZS",
+      "hsnCode": "90181100",
+      "status": "Quotation Sent",
+      "createdAt": "2026-10-01T17:37:33.494Z"
+    },
+    {
+      "quoteRef": "GM-Q-507723",
+      "buyerName": "Hospital Procurement Client",
+      "hospitalName": "Private Hospital / Clinic",
+      "phone": "+91 98765 43210",
+      "location": "Hyderabad, Telangana",
+      "items": [
+        {
+          "id": "1790913306007",
+          "title": "Oxymed BiPAP I Series P1 / AirSmart BPAP ST",
+          "category": "cpap-bipap",
+          "categoryName": "CPAP & BiPAP Care",
+          "brand": "Oxymed",
+          "price": 45600,
+          "priceDisplay": "₹45,600",
+          "hsnCode": "90181100",
+          "image": "https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png",
+          "brochureUrl": "http://5.imimg.com/data5/SELLER/Doc/2025/8/533175933/HQ/AY/RW/25122208/philips-bipap-auto-machine.pdf",
+          "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          "countryOfOrigin": "Made in India",
+          "application": "Hospital / Home Care",
+          "pressureRange": "4-30 cm H2O",
+          "rampRate": "60 Mins",
+          "dataStorage": "1 Year SD Card Storage",
+          "inStock": true,
+          "requiresPrescription": true,
+          "description": "Oxymed's respiratory and sleep devices are recognized by top doctors in India for therapeutic benefits and design excellence. Oxymed i-series helps patients sleep better and live healthier. Includes Backup Rate, Assured Tidal Volume, CSA Detection, CPAP/S/T/S-T/VAT/PC modes, and quiet travel-friendly nasal mask integration.",
+          "specs": [
+            {
+              "key": "Brand",
+              "value": "Oxymed"
+            },
+            {
+              "key": "Type",
+              "value": "BiPAP ST / Auto BiPAP"
+            },
+            {
+              "key": "Pressure Range (cm H2O)",
+              "value": "4 to 30 cm H2O"
+            },
+            {
+              "key": "Ramp Rate",
+              "value": "60 Minutes"
+            },
+            {
+              "key": "Data Storage Capacity",
+              "value": "1 Year SD Card Storage"
+            },
+            {
+              "key": "Application / Usage",
+              "value": "Hospital / Home Care"
+            },
+            {
+              "key": "Country of Origin",
+              "value": "Made in India"
+            },
+            {
+              "key": "Operating Modes",
+              "value": "CPAP, S, T, S/T, VAT, PC"
+            },
+            {
+              "key": "Noise Level",
+              "value": "Ultra-Quiet (< 28 dBA)"
+            },
+            {
+              "key": "Warranty",
+              "value": "2 Years Official Manufacturer Warranty"
+            }
+          ],
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 45600,
+      "totalAmountDisplay": "₹45,600",
+      "status": "Pending",
+      "createdAt": "2026-10-02T04:15:07.724Z"
+    }
+  ],
+  "reviews": [
+    {
+      "reviewer": "Dr. K. Srinivas Rao",
+      "designation": "Senior Pulmonologist, Sunshine Hospitals",
+      "location": "Secunderabad, Telangana",
+      "date": "2025-08-12",
+      "product": "Philips DreamStation BiPAP Auto",
+      "rating": 5,
+      "comment": "Global Mediquips is our preferred vendor for critical respiratory devices. Mr. Shivashankar Katari delivered 4 units within 3 hours during peak ICU requirement with complete GST verification."
+    },
+    {
+      "reviewer": "Shivani",
+      "designation": "Home Caregiver",
+      "location": "Banjara Hills, Hyderabad",
+      "date": "2025-07-17",
+      "product": "Digital Spirometer & Oxymed Concentrator",
+      "rating": 5,
+      "comment": "Excellence in delivery and genuine product quality. Mr. Katari guided us thoroughly on operating the device for home respiratory therapy."
+    },
+    {
+      "reviewer": "Narsimha Reddy",
+      "designation": "Procurement Manager, Apollo Clinic",
+      "location": "Amberpet, Hyderabad, Telangana",
+      "date": "2025-07-04",
+      "product": "5-Function ICU Hospital Bed",
+      "rating": 5,
+      "comment": "Very competitive wholesale pricing compared to market rates. Prompt road dispatch directly to our facility in Amberpet."
+    },
+    {
+      "reviewer": "Dr. Ananya Sharma",
+      "designation": "Critical Care Specialist, Medwin Hospital",
+      "location": "Nampally, Hyderabad, Telangana",
+      "date": "2025-06-22",
+      "product": "Nidek 12-Ch ECG & Mindray Syringe Pump",
+      "rating": 5,
+      "comment": "High precision medical instruments backed by authentic 2-year warranty. Their technical team handled installation seamlessly."
+    }
+  ]
+}

@@ -1,0 +1,294 @@
+{
+  "company": {
+    "name": "Global Mediquips",
+    "year_of_incorporation": 2013,
+    "annual_turnover": "Rs. 2 - 5 Crore",
+    "gst_annual_turnover": "1.5 - 5 Cr",
+    "location": {
+      "area": "Amberpet",
+      "city": "Hyderabad",
+      "state": "Telangana",
+      "country": "India"
+    },
+    "nature_of_business": "Manufacturer, Wholesaler, Retailer",
+    "legal_status": "Sole Proprietorship",
+    "ceo_owner": {
+      "full_name": "Shivashankar Katari",
+      "display_name": "S. Katari",
+      "designation": "Owner / CEO"
+    },
+    "total_employees": "Upto 10 People",
+    "indiamart_member_since": "10 Years",
+    "rating": {
+      "score": 4.4,
+      "total_reviews": 23,
+      "user_satisfaction_response_rate": "60%",
+      "verified_reviews": [
+        {
+          "reviewer": "Shivani",
+          "location": "Hyderabad, Telangana",
+          "date": "2025-07-17",
+          "product": "Digital Spirometer"
+        },
+        {
+          "reviewer": "Narsimha Reddy",
+          "location": "Hyderabad, Telangana",
+          "date": "2025-07-04",
+          "product": "CPAP Machine"
+        }
+      ],
+      "reviews_url": "https://www.indiamart.com/globalmediquips/testimonial.html"
+    },
+    "gst": {
+      "verified": true,
+      "gst_number": "36BHGPK3813B1ZS",
+      "registration_year": 2017,
+      "legal_status": "Proprietorship"
+    },
+    "logo_url": "https://5.imimg.com/data5/SELLER/Logo/2024/12/469845563/VM/WU/ZF/25122208/global-mediquips-120x120.jpg",
+    "indiamart_profile_url": "https://www.indiamart.com/globalmediquips/",
+    "about_us_url": "https://www.indiamart.com/globalmediquips/about-us.html"
+  },
+  "statutory_profile": {
+    "bankers": [
+      "ICICI BANK LIMITED"
+    ],
+    "gst_number": "36BHGPK3813B1ZS",
+    "hsn_codes": [
+      {
+        "code": "90181100",
+        "description": "Instruments and appliances used in medical, surgical, dental or veterinary sciences - Electro-cardiographs & diagnostic apparatus"
+      }
+    ]
+  },
+  "payment_and_shipment": {
+    "payment_modes": [
+      "Cash",
+      "Cheque",
+      "Credit Card",
+      "DD",
+      "Online (UPI / NEFT / RTGS)"
+    ],
+    "shipment_mode": "By Road"
+  },
+  "product_categories": [
+    {
+      "id": "cpap-bipap",
+      "category_name": "CPAP, BiPAP Machine & Accessories",
+      "products_available": 10,
+      "summary": "Leading Wholesaler of Philips BiPAP Auto Machine, Philips Respironics Dreamstation, Oxymed BiPAP ST 25, Oxymed BiPAP 30 ST and Oxymed Auto BiPAP.",
+      "category_image_url": "https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-250x250.png",
+      "category_url": "https://www.indiamart.com/globalmediquips/cpap-bipap-machine-accessories.html"
+    },
+    {
+      "id": "oxygen-concentrators",
+      "category_name": "Oxygen Concentrator",
+      "products_available": 8,
+      "summary": "Pioneers offering Oxymed 10L Concentrator, Philips EverFlo, Oxymed Concentrator, BPL Oxy 5 Neo Dual and Philips Portable Concentrator.",
+      "category_image_url": "https://5.imimg.com/data5/SELLER/PDFImage/2025/2/492186901/WQ/JG/FH/25122208/bpl-oxy-5-neo-dual-oxygen-concentrator-500x500.png",
+      "category_url": "https://www.indiamart.com/globalmediquips/oxygen-concentrator.html"
+    },
+    {
+      "id": "hospital-furniture",
+      "category_name": "Hospital Furniture",
+      "products_available": 7,
+      "summary": "3 Function Motorized Hospital Beds, Hospital Examination Couches, Gynec Examination Tables, Manual Fowler Beds & Deluxe Gynic Tables.",
+      "category_image_url": "https://5.imimg.com/data5/SELLER/PDFImage/2025/4/500732864/IG/JP/DZ/25122208/5-function-manual-icu-hospital-bed-health-shine-250x250.png",
+      "category_url": "https://www.indiamart.com/globalmediquips/hospital-furniture.html"
+    },
+    {
+      "id": "ecg-machines",
+      "category_name": "ECG Machine",
+      "products_available": 3,
+      "summary": "Prominent wholesaler of Nidek 12 Channel, Contec 12 Channel and BPL 12 Channel ECG Machines.",
+      "category_image_url": "https://5.imimg.com/data5/SELLER/PDFImage/2025/2/486279737/JU/HF/UM/25122208/ecg-machine-12-channel-nidek-model-ecg-712-250x250.png",
+      "category_url": "https://www.indiamart.com/globalmediquips/ecg-machine.html"
+    },
+    {
+      "id": "cpap-devices",
+      "category_name": "CPAP Devices",
+      "products_available": 1,
+      "summary": "Includes Oxymed CPAP Machine.",
+      "category_url": "https://www.indiamart.com/globalmediquips/cpap-devices.html"
+    },
+    {
+      "id": "portable-spirometers",
+      "category_name": "Portable Spirometer With Printer",
+      "products_available": 1,
+      "summary": "Featuring RMS Helios 401 Spirometer.",
+      "category_url": "https://www.indiamart.com/globalmediquips/portable-spirometer-with-printer.html"
+    },
+    {
+      "id": "defibrillators",
+      "category_name": "Defibrillator Philips",
+      "products_available": 1,
+      "summary": "Philips HeartStart FRx AED Defibrillator & Philips Efficia DFM100 Biphasic Defibrillator.",
+      "category_url": "https://www.indiamart.com/globalmediquips/defibrillator-philips.html"
+    },
+    {
+      "id": "pcl-instruments",
+      "category_name": "PCL Instrument Set",
+      "products_available": 1,
+      "summary": "Complete Orthopedic Instrument Sets.",
+      "category_url": "https://www.indiamart.com/globalmediquips/pcl-instrument-set.html"
+    },
+    {
+      "id": "new-items",
+      "category_name": "New Items / Critical Care",
+      "products_available": 5,
+      "summary": "Devon Cirona 6200 DVT Pump, Philips Biphasic Defibrillator DFM100, Mindray Syringe Pump Benefusion SP1 & Surgical Instruments.",
+      "category_url": "https://www.indiamart.com/globalmediquips/new-items.html"
+    }
+  ],
+  "full_inventory_items": [
+    {
+      "item_id": "2857152264362",
+      "title": "Philips BiPAP Auto Machine",
+      "category": "CPAP, BiPAP Machine & Accessories",
+      "brand": "Philips Respironics",
+      "price": "₹81,000",
+      "url": "https://www.indiamart.com/proddetail/philips-bipap-auto-machine-2857152264362.html"
+    },
+    {
+      "item_id": "2857152252591",
+      "title": "Philips Respironics Dreamstation Auto CPAP Machine",
+      "category": "CPAP, BiPAP Machine & Accessories",
+      "brand": "Philips Respironics",
+      "url": "https://www.indiamart.com/globalmediquips/cpap-bipap-machine-accessories.html#2857152252591"
+    },
+    {
+      "item_id": "2857152390955",
+      "title": "Oxymed BiPAP ST 25",
+      "category": "CPAP, BiPAP Machine & Accessories",
+      "brand": "Oxymed",
+      "url": "https://www.indiamart.com/globalmediquips/cpap-bipap-machine-accessories.html#2857152390955"
+    },
+    {
+      "item_id": "2857152145630",
+      "title": "Resmed Lumis 100 VPAP S BiPAP Machine",
+      "category": "CPAP, BiPAP Machine & Accessories",
+      "brand": "ResMed",
+      "url": "https://www.indiamart.com/globalmediquips/cpap-bipap-machine-accessories.html#2857152145630"
+    },
+    {
+      "item_id": "2857152320030",
+      "title": "Oxymed 10L Oxygen Concentrator",
+      "category": "Oxygen Concentrator",
+      "brand": "Oxymed",
+      "url": "https://www.indiamart.com/globalmediquips/oxygen-concentrator.html#2857152320030"
+    },
+    {
+      "item_id": "2857152313091",
+      "title": "Philips EverFlo Oxygen Concentrator",
+      "category": "Oxygen Concentrator",
+      "brand": "Philips",
+      "url": "https://www.indiamart.com/globalmediquips/oxygen-concentrator.html#2857152313091"
+    },
+    {
+      "item_id": "2857152316497",
+      "title": "Oxymed Oxygen Concentrator",
+      "category": "Oxygen Concentrator",
+      "brand": "Oxymed",
+      "url": "https://www.indiamart.com/globalmediquips/oxygen-concentrator.html#2857152316497"
+    },
+    {
+      "item_id": "2857152129412",
+      "title": "BPL Oxy 5 Neo Dual Oxygen Concentrator",
+      "category": "Oxygen Concentrator",
+      "brand": "BPL",
+      "url": "https://www.indiamart.com/globalmediquips/oxygen-concentrator.html#2857152129412"
+    },
+    {
+      "item_id": "2857152146255",
+      "title": "Philips Portable Oxygen Concentrator (SimplyGo)",
+      "category": "Oxygen Concentrator",
+      "brand": "Philips",
+      "url": "https://www.indiamart.com/globalmediquips/oxygen-concentrator.html#2857152146255"
+    },
+    {
+      "item_id": "2857152156188",
+      "title": "3 Function Motorized Hospital Bed",
+      "category": "Hospital Furniture",
+      "url": "https://www.indiamart.com/globalmediquips/hospital-furniture.html#2857152156188"
+    },
+    {
+      "item_id": "2857152242297",
+      "title": "Hospital Examination Couch",
+      "category": "Hospital Furniture",
+      "url": "https://www.indiamart.com/globalmediquips/hospital-furniture.html#2857152242297"
+    },
+    {
+      "item_id": "2857152129133",
+      "title": "Gynec Examination Table",
+      "category": "Hospital Furniture",
+      "url": "https://www.indiamart.com/globalmediquips/hospital-furniture.html#2857152129133"
+    },
+    {
+      "item_id": "2857152166633",
+      "title": "Manual Fowler Bed 2 Function Deluxe",
+      "category": "Hospital Furniture",
+      "url": "https://www.indiamart.com/globalmediquips/hospital-furniture.html#2857152166633"
+    },
+    {
+      "item_id": "2857152231788",
+      "title": "Nidek 12 Channel ECG Machine",
+      "category": "ECG Machine",
+      "brand": "Nidek",
+      "url": "https://www.indiamart.com/globalmediquips/ecg-machine.html#2857152231788"
+    },
+    {
+      "item_id": "2857152320997",
+      "title": "Contec 12 Channel ECG Machine",
+      "category": "ECG Machine",
+      "brand": "Contec",
+      "url": "https://www.indiamart.com/globalmediquips/ecg-machine.html#2857152320997"
+    },
+    {
+      "item_id": "2857152322748",
+      "title": "BPL 12 Channel ECG Machine",
+      "category": "ECG Machine",
+      "brand": "BPL",
+      "url": "https://www.indiamart.com/globalmediquips/ecg-machine.html#2857152322748"
+    },
+    {
+      "item_id": "2857152384988",
+      "title": "Oxymed CPAP Machine",
+      "category": "CPAP Devices",
+      "brand": "Oxymed",
+      "url": "https://www.indiamart.com/globalmediquips/cpap-devices.html#2857152384988"
+    },
+    {
+      "item_id": "2857152404848",
+      "title": "RMS Helios 401 Spirometer",
+      "category": "Portable Spirometer With Printer",
+      "brand": "RMS Helios",
+      "url": "https://www.indiamart.com/globalmediquips/portable-spirometer-with-printer.html#2857152404848"
+    },
+    {
+      "item_id": "2857152340330",
+      "title": "Philips HeartStart FRx AED Defibrillator",
+      "category": "Defibrillator Philips",
+      "brand": "Philips",
+      "url": "https://www.indiamart.com/globalmediquips/defibrillator-philips.html#2857152340330"
+    },
+    {
+      "item_id": "2857152451355",
+      "title": "Orthopedic Instruments / PCL Set",
+      "category": "PCL Instrument Set",
+      "url": "https://www.indiamart.com/globalmediquips/pcl-instrument-set.html#2857152451355"
+    },
+    {
+      "item_id": "2857152242062",
+      "title": "Mindray Syringe Pump Benefusion SP1",
+      "category": "New Items",
+      "brand": "Mindray",
+      "url": "https://www.indiamart.com/globalmediquips/new-items.html#2857152242062"
+    },
+    {
+      "item_id": "2857152128988",
+      "title": "Surgical Instruments",
+      "category": "New Items",
+      "url": "https://www.indiamart.com/globalmediquips/new-items.html#2857152128988"
+    }
+  ]
+}

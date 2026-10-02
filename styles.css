@@ -1,0 +1,164 @@
+/* Global Mediquips Master Enterprise B2B Design System */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --navy-primary: #1D2B84;
+  --navy-dark: #121A58;
+  --navy-light: #2B3EB1;
+  
+  --cyan-accent: #00A8E8;
+  --cyan-hover: #0088BD;
+  --cyan-light: #E6F7FF;
+  
+  --yellow-warm: #F4D03F;
+  --yellow-dark: #856404;
+  
+  --whatsapp-green: #25D366;
+  --whatsapp-dark: #1EBE5D;
+  
+  --bg-slate: #F8FAFC;
+  --text-dark: #0F172A;
+  --text-muted: #64748B;
+  --border-light: #E2E8F0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-slate);
+  color: var(--text-dark);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  letter-spacing: -0.011em;
+}
+
+/* Form Input & Focus States */
+input, select, textarea {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--navy-primary) !important;
+  box-shadow: 0 0 0 4px rgba(29, 43, 132, 0.12) !important;
+  background-color: #FFFFFF !important;
+}
+
+/* Explicit High-Contrast Hero Styling */
+.hero-gradient-bg {
+  background: linear-gradient(135deg, #1D2B84 0%, #121A58 100%) !important;
+  color: #FFFFFF !important;
+}
+
+.hero-gradient-bg h1 {
+  color: #FFFFFF !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-gradient-bg p {
+  color: #CBD5E1 !important;
+}
+
+/* Brand Utility Classes */
+.bg-navy-primary { background-color: var(--navy-primary); }
+.bg-navy-dark { background-color: var(--navy-dark); }
+.text-navy-primary { color: var(--navy-primary); }
+
+.bg-cyan-accent { background-color: var(--cyan-accent); }
+.text-cyan-accent { color: var(--cyan-accent); }
+.hover\:bg-cyan-hover:hover { background-color: var(--cyan-hover); }
+
+.bg-yellow-warm { background-color: var(--yellow-warm); }
+.text-yellow-dark { color: var(--yellow-dark); }
+
+.bg-whatsapp { background-color: var(--whatsapp-green); }
+.hover\:bg-whatsapp-dark:hover { background-color: var(--whatsapp-dark); }
+
+/* Master Card Component Styles (Apple-grade) */
+.master-card {
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px -4px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+
+.master-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 24px 45px -12px rgba(15, 23, 42, 0.12), 0 8px 16px -4px rgba(15, 23, 42, 0.04);
+  border-color: #CBD5E1;
+}
+
+/* Category Explorer Buttons */
+.cat-card-btn {
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px -4px rgba(15, 23, 42, 0.04);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.cat-card-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px -8px rgba(15, 23, 42, 0.1);
+  border-color: #CBD5E1;
+}
+
+.cat-card-btn.active-cat {
+  background-color: var(--navy-primary) !important;
+  color: #ffffff !important;
+  border-color: var(--navy-primary) !important;
+  box-shadow: 0 12px 24px -6px rgba(29, 43, 132, 0.35) !important;
+}
+
+.cat-card-btn.active-cat h3,
+.cat-card-btn.active-cat p,
+.cat-card-btn.active-cat svg {
+  color: #ffffff !important;
+}
+
+/* Page Transitions */
+.page-section {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.page-section.active-page {
+  display: block;
+  opacity: 1;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+::-webkit-scrollbar-thumb {
+  background: #94A3B8;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #64748B;
+}
+
+/* Floating WhatsApp Pulse Animation */
+@keyframes wa-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); }
+  70% { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+.wa-floating-btn {
+  animation: wa-pulse 2.5s infinite;
+}

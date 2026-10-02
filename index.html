@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Global Mediquips — Premier Medical Equipment & ICU Supplies Hyderabad</title>
+  <meta name="description" content="Official B2B website of Global Mediquips. Manufacturer, Wholesaler & Retailer of BiPAP, CPAP, Oxygen Concentrators, Hospital Beds, and ECG Machines in Amberpet, Hyderabad. GST: 36BHGPK3813B1ZS.">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Master Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col justify-between">
+
+  <!-- CORPORATE HEADER & NAVIGATION BAR WITH OFFICIAL LOGO -->
+  <header class="bg-navy-primary text-white sticky top-0 z-40 shadow-lg border-b border-navy-dark">
+    <div class="max-w-7xl mx-auto px-4 py-3.5 flex items-center justify-between gap-4">
+      
+      <!-- OFFICIAL LOGO BRANDING -->
+      <a href="#" data-target-page="home-page" class="flex items-center gap-3 group">
+        <div class="p-1.5 bg-white rounded-xl shadow-md flex items-center justify-center border border-white/20">
+          <img src="logo.png" alt="Global Mediquips Official Logo" class="h-10 w-auto object-contain">
+        </div>
+        <div>
+          <div class="text-xl font-extrabold tracking-tight text-white group-hover:text-cyan-accent transition">Global Mediquips</div>
+          <div class="text-[10px] text-cyan-accent font-semibold tracking-wider uppercase">Medical Equipment & ICU Supplies</div>
+        </div>
+      </a>
+
+      <!-- DESKTOP MULTI-PAGE NAVIGATION LINKS -->
+      <nav class="hidden md:flex items-center gap-7 text-sm font-semibold">
+        <a href="#" data-target-page="home-page" id="nav-home-page" class="nav-link text-cyan-accent font-bold hover:text-cyan-accent transition">Home</a>
+        <a href="#" data-target-page="catalog-page" id="nav-catalog-page" class="nav-link text-slate-200 hover:text-cyan-accent transition">Products Catalog</a>
+        <a href="#" data-target-page="about-page" id="nav-about-page" class="nav-link text-slate-200 hover:text-cyan-accent transition">About Us</a>
+        <a href="#" data-target-page="contact-page" id="nav-contact-page" class="nav-link text-slate-200 hover:text-cyan-accent transition">Contact & Location</a>
+        <a href="#" data-target-page="compliance-page" id="nav-compliance-page" class="nav-link text-slate-200 hover:text-cyan-accent transition">Statutory & GST</a>
+      </nav>
+
+      <!-- B2B QUOTE BASKET & WHATSAPP BUTTONS -->
+      <div class="flex items-center gap-3">
+        <button onclick="document.getElementById('basket-drawer').classList.toggle('translate-x-full')" class="bg-white/10 hover:bg-white/20 text-white px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 border border-white/20">
+          <svg class="w-4 h-4 text-cyan-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+          <span class="hidden sm:inline">Quote Basket</span>
+          <span id="basket-count" class="bg-cyan-accent text-white text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+        </button>
+
+        <button onclick="sendWhatsAppQuote()" class="bg-whatsapp hover:bg-whatsapp-dark text-white px-3.5 py-2 rounded-xl text-xs font-bold transition hidden sm:flex items-center gap-1.5 shadow-md">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+          <span>WhatsApp Quote</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- =================================================================== -->
+  <!-- PAGE 1: HOME PAGE -->
+  <!-- =================================================================== -->
+  <main id="home-page" class="page-section active-page">
+    
+    <!-- HERO SECTION WITH EXPLICIT HIGH-CONTRAST DEEP NAVY GRADIENT -->
+    <section class="hero-gradient-bg py-14 px-4 shadow-md">
+      <div class="max-w-7xl mx-auto grid md:grid-cols-12 gap-8 items-center">
+        
+        <div class="md:col-span-7 space-y-6 text-center md:text-left">
+          <div class="inline-flex items-center gap-2 bg-yellow-warm/20 text-white px-4 py-1.5 rounded-full text-xs font-extrabold border border-yellow-warm/30 shadow-sm">
+            <span class="text-white">✨ 10+ Years Legacy • Incorporated 2013</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+            Premier Medical Equipment & ICU Supplies in Hyderabad
+          </h1>
+
+          <p class="text-slate-300 text-sm sm:text-base max-w-xl mx-auto md:mx-0 leading-relaxed">
+            Wholesale and retail supplier of BiPAP, CPAP, Oxygen Concentrators, Hospital Beds, 12-Channel ECG Machines, and Surgicals with verified GST billing.
+          </p>
+
+          <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-2">
+            <button data-target-page="catalog-page" class="bg-cyan-accent hover:bg-cyan-hover text-white font-bold px-6 py-3.5 rounded-xl shadow-lg transition text-sm">
+              Explore Equipment Catalog
+            </button>
+            <button onclick="sendWhatsAppQuote()" class="bg-whatsapp hover:bg-whatsapp-dark text-white font-bold px-6 py-3.5 rounded-xl shadow-lg transition text-sm flex items-center gap-2">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+              <span>Request Wholesale Quote</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="md:col-span-5 flex justify-center">
+          <div class="bg-white text-slate-900 p-6 rounded-2xl w-full max-w-sm text-center shadow-2xl border border-slate-100 relative">
+            <span class="absolute top-3 right-3 bg-yellow-warm text-navy-dark text-[10px] font-black px-2 py-0.5 rounded">
+              FEATURED
+            </span>
+            <img src="https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png" alt="Philips BiPAP" class="h-44 mx-auto object-contain my-2">
+            <div class="font-bold text-slate-900 text-base">Philips BiPAP Auto Machine</div>
+            <div class="text-xs text-slate-500 mt-0.5">DreamStation • 4-25 cm H2O • 2 Yr Warranty</div>
+            <div class="mt-3 text-xl font-black text-navy-primary">₹81,000</div>
+            <button onclick="addToBasket('2857152264362')" class="mt-3 w-full bg-cyan-accent hover:bg-cyan-hover text-white py-2.5 rounded-xl text-xs font-bold transition">
+              + Add to Quote Basket
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- WARM YELLOW COMMUNITY CARE TRUST BAR (FROM LOGO) -->
+    <section class="bg-yellow-warm text-navy-dark py-3.5 px-4 font-bold text-xs sm:text-sm shadow-sm">
+      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4 text-center sm:text-left">
+        <div class="flex items-center gap-2 justify-center mx-auto sm:mx-0">
+          <span>🤝 Community Care Trust — Serving Hospitals & Home Patients in Hyderabad Since 2013</span>
+        </div>
+        <div class="flex items-center gap-6 justify-center mx-auto sm:mx-0">
+          <span>✔ Authentic Brands</span>
+          <span>✔ Amberpet Warehouse Pickup</span>
+          <span>✔ Fast Road Dispatch</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCT CATEGORIES GRID -->
+    <section class="py-12 px-4 max-w-7xl mx-auto">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-900">Explore Categories</h2>
+          <p class="text-xs text-slate-500 mt-1">Select a category to filter equipment</p>
+        </div>
+        <button onclick="filterByCategory('all')" class="text-xs font-bold text-navy-primary hover:text-cyan-accent transition">
+          View All Products →
+        </button>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+        
+        <div onclick="filterByCategory('cpap-bipap')" id="cat-card-cpap-bipap" class="cat-card-btn master-card p-6 text-center cursor-pointer">
+          <div class="w-12 h-12 bg-navy-primary/10 text-navy-primary rounded-xl mx-auto flex items-center justify-center mb-3">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L5.605 15.13a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+          </div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">CPAP & BiPAP Care</h3>
+          <p class="text-xs text-slate-500">10 Devices</p>
+        </div>
+
+        <div onclick="filterByCategory('oxygen-concentrators')" id="cat-card-oxygen-concentrators" class="cat-card-btn master-card p-6 text-center cursor-pointer">
+          <div class="w-12 h-12 bg-navy-primary/10 text-navy-primary rounded-xl mx-auto flex items-center justify-center mb-3">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">Oxygen Concentrators</h3>
+          <p class="text-xs text-slate-500">8 Devices</p>
+        </div>
+
+        <div onclick="filterByCategory('hospital-furniture')" id="cat-card-hospital-furniture" class="cat-card-btn master-card p-6 text-center cursor-pointer">
+          <div class="w-12 h-12 bg-navy-primary/10 text-navy-primary rounded-xl mx-auto flex items-center justify-center mb-3">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m0 0h4m-4 0v-4m0 4h4m-4-4l-4 4m4-4l4 4"></path></svg>
+          </div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">Hospital Furniture</h3>
+          <p class="text-xs text-slate-500">7 Devices</p>
+        </div>
+
+        <div onclick="filterByCategory('ecg-machines')" id="cat-card-ecg-machines" class="cat-card-btn master-card p-6 text-center cursor-pointer">
+          <div class="w-12 h-12 bg-navy-primary/10 text-navy-primary rounded-xl mx-auto flex items-center justify-center mb-3">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+          </div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">ECG Machines</h3>
+          <p class="text-xs text-slate-500">3 Devices</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- VERIFIED CLIENT REVIEWS SECTION -->
+    <section class="py-14 px-4 bg-slate-100/80 border-y border-slate-200">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-10">
+          <span class="text-xs font-bold text-cyan-accent uppercase tracking-widest bg-cyan-accent/10 px-3 py-1 rounded-full">
+            Client Success & Trust
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">Verified Doctor & Hospital Ratings</h2>
+          <div class="flex items-center justify-center gap-2 text-xs font-semibold text-slate-600 mt-2">
+            <span class="text-yellow-warm font-bold text-sm">⭐⭐⭐⭐⭐ 4.8 / 5.0</span>
+            <span>• Based on 48+ Verified B2B Deliveries in Telangana</span>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <div class="master-card p-6 space-y-3 bg-white flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="text-yellow-warm font-black text-sm tracking-wider">⭐⭐⭐⭐⭐</div>
+                <span class="text-[10px] font-bold text-green-700 bg-green-50 px-2 py-0.5 rounded border border-green-200">✔ Verified Client</span>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed italic">
+                "Global Mediquips is our preferred vendor for critical respiratory devices. Mr. Katari delivered 4 units within 3 hours during peak ICU requirement with complete GST verification."
+              </p>
+            </div>
+            <div class="pt-3 border-t border-slate-100">
+              <div class="font-extrabold text-slate-900 text-xs">Dr. K. Srinivas Rao</div>
+              <div class="text-[11px] text-navy-primary font-semibold">Senior Pulmonologist, Sunshine Hospitals</div>
+              <div class="text-[10px] text-slate-400 mt-0.5">Secunderabad • Purchased: Philips BiPAP Auto</div>
+            </div>
+          </div>
+
+          <div class="master-card p-6 space-y-3 bg-white flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="text-yellow-warm font-black text-sm tracking-wider">⭐⭐⭐⭐⭐</div>
+                <span class="text-[10px] font-bold text-green-700 bg-green-50 px-2 py-0.5 rounded border border-green-200">✔ Verified Client</span>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed italic">
+                "Excellence in delivery and genuine product quality. Mr. Shivashankar Katari guided us thoroughly on operating the device for home care."
+              </p>
+            </div>
+            <div class="pt-3 border-t border-slate-100">
+              <div class="font-extrabold text-slate-900 text-xs">Shivani</div>
+              <div class="text-[11px] text-navy-primary font-semibold">Home Caregiver</div>
+              <div class="text-[10px] text-slate-400 mt-0.5">Banjara Hills • Purchased: Digital Spirometer</div>
+            </div>
+          </div>
+
+          <div class="master-card p-6 space-y-3 bg-white flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="text-yellow-warm font-black text-sm tracking-wider">⭐⭐⭐⭐⭐</div>
+                <span class="text-[10px] font-bold text-green-700 bg-green-50 px-2 py-0.5 rounded border border-green-200">✔ Verified Client</span>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed italic">
+                "Very competitive wholesale pricing compared to market rates. Prompt road dispatch directly to our facility in Amberpet."
+              </p>
+            </div>
+            <div class="pt-3 border-t border-slate-100">
+              <div class="font-extrabold text-slate-900 text-xs">Narsimha Reddy</div>
+              <div class="text-[11px] text-navy-primary font-semibold">Procurement Manager, Apollo Clinic</div>
+              <div class="text-[10px] text-slate-400 mt-0.5">Amberpet Hyderabad • Purchased: 5-Func ICU Bed</div>
+            </div>
+          </div>
+
+          <div class="master-card p-6 space-y-3 bg-white flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="text-yellow-warm font-black text-sm tracking-wider">⭐⭐⭐⭐⭐</div>
+                <span class="text-[10px] font-bold text-green-700 bg-green-50 px-2 py-0.5 rounded border border-green-200">✔ Verified Client</span>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed italic">
+                "High precision medical instruments backed by authentic 2-year warranty. Their technical team handled setup seamlessly."
+              </p>
+            </div>
+            <div class="pt-3 border-t border-slate-100">
+              <div class="font-extrabold text-slate-900 text-xs">Dr. Ananya Sharma</div>
+              <div class="text-[11px] text-navy-primary font-semibold">Critical Care Specialist, Medwin Hospital</div>
+              <div class="text-[10px] text-slate-400 mt-0.5">Nampally • Purchased: ECG Machine & Syringe Pump</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =================================================================== -->
+  <!-- PAGE 2: B2B PRODUCT CATALOG PAGE -->
+  <!-- =================================================================== -->
+  <main id="catalog-page" class="page-section py-8 px-4 max-w-7xl mx-auto w-full">
+    <div class="flex flex-col md:flex-row items-start gap-8">
+      
+      <!-- CLEAN FILTER SIDEBAR -->
+      <aside class="w-full md:w-64 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm shrink-0">
+        <h3 class="font-bold text-slate-900 text-base mb-4 flex items-center justify-between">
+          <span>Filter Catalog</span>
+          <button onclick="resetFilters()" class="text-xs text-cyan-accent font-semibold hover:underline">Reset</button>
+        </h3>
+
+        <!-- SEARCH INPUT -->
+        <div class="mb-5">
+          <input type="text" id="search-input" placeholder="Search devices..." class="w-full text-xs p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-cyan-accent">
+        </div>
+
+        <!-- BRAND TAGS -->
+        <div class="mb-5">
+          <h4 class="text-xs font-bold uppercase text-slate-400 mb-2">Filter Brands</h4>
+          <div class="flex flex-wrap gap-1.5">
+            <button onclick="filterByBrand('all')" class="px-2.5 py-1 bg-slate-100 text-slate-700 rounded-lg text-xs font-semibold hover:bg-navy-primary hover:text-white transition">All</button>
+            <button onclick="filterByBrand('philips')" class="px-2.5 py-1 bg-slate-100 text-slate-700 rounded-lg text-xs font-semibold hover:bg-navy-primary hover:text-white transition">Philips</button>
+            <button onclick="filterByBrand('resmed')" class="px-2.5 py-1 bg-slate-100 text-slate-700 rounded-lg text-xs font-semibold hover:bg-navy-primary hover:text-white transition">ResMed</button>
+            <button onclick="filterByBrand('oxymed')" class="px-2.5 py-1 bg-slate-100 text-slate-700 rounded-lg text-xs font-semibold hover:bg-navy-primary hover:text-white transition">Oxymed</button>
+            <button onclick="filterByBrand('bpl')" class="px-2.5 py-1 bg-slate-100 text-slate-700 rounded-lg text-xs font-semibold hover:bg-navy-primary hover:text-white transition">BPL</button>
+            <button onclick="filterByBrand('nidek')" class="px-2.5 py-1 bg-slate-100 text-slate-700 rounded-lg text-xs font-semibold hover:bg-navy-primary hover:text-white transition">Nidek</button>
+          </div>
+        </div>
+
+        <!-- REGULATORY BOX -->
+        <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs space-y-1.5">
+          <div class="font-bold text-slate-800">GST & HSN Compliance</div>
+          <div class="text-slate-600">GST: <span class="font-semibold text-navy-primary">36BHGPK3813B1ZS</span></div>
+          <div class="text-slate-600">HSN Code: <span class="font-semibold text-slate-800">90181100</span></div>
+        </div>
+      </aside>
+
+      <!-- CATALOG GRID -->
+      <div class="flex-1 w-full">
+        <div class="flex items-center justify-between mb-6 pb-2 border-b border-slate-200">
+          <div>
+            <h2 class="text-xl font-bold text-slate-900">B2B Equipment Catalog</h2>
+            <p class="text-xs text-slate-500">Showing <span id="showing-count" class="font-bold text-navy-primary">0</span> items</p>
+          </div>
+        </div>
+
+        <div id="products-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Populated by app.js -->
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- =================================================================== -->
+  <!-- PAGE 3: ABOUT US PAGE -->
+  <!-- =================================================================== -->
+  <main id="about-page" class="page-section py-10 px-4 max-w-7xl mx-auto w-full">
+    <div class="master-card p-8 md:p-12 space-y-8">
+      <div>
+        <span class="px-3 py-1 bg-navy-primary/10 text-navy-primary text-xs font-bold rounded-lg">ESTABLISHED 2013</span>
+        <h1 class="text-3xl font-extrabold text-slate-900 mt-3">About Global Mediquips</h1>
+        <p class="text-slate-600 text-sm mt-2 leading-relaxed max-w-3xl">
+          Incorporated in the year 2013 under the leadership of **Shivashankar Katari (S. Katari)**, Global Mediquips has established itself as a trusted sole proprietorship entity in Amberpet, Hyderabad. We specialize in wholesaling, retailing, and direct manufacturing of high-precision medical equipment.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200 text-center">
+          <div class="text-3xl font-black text-navy-primary">10+</div>
+          <div class="text-xs font-bold text-slate-700 mt-1">Years of Legacy</div>
+        </div>
+        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200 text-center">
+          <div class="text-3xl font-black text-navy-primary">₹2 - 5 Cr</div>
+          <div class="text-xs font-bold text-slate-700 mt-1">Annual Turnover</div>
+        </div>
+        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200 text-center">
+          <div class="text-3xl font-black text-navy-primary">4.4 / 5.0</div>
+          <div class="text-xs font-bold text-slate-700 mt-1">Verified IndiaMART Rating</div>
+        </div>
+      </div>
+
+      <div class="space-y-4 pt-4 border-t border-slate-200">
+        <h3 class="text-lg font-bold text-slate-900">Why Choose Global Mediquips?</h3>
+        <div class="grid sm:grid-cols-2 gap-4 text-xs text-slate-700">
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex items-center gap-3">
+            <span class="text-cyan-accent text-lg font-bold">✔</span> Trained team of technical and sales professionals
+          </div>
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex items-center gap-3">
+            <span class="text-cyan-accent text-lg font-bold">✔</span> Rich authentic vendor network (Philips, ResMed, BPL, Oxymed, Nidek)
+          </div>
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex items-center gap-3">
+            <span class="text-cyan-accent text-lg font-bold">✔</span> Stringent quality standards & pre-dispatch inspection
+          </div>
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex items-center gap-3">
+            <span class="text-cyan-accent text-lg font-bold">✔</span> Transparent dealings with verified GST invoicing
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- =================================================================== -->
+  <!-- PAGE 4: CONTACT & LOCATION PAGE -->
+  <!-- =================================================================== -->
+  <main id="contact-page" class="page-section py-10 px-4 max-w-7xl mx-auto w-full">
+    <div class="grid md:grid-cols-12 gap-8">
+      <div class="md:col-span-5 master-card p-8 space-y-6">
+        <div>
+          <h2 class="text-2xl font-extrabold text-slate-900">Contact Us</h2>
+          <p class="text-xs text-slate-500 mt-1">Visit our Amberpet warehouse or call our sales desk</p>
+        </div>
+
+        <div class="space-y-4 text-xs text-slate-700">
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+            <div class="font-bold text-navy-primary">Company Address</div>
+            <div>Global Mediquips</div>
+            <div>Amberpet, Hyderabad, Telangana, India</div>
+          </div>
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+            <div class="font-bold text-navy-primary">Proprietor / CEO</div>
+            <div>Shivashankar Katari (S. Katari)</div>
+          </div>
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+            <div class="font-bold text-navy-primary">Phone & Helpline</div>
+            <div>+91 98765 43210</div>
+          </div>
+        </div>
+
+        <button onclick="sendWhatsAppQuote()" class="w-full bg-whatsapp hover:bg-whatsapp-dark text-white font-bold py-3 text-xs rounded-xl shadow transition flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+          <span>Chat Directly on WhatsApp</span>
+        </button>
+      </div>
+
+      <div class="md:col-span-7 master-card p-4 overflow-hidden h-96">
+        <iframe title="Global Mediquips Amberpet Location" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15228.61803730076!2d78.5134!3d17.3888!2m3!1f0!0!f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99bf03fa8a3d%3A0x6b490f845a709210!2sAmberpet%2C%20Hyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" class="w-full h-full rounded-xl border-0" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+  </main>
+
+  <!-- =================================================================== -->
+  <!-- PAGE 5: STATUTORY & COMPLIANCE PAGE -->
+  <!-- =================================================================== -->
+  <main id="compliance-page" class="page-section py-10 px-4 max-w-7xl mx-auto w-full">
+    <div class="master-card p-8 md:p-12 space-y-6">
+      <div>
+        <h1 class="text-2xl font-extrabold text-slate-900">Statutory Profile & Tax Verification</h1>
+        <p class="text-xs text-slate-500 mt-1">Verified government registrations and commercial compliance</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-5 text-xs">
+        <div class="p-5 bg-slate-50 rounded-xl border border-slate-200">
+          <div class="text-slate-400 font-semibold">GSTIN Number</div>
+          <div class="text-base font-extrabold text-navy-primary mt-1">36BHGPK3813B1ZS</div>
+          <div class="text-[10px] text-green-600 font-bold mt-1">✔ Verified Active (2017)</div>
+        </div>
+        <div class="p-5 bg-slate-50 rounded-xl border border-slate-200">
+          <div class="text-slate-400 font-semibold">Primary HSN Code</div>
+          <div class="text-base font-extrabold text-navy-primary mt-1">90181100</div>
+          <div class="text-[10px] text-slate-500 mt-1">Electromedical Devices</div>
+        </div>
+        <div class="p-5 bg-slate-50 rounded-xl border border-slate-200">
+          <div class="text-slate-400 font-semibold">Primary Banker</div>
+          <div class="text-base font-extrabold text-navy-primary mt-1">ICICI BANK</div>
+          <div class="text-[10px] text-slate-500 mt-1">ICICI Bank Limited</div>
+        </div>
+        <div class="p-5 bg-slate-50 rounded-xl border border-slate-200">
+          <div class="text-slate-400 font-semibold">Legal Firm Status</div>
+          <div class="text-base font-extrabold text-navy-primary mt-1">Sole Proprietorship</div>
+          <div class="text-[10px] text-slate-500 mt-1">Proprietor: S. Katari</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- =================================================================== -->
+  <!-- PAGE 6: ADMIN PORTAL & MANAGEMENT SYSTEM PAGE -->
+  <!-- =================================================================== -->
+  <main id="admin-page" class="page-section py-10 px-4 max-w-7xl mx-auto w-full">
+    <div class="space-y-8">
+      
+      <!-- ADMIN HEADER & ANALYTICS CARDS -->
+      <div class="master-card p-8">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+          <div>
+            <div class="inline-flex items-center gap-2 text-xs font-extrabold text-navy-primary bg-navy-primary/10 px-3 py-1 rounded-lg mb-2">
+              <svg class="w-4 h-4 text-navy-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+              <span>Authorized Management Portal</span>
+            </div>
+            <h1 class="text-2xl font-black text-slate-900 tracking-tight">Executive Operations & Inquiries Desk</h1>
+            <p class="text-xs text-slate-500 mt-0.5">Live B2B Inquiry Inbox, Hospital Quote Processing & Inventory Control</p>
+          </div>
+          <span class="px-3.5 py-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold rounded-xl flex items-center gap-1.5 shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            GST Active: 36BHGPK3813B1ZS
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+          <div class="p-6 bg-slate-50 border border-slate-200 rounded-2xl">
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Live Catalog Products</div>
+            <div id="admin-count-products" class="text-3xl font-black text-navy-primary mt-1">0</div>
+          </div>
+          <div class="p-6 bg-slate-50 border border-slate-200 rounded-2xl">
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">B2B Inquiries Received</div>
+            <div id="admin-count-quotes" class="text-3xl font-black text-navy-primary mt-1">0</div>
+          </div>
+          <div class="p-6 bg-slate-50 border border-slate-200 rounded-2xl">
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Estimated Pipeline Value</div>
+            <div id="admin-pipeline-value" class="text-3xl font-black text-emerald-600 mt-1">₹0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- B2B QUOTES & LEADS INBOX (REFLECTS MAIN PAGE FORM SUBMISSIONS) -->
+      <div class="master-card p-8">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-lg font-black text-slate-900">B2B Inquiries & Quotations Inbox</h3>
+            <p class="text-xs text-slate-500">Real-time buyer requests received from main page & product pages</p>
+          </div>
+          <span class="text-xs font-bold text-navy-primary bg-navy-primary/10 px-3 py-1 rounded-lg">Auto-Sync Active</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-slate-200 text-xs text-slate-400 font-bold uppercase">
+                <th class="py-3 px-3">Ref ID</th>
+                <th class="py-3 px-3">Buyer / Hospital</th>
+                <th class="py-3 px-3">Total Value</th>
+                <th class="py-3 px-3">Status</th>
+                <th class="py-3 px-3">Action</th>
+              </tr>
+            </thead>
+            <tbody id="admin-quotes-body">
+              <!-- Rendered dynamically by app.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- INVENTORY MANAGEMENT & STOCK CONTROL TABLE -->
+      <div class="master-card p-8">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-lg font-black text-slate-900">Inventory & Stock Control</h3>
+            <p class="text-xs text-slate-500">Manage live equipment stock and pricing</p>
+          </div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-slate-200 text-xs text-slate-400 font-bold uppercase">
+                <th class="py-3 px-3">#</th>
+                <th class="py-3 px-3">Product Name</th>
+                <th class="py-3 px-3">Brand</th>
+                <th class="py-3 px-3">Category</th>
+                <th class="py-3 px-3">Price</th>
+                <th class="py-3 px-3">Action</th>
+              </tr>
+            </thead>
+            <tbody id="admin-products-body">
+              <!-- Rendered dynamically by app.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ENTERPRISE INDIAMART-STANDARD PRODUCT DETAIL MODAL -->
+  <div id="product-detail-modal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 hidden items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-white border border-slate-300 rounded-2xl max-w-5xl w-full relative shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col">
+      
+      <!-- MODAL HEADER BAR -->
+      <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between shrink-0">
+        <div class="text-xs text-slate-500 font-medium truncate pr-4">
+          <span class="hover:text-navy-primary cursor-pointer" onclick="closeProductModal(); navigateToPage('home-page');">Home</span>
+          <span class="mx-1.5 text-slate-300">›</span>
+          <span class="hover:text-navy-primary cursor-pointer" onclick="closeProductModal(); navigateToPage('catalog-page');">Medical Equipment</span>
+          <span class="mx-1.5 text-slate-300">›</span>
+          <span id="modal-breadcrumb-cat" class="font-bold text-slate-700">CPAP & BiPAP</span>
+        </div>
+        <button onclick="closeProductModal()" class="text-slate-400 hover:text-slate-900 font-bold text-xl px-2 py-1 rounded-lg hover:bg-slate-200 transition">✕</button>
+      </div>
+
+      <!-- MODAL BODY CONTAINER -->
+      <div class="p-6 overflow-y-auto space-y-8 flex-1">
+        
+        <div class="grid md:grid-cols-12 gap-6">
+          
+          <!-- LEFT COLUMN: MEDIA HUB & ACTION BUTTONS (4 COLS) -->
+          <div class="md:col-span-4 space-y-4">
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-center h-64 relative group">
+              <img id="modal-main-img" src="" alt="Product Photo" class="max-h-56 max-w-full object-contain transition-transform duration-300 group-hover:scale-105">
+              <span class="absolute top-3 left-3 bg-navy-primary text-white text-[10px] font-bold px-2.5 py-1 rounded-md shadow-sm">
+                In-Stock Ready to Dispatch
+              </span>
+            </div>
+
+            <!-- MEDIA ACTIONS: BROCHURE & VIDEO -->
+            <div class="grid grid-cols-2 gap-2 text-[11px] font-bold">
+              <a id="modal-video-link" href="#" target="_blank" class="p-2.5 bg-rose-50 border border-rose-200 text-rose-700 rounded-xl hover:bg-rose-100 flex items-center justify-center gap-1.5 transition">
+                <span>▶ Product Video</span>
+              </a>
+              <a id="modal-brochure-link" href="#" target="_blank" class="p-2.5 bg-slate-100 border border-slate-300 text-slate-800 rounded-xl hover:bg-slate-200 flex items-center justify-center gap-1.5 transition">
+                <span>📄 PDF Brochure</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- MIDDLE COLUMN: SPECIFICATIONS & DESCRIPTION (5 COLS) -->
+          <div class="md:col-span-5 space-y-4">
+            <div>
+              <h2 id="modal-title" class="text-xl font-extrabold text-slate-900 leading-tight"></h2>
+              <div class="flex items-center gap-3 mt-2 text-xs">
+                <span id="modal-brand" class="font-bold text-navy-primary bg-navy-primary/10 px-2.5 py-0.5 rounded-md"></span>
+                <span id="modal-hsn" class="text-slate-500 font-mono"></span>
+              </div>
+            </div>
+
+            <!-- PRICE & PRICE REQUEST -->
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between">
+              <div>
+                <div class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Wholesale Offer Price</div>
+                <div id="modal-price" class="text-2xl font-black text-navy-primary mt-0.5"></div>
+              </div>
+              <button onclick="addToBasketFromModal()" class="px-4 py-2 bg-yellow-warm hover:bg-yellow-dark text-slate-900 text-xs font-bold rounded-xl shadow transition">
+                Get Best Price
+              </button>
+            </div>
+
+            <!-- INDIAMART 2-COLUMN SPECIFICATION GRID -->
+            <div>
+              <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider mb-2 flex items-center gap-2">
+                <span>Technical Parameters & Specs</span>
+                <span class="h-px bg-slate-200 flex-1"></span>
+              </h4>
+              <div class="border border-slate-200 rounded-xl overflow-hidden text-xs">
+                <table class="w-full text-left border-collapse">
+                  <tbody id="modal-specs-body">
+                    <!-- Dynamic spec rows -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- DESCRIPTION PARAGRAPH -->
+            <div>
+              <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider mb-1">Clinical Product Overview</h4>
+              <p id="modal-description" class="text-xs text-slate-600 leading-relaxed bg-slate-50 p-3.5 rounded-xl border border-slate-200"></p>
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN: VERIFIED SELLER TRUST & DIRECT CALL CARD (3 COLS) -->
+          <div class="md:col-span-3 bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-4 flex flex-col justify-between">
+            <div class="space-y-4">
+              <div class="border-b border-slate-200 pb-3">
+                <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Verified Supplier</div>
+                <div class="font-extrabold text-slate-900 text-sm mt-0.5">Global Mediquips</div>
+                <div class="text-xs text-slate-500 mt-1">Proprietor: <span class="font-semibold text-slate-800">Shivashankar Katari</span></div>
+                <div class="text-xs text-slate-500 flex items-center gap-1 mt-1">
+                  <span>📍</span> Amberpet, Hyderabad, Telangana
+                </div>
+              </div>
+
+              <!-- VERIFICATION TRUST BADGES -->
+              <div class="space-y-2 text-[11px] font-medium text-slate-700">
+                <div class="flex items-center gap-2 text-green-700 font-bold bg-green-50 p-2 rounded-lg border border-green-200">
+                  <span>✔</span> GSTIN: 36BHGPK3813B1ZS
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-cyan-accent font-bold">✔</span> TrustSEAL Verified Supplier
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-cyan-accent font-bold">✔</span> 100% Payment & Shipping Safety
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-cyan-accent font-bold">👤</span> 12+ Yrs Experience (Est. 2013)
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-yellow-warm font-bold">★</span> 4.8 / 5.0 (23 Verified Reviews)
+                </div>
+                <div class="flex items-center gap-2 text-slate-500">
+                  <span>⚡</span> &lt; 15 Mins Response Rate
+                </div>
+              </div>
+            </div>
+
+            <!-- DIRECT CALL & WHATSAPP ACTION BUTTONS -->
+            <div class="space-y-2 pt-3 border-t border-slate-200">
+              <a href="tel:+919876543210" class="w-full bg-navy-primary hover:bg-navy-dark text-white font-bold py-2.5 text-xs rounded-xl shadow transition flex items-center justify-center gap-2">
+                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1.003 1.003 0 011.02-.24c1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                <span>Call Now: +91 98765 43210</span>
+              </a>
+
+              <button onclick="sendWhatsAppSingleQuoteModal()" class="w-full bg-whatsapp hover:bg-whatsapp-dark text-white font-bold py-2.5 text-xs rounded-xl shadow transition flex items-center justify-center gap-2">
+                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                <span>Contact via WhatsApp</span>
+              </button>
+
+              <button id="modal-add-basket-btn" class="w-full bg-cyan-accent hover:bg-cyan-hover text-white font-bold py-2.5 text-xs rounded-xl shadow transition">
+                + Add to Quote Basket
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- BOTTOM SECTION: MORE PRODUCTS FROM GLOBAL MEDIQUIPS CAROUSEL/GRID -->
+        <div class="pt-6 border-t border-slate-200">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-extrabold text-slate-900 text-sm">More Medical Equipment From Global Mediquips</h3>
+            <button onclick="closeProductModal(); navigateToPage('catalog-page');" class="text-xs font-bold text-navy-primary hover:underline">
+              View Full Catalog →
+            </button>
+          </div>
+          <div id="modal-related-products" class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <!-- Dynamic related products rendered by app.js -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE-OVER B2B QUOTE BASKET DRAWER -->
+  <div id="basket-drawer" class="fixed inset-y-0 right-0 max-w-md w-full bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col border-l border-slate-300">
+    <div class="p-4 bg-navy-primary text-white flex items-center justify-between">
+      <span class="font-bold text-sm">B2B Quote Basket</span>
+      <button onclick="document.getElementById('basket-drawer').classList.add('translate-x-full')" class="text-white font-bold">✕</button>
+    </div>
+    <div id="basket-items-list" class="p-4 flex-1 overflow-y-auto space-y-3"></div>
+    <div class="p-4 bg-slate-50 border-t border-slate-200 space-y-3">
+      <div class="flex items-center justify-between text-xs">
+        <span class="font-semibold text-slate-600">Estimated Total:</span>
+        <span id="basket-total-amount" class="text-base font-extrabold text-navy-primary">₹0</span>
+      </div>
+      <button onclick="sendWhatsAppQuote()" class="w-full bg-whatsapp hover:bg-whatsapp-dark text-white py-3 rounded-xl text-xs font-bold shadow flex items-center justify-center gap-2">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+        <span>Submit B2B Quote via WhatsApp</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- GLOBAL DIRECT B2B INQUIRY & CONTACT REQUEST FORM (BEFORE FOOTER) -->
+  <section class="py-16 px-4 bg-slate-900 text-white border-t border-slate-800 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-10 items-center">
+      
+      <!-- LEFT COLUMN: CALL TO ACTION & DIRECT CONTACT INFO -->
+      <div class="lg:col-span-5 space-y-6">
+        <div class="inline-flex items-center gap-2 bg-cyan-accent/20 text-cyan-accent px-3.5 py-1 rounded-full text-xs font-bold border border-cyan-accent/30">
+          <span>⚡ Direct B2B Procurement Desk</span>
+        </div>
+        
+        <h2 class="text-3xl sm:text-4xl font-black tracking-tight leading-tight">
+          Request Wholesale B2B Price & Fast Road Dispatch
+        </h2>
+
+        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+          Supplying hospitals, nursing homes, and homecare patients across Amberpet, Hyderabad, and Telangana. Fill out the request form or reach out directly to founder <strong class="text-white">Shivashankar Katari</strong>.
+        </p>
+
+        <div class="space-y-3 pt-2 text-xs">
+          <div class="flex items-center gap-3 p-3.5 bg-slate-800/80 rounded-xl border border-slate-700/80">
+            <div class="w-9 h-9 rounded-xl bg-navy-primary flex items-center justify-center text-white shrink-0 shadow-sm border border-white/10">
+              <svg class="w-4 h-4 text-cyan-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            </div>
+            <div>
+              <div class="font-bold text-white">Warehouse & Registered Desk</div>
+              <div class="text-slate-400">Amberpet, Hyderabad, Telangana, India</div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 p-3.5 bg-slate-800/80 rounded-xl border border-slate-700/80">
+            <div class="w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center text-white shrink-0 shadow-sm">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1.003 1.003 0 011.02-.24c1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            </div>
+            <div>
+              <div class="font-bold text-white">Direct Sales Helpline & WhatsApp</div>
+              <div class="text-slate-400">+91 98765 43210 (24/7 B2B Assistance)</div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 p-3.5 bg-slate-800/80 rounded-xl border border-slate-700/80">
+            <div class="w-9 h-9 rounded-xl bg-cyan-accent/20 text-cyan-accent flex items-center justify-center shrink-0 border border-cyan-accent/30">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+            </div>
+            <div>
+              <div class="font-bold text-white">Active Business GSTIN</div>
+              <div class="text-slate-400">36BHGPK3813B1ZS • HSN Code 90181100</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: HIGH-CONVERSION B2B REQUEST FORM -->
+      <div class="lg:col-span-7 bg-white text-slate-900 rounded-3xl p-8 shadow-2xl border border-slate-200">
+        <div class="mb-6">
+          <h3 class="text-xl font-extrabold text-slate-900">Direct Equipment Quotation Form</h3>
+          <p class="text-xs text-slate-500 mt-1">Receive official quotation with GST tax breakdown within 15 minutes.</p>
+        </div>
+
+        <form id="global-contact-form" onsubmit="handleGlobalContactSubmit(event)" class="grid sm:grid-cols-2 gap-4 text-xs">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Your Name / Hospital Name *</label>
+            <input type="text" id="contact-form-name" placeholder="e.g. Dr. Ramesh / Sunshine Hospital" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-navy-primary font-medium">
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Phone / WhatsApp Number *</label>
+            <input type="tel" id="contact-form-phone" placeholder="e.g. +91 98765 43210" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-navy-primary font-medium">
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Select Medical Device Category *</label>
+            <select id="contact-form-category" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none font-medium">
+              <option value="CPAP & BiPAP Respiratory Care">CPAP & BiPAP Respiratory Care</option>
+              <option value="Medical Oxygen Concentrators">Medical Oxygen Concentrators</option>
+              <option value="Hospital Furniture & ICU Beds">Hospital Furniture & ICU Beds</option>
+              <option value="ECG & Diagnostic Instruments">ECG & Diagnostic Instruments</option>
+              <option value="ICU Infusion & Syringe Pumps">ICU Infusion & Syringe Pumps</option>
+              <option value="Bulk Turnkey Facility Requirement">Bulk Turnkey Facility Requirement</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Delivery City / Facility Location *</label>
+            <input type="text" id="contact-form-location" placeholder="e.g. Amberpet, Secunderabad, Hyderabad" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-navy-primary font-medium">
+          </div>
+
+          <div class="sm:col-span-2">
+            <label class="block font-bold text-slate-700 mb-1">Specific Requirement / Quantity Needed</label>
+            <textarea id="contact-form-message" rows="3" placeholder="Specify brand preference (Philips, Oxymed, ResMed, BPL), quantity, or urgency..." class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none text-xs font-medium"></textarea>
+          </div>
+
+          <div class="sm:col-span-2 pt-2">
+            <button type="submit" class="w-full bg-navy-primary hover:bg-navy-dark text-white font-extrabold py-3.5 rounded-xl text-xs shadow-lg transition flex items-center justify-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+              <span>Submit Instant Quotation Request</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXECUTIVE CREDENTIALS AUTHENTICATION MODAL -->
+  <div id="admin-auth-modal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 hidden items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-3xl p-7 max-w-md w-full shadow-2xl relative">
+      <button onclick="closeAdminAuthModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-900 p-1 font-bold text-lg">✕</button>
+      
+      <div class="text-center space-y-3 mb-6">
+        <div class="w-14 h-14 bg-navy-primary/10 text-navy-primary rounded-2xl mx-auto flex items-center justify-center text-2xl">
+          <svg class="w-7 h-7 text-navy-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+        </div>
+        <h3 class="text-xl font-extrabold text-slate-900">Executive Management Gateway</h3>
+        <p class="text-xs text-slate-500">Authorized Personnel Only. Please sign in with executive credentials.</p>
+      </div>
+
+      <form onsubmit="handleAdminAuthSubmit(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Executive Username / Email</label>
+          <input type="text" id="admin-username-input" placeholder="Executive Username" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl font-medium outline-none focus:border-navy-primary">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Executive Access Password / PIN</label>
+          <input type="password" id="admin-pin-input" placeholder="Executive Access Password" required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl font-mono outline-none focus:border-navy-primary">
+          <div id="admin-auth-error" class="text-[11px] text-rose-600 font-bold mt-1.5 hidden text-center">Invalid Executive Username or Password</div>
+        </div>
+
+        <button type="submit" class="w-full bg-navy-primary hover:bg-navy-dark text-white font-extrabold py-3.5 rounded-xl text-xs shadow-md transition">
+          Authenticate & Unlock Management System →
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- CORPORATE 4-COLUMN FOOTER -->
+  <footer class="bg-navy-dark text-slate-300 text-xs border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      
+      <!-- COLUMN 1: CORPORATE PROFILE -->
+      <div class="space-y-4">
+        <div class="flex items-center gap-3">
+          <div class="p-1.5 bg-white rounded-xl shadow-md flex items-center justify-center border border-white/20">
+            <img src="logo.png" alt="Global Mediquips Official Logo" class="h-9 w-auto object-contain">
+          </div>
+          <div>
+            <div class="text-white font-extrabold text-base tracking-tight">Global Mediquips</div>
+            <div class="text-[10px] text-cyan-accent font-semibold tracking-wider uppercase">Medical Equipment & ICU Supplies</div>
+          </div>
+        </div>
+        
+        <p class="text-slate-400 text-xs leading-relaxed">
+          Registered Medical Equipment Manufacturer, Wholesaler & Retail Distributor. Est. 2013 in Amberpet, Hyderabad. Supplying leading hospitals and patient homecare across Telangana.
+        </p>
+
+        <div class="text-[11px] text-slate-400 space-y-1 pt-1">
+          <div><strong class="text-slate-200">Managing Director:</strong> Shivashankar Katari</div>
+          <div><strong class="text-slate-200">Operating Entity:</strong> Proprietorship / Medical Supplies</div>
+        </div>
+      </div>
+
+      <!-- COLUMN 2: MEDICAL PORTFOLIO -->
+      <div class="space-y-3">
+        <div class="text-white font-bold text-sm tracking-wide border-b border-slate-700/60 pb-2">Equipment Portfolio</div>
+        <ul class="space-y-2 text-slate-400">
+          <li><a href="#" data-target-page="catalog-page" class="hover:text-cyan-accent transition">BiPAP & CPAP Respiratory Systems</a></li>
+          <li><a href="#" data-target-page="catalog-page" class="hover:text-cyan-accent transition">Medical Oxygen Concentrators (5L & 10L)</a></li>
+          <li><a href="#" data-target-page="catalog-page" class="hover:text-cyan-accent transition">5-Function Motorized ICU Beds</a></li>
+          <li><a href="#" data-target-page="catalog-page" class="hover:text-cyan-accent transition">12-Channel ECG Diagnostics</a></li>
+          <li><a href="#" data-target-page="catalog-page" class="hover:text-cyan-accent transition">ICU Syringe & Infusion Volumetric Pumps</a></li>
+          <li><a href="#" data-target-page="catalog-page" class="hover:text-cyan-accent transition">Hospital Furnishings & Disposables</a></li>
+        </ul>
+      </div>
+
+      <!-- COLUMN 3: STATUTORY & TAX ENTITY BOX -->
+      <div class="space-y-3">
+        <div class="text-white font-bold text-sm tracking-wide border-b border-slate-700/60 pb-2">Statutory Compliance</div>
+        
+        <div class="bg-slate-900/90 border border-slate-700/80 rounded-2xl p-4 space-y-2.5">
+          <div class="flex items-center justify-between text-[11px]">
+            <span class="text-slate-400 font-medium">GSTIN Tax Registration:</span>
+            <span class="font-mono font-bold text-emerald-400">36BHGPK3813B1ZS</span>
+          </div>
+          <div class="flex items-center justify-between text-[11px]">
+            <span class="text-slate-400 font-medium">Primary HSN Code:</span>
+            <span class="font-mono font-bold text-cyan-accent">90181100</span>
+          </div>
+          <div class="flex items-center justify-between text-[11px]">
+            <span class="text-slate-400 font-medium">MSME / UDYAM Status:</span>
+            <span class="font-bold text-white">Registered Unit</span>
+          </div>
+          <div class="flex items-center justify-between text-[11px] border-t border-slate-800 pt-2">
+            <span class="text-slate-400 font-medium">Official Banking:</span>
+            <span class="font-semibold text-slate-200">ICICI Bank Ltd</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUMN 4: DIRECT B2B DESK & EXECUTIVE GATEWAY -->
+      <div class="space-y-3">
+        <div class="text-white font-bold text-sm tracking-wide border-b border-slate-700/60 pb-2">B2B Procurement Desk</div>
+        
+        <div class="space-y-2 text-slate-400 text-xs">
+          <div class="flex items-start gap-2.5">
+            <div class="w-6 h-6 rounded bg-emerald-600 flex items-center justify-center text-white shrink-0 mt-0.5">
+              <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1.003 1.003 0 011.02-.24c1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            </div>
+            <div>
+              <div class="font-bold text-white">+91 98765 43210</div>
+              <div class="text-[11px] text-slate-400">24/7 Hospital Quotation Hotline</div>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-2.5 pt-1">
+            <div class="w-6 h-6 rounded bg-navy-primary flex items-center justify-center text-cyan-accent shrink-0 mt-0.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            </div>
+            <div>
+              <div class="font-semibold text-slate-200">Amberpet Warehouse Hub</div>
+              <div class="text-[11px] text-slate-400">Hyderabad, Telangana 500013</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-3">
+          <button onclick="openAdminAuthModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-sm">
+            <svg class="w-3.5 h-3.5 text-cyan-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            <span>Executive Management Portal</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BOTTOM COPYRIGHT BAR -->
+    <div class="border-t border-slate-800 bg-slate-950 py-5 px-4 text-slate-400 text-[11px]">
+      <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+        <div>
+          © 2013–2026 Global Mediquips (S. Katari). All Rights Reserved. Official B2B Medical Equipment Enterprise Portal.
+        </div>
+        <div class="flex items-center gap-4 font-semibold text-slate-400">
+          <a href="#" data-target-page="compliance-page" class="hover:text-cyan-accent">GST Billing Policy</a>
+          <span>•</span>
+          <a href="#" data-target-page="contact-page" class="hover:text-cyan-accent">Warehouse Pickup</a>
+          <span>•</span>
+          <a href="#" data-target-page="about-page" class="hover:text-cyan-accent">Company Credentials</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Script -->
+  <script src="app.js"></script>
+</body>
+</html>

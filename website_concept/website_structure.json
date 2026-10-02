@@ -1,0 +1,70 @@
+{
+  "site_title": "Global Mediquips — Premier Medical Equipment & Surgicals Supplier",
+  "recommended_domain": "www.globalmediquips.com",
+  "target_audience": [
+    "Hospitals & ICU Procurement Officers",
+    "Private Clinics & Diagnostic Labs",
+    "Home Care Respiratory Patients",
+    "Regional Sub-Dealers & Wholesalers"
+  ],
+  "navigation_menu": [
+    {
+      "label": "Home",
+      "path": "/"
+    },
+    {
+      "label": "About Us",
+      "path": "/about-us",
+      "sub_sections": [
+        "Company Profile & 10+ Yr Legacy",
+        "GST & Statutory Verification",
+        "Vendor Network & Quality Standards"
+      ]
+    },
+    {
+      "label": "Products & Solutions",
+      "path": "/products",
+      "categories": [
+        {
+          "name": "CPAP & BiPAP Systems",
+          "path": "/products/cpap-bipap-machine-accessories"
+        },
+        {
+          "name": "Oxygen Concentrators",
+          "path": "/products/oxygen-concentrator"
+        },
+        {
+          "name": "Hospital Furniture",
+          "path": "/products/hospital-furniture"
+        },
+        {
+          "name": "ECG Machines & Diagnostics",
+          "path": "/products/ecg-machine"
+        },
+        {
+          "name": "Surgicals & Home Healthcare",
+          "path": "/products/surgicals-homecare"
+        }
+      ]
+    },
+    {
+      "label": "Request B2B Quote",
+      "path": "/request-quote"
+    },
+    {
+      "label": "Resources & Downloads",
+      "path": "/downloads"
+    },
+    {
+      "label": "Contact Us",
+      "path": "/contact"
+    }
+  ],
+  "key_features": [
+    "WhatsApp Click-to-Chat Float Widget",
+    "Request Quote Basket (No direct payment, inquiry model)",
+    "PDF Brochure Downloads (Philips, BPL, Nidek specs)",
+    "Google Maps Embed (Amberpet, Hyderabad)",
+    "GST 36BHGPK3813B1ZS Credibility Badge"
+  ]
+}
