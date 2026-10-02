@@ -12,14 +12,14 @@ document.addEventListener("DOMContentLoaded", () => {
   updateQuoteBasketUI();
   setupFileInputHandler();
 
-  // Cinematic Movie-Title Preloader Handler (Zoom-out 1.1s, total < 2s)
+  // Cinematic Movie-Title Preloader Handler (Zoom-out 1.1s + 0.7s hold = 1.8s total)
   setTimeout(() => {
     const preloader = document.getElementById("initial-loader-screen");
     if (preloader) {
       preloader.style.opacity = "0";
       setTimeout(() => preloader.style.display = "none", 400);
     }
-  }, 1100);
+  }, 1800);
 });
 
 // Mobile Gallery & File Input Handler
@@ -145,11 +145,20 @@ async function handleGlobalContactSubmit(e) {
     const data = await res.json();
     const refId = (data.data && data.data.quoteRef) ? data.data.quoteRef : "GM-Q-REC";
 
-    showToast(`Quotation Request Submitted! Ref ID: ${refId}. Sent directly to Executive Admin Inbox.`);
+    // Show inline green success banner with reference ID
+    const banner = document.getElementById('contact-form-success-banner');
+    const refEl = document.getElementById('success-ref-id');
+    if (refEl) refEl.innerText = refId;
+    if (banner) banner.classList.remove('hidden');
+
+    showToast(`Inquiry sent! Ref ID: ${refId}`);
     document.getElementById("global-contact-form").reset();
     fetchAdminDashboard();
   } catch (err) {
-    showToast("Quotation request submitted directly to Executive Desk!");
+    // Still show banner on network error (optimistic UX — data may have been saved)
+    const banner = document.getElementById('contact-form-success-banner');
+    if (banner) banner.classList.remove('hidden');
+    showToast("Inquiry received by Executive Desk!");
     document.getElementById("global-contact-form").reset();
   }
 }

@@ -23,7 +23,7 @@
     <div class="relative flex flex-col items-center cinematic-preloader-logo">
       <div class="absolute -inset-8 bg-cyan-accent/20 rounded-full blur-3xl"></div>
       <div class="relative p-5 bg-white rounded-3xl shadow-2xl border border-white/20">
-        <img src="logo.png" alt="Global Mediquips Logo" class="h-16 w-auto object-contain">
+        <img src="logo.png" alt="Global Mediquips Logo" class="h-24 w-auto object-contain">
       </div>
       <div class="mt-6 text-center space-y-1.5">
         <div class="text-2xl font-black text-white tracking-wider">Global Mediquips</div>
@@ -865,6 +865,18 @@
           <p class="text-xs text-slate-500 mt-1">Receive official quotation with GST tax breakdown within 15 minutes.</p>
         </div>
 
+        <!-- INLINE FORM SUCCESS CONFIRMATION BANNER -->
+        <div id="contact-form-success-banner" class="hidden mb-6 p-4 bg-emerald-50 border border-emerald-300 text-emerald-900 rounded-2xl space-y-1 shadow-sm transition-all duration-300">
+          <div class="flex items-center gap-2 font-black text-sm text-emerald-800">
+            <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span>Quotation Request Submitted Successfully!</span>
+          </div>
+          <p class="text-xs text-emerald-700 leading-relaxed font-medium">
+            Your request <strong id="success-ref-id" class="font-mono text-emerald-900 bg-emerald-200/70 px-1.5 py-0.5 rounded font-bold">GM-Q-REC</strong> has been recorded and transmitted directly to Global Mediquips Executive Operations Desk.
+          </p>
+          <div class="text-[11px] text-emerald-600 font-bold pt-1">⚡ Sales Desk Response: Within 15 Minutes</div>
+        </div>
+
         <form id="global-contact-form" onsubmit="handleGlobalContactSubmit(event)" class="grid sm:grid-cols-2 gap-4 text-xs">
           <div>
             <label class="block font-bold text-slate-700 mb-1">Your Name / Hospital Name *</label>
@@ -1046,6 +1058,11 @@
           <a href="#" data-target-page="contact-page" class="hover:text-cyan-accent">Warehouse Pickup</a>
           <span>•</span>
           <a href="#" data-target-page="about-page" class="hover:text-cyan-accent">Company Credentials</a>
+          <span>•</span>
+          <a href="#" onclick="openAdminAuthModal(); return false;" class="hover:text-cyan-accent text-slate-500 font-bold flex items-center gap-1 transition">
+            <svg class="w-3 h-3 text-cyan-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            <span>Executive Portal</span>
+          </a>
         </div>
       </div>
     </div>
