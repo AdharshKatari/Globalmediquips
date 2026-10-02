@@ -483,7 +483,7 @@ function handleAdminAuthSubmit(e) {
   const err = document.getElementById("admin-auth-error");
 
   // Executive Credentials — single authorised login only
-  if (username === "katari" && password === "Katari@Mediquips2026") {
+  if (username === "admin@globalmediquips" && password === "admin666") {
     isAdminAuthenticated = true;
     closeAdminAuthModal();
     navigateToPage('admin-page');
