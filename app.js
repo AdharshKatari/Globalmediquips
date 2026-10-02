@@ -12,6 +12,26 @@ document.addEventListener("DOMContentLoaded", () => {
   updateQuoteBasketUI();
   setupFileInputHandler();
 
+  // Play soft professional startup chime using Web Audio API
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const notes = [523.25, 659.25, 783.99, 1046.5]; // C5, E5, G5, C6
+    notes.forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      const startAt = ctx.currentTime + i * 0.18;
+      gain.gain.setValueAtTime(0, startAt);
+      gain.gain.linearRampToValueAtTime(0.15, startAt + 0.08);
+      gain.gain.exponentialRampToValueAtTime(0.001, startAt + 0.6);
+      osc.start(startAt);
+      osc.stop(startAt + 0.7);
+    });
+  } catch(e) { /* Audio not supported — silent fail */ }
+
   // Cinematic Movie-Title Preloader Handler (Zoom-out 1.1s + 0.7s hold = 1.8s total)
   setTimeout(() => {
     const preloader = document.getElementById("initial-loader-screen");
@@ -102,17 +122,7 @@ function handleAdminAuthSubmit(e) {
   if (username === "katari" && password === "Katari@Mediquips2026") {
     isAdminAuthenticated = true;
     closeAdminAuthModal();
-
-    // Direct page display after authentication
-    document.querySelectorAll(".page-section").forEach(page => page.classList.remove("active-page"));
-    document.querySelectorAll(".nav-link").forEach(link => link.classList.remove("text-cyan-accent", "font-bold"));
-
-    const adminPage = document.getElementById("admin-page");
-    if (adminPage) {
-      adminPage.classList.add("active-page");
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    fetchAdminDashboard();
+    navigateToPage('admin-page');
   } else {
     if (err) err.classList.remove("hidden");
   }
@@ -196,6 +206,17 @@ function navigateToPage(pageId) {
   if (pageId === 'admin-page' && !isAdminAuthenticated) {
     openAdminAuthModal();
     return;
+  }
+
+  const publicHeader = document.querySelector("header");
+  const publicFooter = document.querySelector("footer");
+
+  if (pageId === 'admin-page') {
+    if (publicHeader) publicHeader.classList.add("hidden");
+    if (publicFooter) publicFooter.classList.add("hidden");
+  } else {
+    if (publicHeader) publicHeader.classList.remove("hidden");
+    if (publicFooter) publicFooter.classList.remove("hidden");
   }
 
   document.querySelectorAll(".page-section").forEach(page => {
@@ -548,36 +569,46 @@ let currentModalProduct = null;
 
 async function handleAddProductForm(e) {
   e.preventDefault();
-  const title = document.getElementById("admin-form-title").value;
-  const brand = document.getElementById("admin-form-brand").value;
+  const title = document.getElementById("admin-form-title").value.trim();
+  const brand = document.getElementById("admin-form-brand").value.trim();
   const category = document.getElementById("admin-form-category").value;
-  const price = document.getElementById("admin-form-price").value;
-  const image = document.getElementById("admin-form-image").value;
-  const countryOfOrigin = document.getElementById("admin-form-origin") ? document.getElementById("admin-form-origin").value : "";
-  const application = document.getElementById("admin-form-application") ? document.getElementById("admin-form-application").value : "";
-  const pressureRange = document.getElementById("admin-form-pressure") ? document.getElementById("admin-form-pressure").value : "";
-  const rampRate = document.getElementById("admin-form-ramp") ? document.getElementById("admin-form-ramp").value : "";
-  const description = document.getElementById("admin-form-description").value;
+  const price = parseFloat(document.getElementById("admin-form-price").value) || 0;
+  let image = document.getElementById("admin-form-image") ? document.getElementById("admin-form-image").value.trim() : "";
+  const hsnCode = document.getElementById("admin-form-hsn") ? document.getElementById("admin-form-hsn").value.trim() : "90181100";
+  const countryOfOrigin = document.getElementById("admin-form-origin") ? document.getElementById("admin-form-origin").value.trim() : "Made in India";
+  const application = document.getElementById("admin-form-application") ? document.getElementById("admin-form-application").value.trim() : "Hospital & Home Care";
+  const pressureRange = document.getElementById("admin-form-pressure") ? document.getElementById("admin-form-pressure").value.trim() : "Standard Operating Range";
+  const rampRate = document.getElementById("admin-form-ramp") ? document.getElementById("admin-form-ramp").value.trim() : "Automatic";
+  const warranty = document.getElementById("admin-form-warranty") ? document.getElementById("admin-form-warranty").value.trim() : "2 Years Warranty";
+  const brochureUrl = document.getElementById("admin-form-brochure") ? document.getElementById("admin-form-brochure").value.trim() : "";
+  const videoUrl = document.getElementById("admin-form-video") ? document.getElementById("admin-form-video").value.trim() : "";
+  const description = document.getElementById("admin-form-description").value.trim();
+
+  // If no image URL, provide default high-res fallback
+  if (!image) {
+    image = "https://5.imimg.com/data5/SELLER/PDFImage/2025/8/533175945/LJ/KA/DT/25122208/philips-bipap-auto-machine-500x500.png";
+  }
 
   try {
     const res = await fetch('/api/admin/products', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        title, brand, category, price, image, description,
-        countryOfOrigin, application, pressureRange, rampRate
+        title, brand, category, price, image, description, hsnCode,
+        countryOfOrigin, application, pressureRange, rampRate, warranty,
+        brochureUrl, videoUrl
       })
     });
     const data = await res.json();
     if (data.success) {
-      showToast("New Product Published!");
+      showToast("New Product Published to Catalog!");
       fetchProducts();
       fetchAdminDashboard();
       document.getElementById("add-product-form").reset();
       switchAdminTab('inventory');
     }
   } catch (err) {
-    alert("Error adding product");
+    alert("Error publishing product to catalog");
   }
 }
 

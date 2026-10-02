@@ -379,6 +379,25 @@
       "hsnCode": "90181100",
       "status": "Pending",
       "createdAt": "2026-10-02T06:09:01.224Z"
+    },
+    {
+      "quoteRef": "GM-Q-506955",
+      "buyerName": "Adharsh Katari",
+      "hospitalName": "Adharsh Katari (vaya)",
+      "phone": "+916309189339",
+      "location": "vaya",
+      "items": [
+        {
+          "title": "CPAP & BiPAP Respiratory Care",
+          "price": 0,
+          "quantity": 1,
+          "notes": "jhbj"
+        }
+      ],
+      "totalAmount": 0,
+      "totalAmountDisplay": "₹0",
+      "status": "Pending",
+      "createdAt": "2026-10-02T06:28:26.959Z"
     }
   ],
   "reviews": [
