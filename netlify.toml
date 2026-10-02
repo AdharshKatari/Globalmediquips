@@ -1,4 +1,7 @@
 [build]
+  # Static site: no build step needed (overrides the "npm run build" command set in the Netlify UI,
+  # which fails because package.json has no build script)
+  command = "echo 'No build step required'"
   publish = "."
 
 [[redirects]]
