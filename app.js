@@ -98,7 +98,7 @@ function setupFileInputHandler() {
 // Fetch Storefront Settings (Founder Photo & Featured Product)
 async function fetchCompanySettings() {
   try {
-    const res = await fetch('/api/company');
+    const res = await fetch('/api/company', { cache: 'no-store' });
     if (res.ok) {
       const data = await res.json();
       if (data.success && data.data) {
@@ -114,7 +114,7 @@ async function fetchCompanySettings() {
 
   // Fallback for static platforms like Netlify
   try {
-    const fallbackRes = await fetch('./database.json');
+    const fallbackRes = await fetch('./database.json', { cache: 'no-store' });
     if (fallbackRes.ok) {
       const fallbackData = await fallbackRes.json();
       if (fallbackData && fallbackData.company) {
@@ -175,7 +175,7 @@ function applyHeroFeaturedProduct() {
 
 async function fetchProducts() {
   try {
-    const res = await fetch('/api/products');
+    const res = await fetch('/api/products', { cache: 'no-store' });
     if (res.ok) {
       const data = await res.json();
       if (data.success && data.data && data.data.length > 0) {
@@ -193,7 +193,7 @@ async function fetchProducts() {
 
   // Fallback for static platforms like Netlify
   try {
-    const fallbackRes = await fetch('./database.json');
+    const fallbackRes = await fetch('./database.json', { cache: 'no-store' });
     if (fallbackRes.ok) {
       const fallbackData = await fallbackRes.json();
       if (fallbackData && fallbackData.products) {
@@ -631,6 +631,13 @@ function switchAdminTab(tabName) {
     selectedPanel.classList.remove("hidden");
   }
 
+  // The Featured Product selector lives in this tab — refresh it every time the tab opens,
+  // and reload products first if they haven't arrived yet
+  if (tabName === 'analytics') {
+    if (PRODUCTS_DATA && PRODUCTS_DATA.length) populateAdminFeaturedSelect();
+    else fetchProducts();
+  }
+
   const selectedBtn = document.getElementById(`admin-tab-btn-${tabName}`);
   if (selectedBtn) {
     selectedBtn.classList.remove("border-transparent", "text-slate-600", "font-bold");
@@ -647,7 +654,7 @@ async function fetchAdminDashboard() {
   let loaded = false;
 
   try {
-    const res = await fetch('/api/admin/dashboard');
+    const res = await fetch('/api/admin/dashboard', { cache: 'no-store' });
     const data = await res.json();
     if (data.success) {
       setAdminStat('admin-count-products', data.data.productsCount);
@@ -664,7 +671,7 @@ async function fetchAdminDashboard() {
   if (!loaded) {
     // Static-host fallback: keep inbox, inventory and Featured Product selector fully usable
     try {
-      const fallbackRes = await fetch('./database.json');
+      const fallbackRes = await fetch('./database.json', { cache: 'no-store' });
       const db = await fallbackRes.json();
       const quotes = (db && db.quotes) || [];
       const products = (db && db.products) || [];
